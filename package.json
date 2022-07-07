@@ -1,0 +1,19 @@
+{
+  "name": "suivi_poids",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --watch ./sass/main.scss:./css/style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/julabina/suivi_poids.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/julabina/suivi_poids/issues"
+  },
+  "homepage": "https://github.com/julabina/suivi_poids#readme"
+}
