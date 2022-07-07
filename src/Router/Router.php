@@ -83,7 +83,7 @@ class Router {
      * @return call call()
      */
     public function run() {
-
+        
         if(!isset($this->routes[$_SERVER['REQUEST_METHOD']])) {
             throw new RouterException('No routes exist');
         } 
