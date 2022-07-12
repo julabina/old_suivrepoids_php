@@ -31,4 +31,26 @@ class UserModel {
         return ($affectedLine > 0);
     }
 
+    public function logUser(string $email, string $password): array {
+
+        $statement = $this->connection->getConnection()->query(
+            "SELECT * FROM users WHERE email = '$email'"
+        );
+
+        $user = $statement->fetch();
+        $userInfo = [];
+
+        if($user) {
+            if(password_verify($password, $user['user_pwd'])) {
+                $userInfo[] = $user['userId'];
+                $userInfo[] = $user['firstname'];
+                $userInfo[] = $user['size'];
+                $userInfo[] = $user['is_man'];
+            }
+        }
+
+        return $userInfo;
+
+    }
+
 }
