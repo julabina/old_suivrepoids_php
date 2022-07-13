@@ -5,20 +5,33 @@ namespace App\Models;
 use App\Lib\DatabaseConnection;
 use \Ramsey\Uuid\Uuid;
 
+class User {
+    public string $userId;
+    public string $name;
+    public string $size;
+    public string $sexe;
+    public $weight;
+    public $imc;
+    public $img;
+    public $weight_goal;
+    public $imc_goal;
+    public $img_goal;
+}
+
 class UserModel {
 
     public DatabaseConnection $connection;
 
-    public function createUser(string $email, string $password, string $name, string $size, string $sexe): bool {
+    public function createUser(string $email, string $password, string $name, string $size, string $sexe): string {
 
         $v4 = Uuid::uuid4();
         $newId = $v4->toString();
         $newPassword = password_hash($password, PASSWORD_DEFAULT);
         
         $newSexe = false;
-        if($sexe === 'men') {
+        if($sexe === 'man') {
             $newSexe = true;
-        } elseif ($sexe === 'women') {
+        } elseif ($sexe === 'woman') {
             $newSexe = false;
         }
 
@@ -28,7 +41,11 @@ class UserModel {
 
         $affectedLine = $statement->execute([$newId, $email, $newPassword, $size, $name, $newSexe]);
 
-        return ($affectedLine > 0);
+        if($affectedLine > 0) {
+            return $newId;
+        } else {
+            return "";
+        }
     }
 
     public function logUser(string $email, string $password): array {
@@ -50,6 +67,37 @@ class UserModel {
         }
 
         return $userInfo;
+
+    }
+
+    public function getStats($userId): User {
+
+        $statement = $this->connection->getConnection()->query(
+            "SELECT size, firstname, is_man, weight_goal, imc_goal, img_goal, imc, img, user_weight FROM users RIGHT JOIN objectifs ON users.userId = objectifs.userId RIGHT JOIN weight_infos ON users.userId = weight_infos.userId WHERE users.userId = '$userId' AND objectifs.current = 1 AND weight_infos.record_date = (SELECT MAX(record_date) FROM weight_infos)"
+        );
+        
+        $test = $statement->fetch();
+        
+        $userInfos = new User();
+
+        if($test > 0) {
+            $userInfos->userId = $userId;
+            $userInfos->name = $test['firstname'];
+            $userInfos->size = $test['size'];
+            if($test['is_man'] === 1) {
+                $userInfos->sexe = "man";
+            } elseif ($test['is_man'] === 0) {
+                $userInfos->sexe = "woman";
+            }
+            $userInfos->weight = $test['user_weight'];
+            $userInfos->imc = number_format($test['imc'], 2);
+            $userInfos->img = number_format($test['img'], 2);
+            $userInfos->weight_goal = $test['weight_goal'];
+            $userInfos->imc_goal = $test['imc_goal'];
+            $userInfos->img_goal = $test['img_goal'];
+        }  
+
+        return $userInfos;
 
     }
 

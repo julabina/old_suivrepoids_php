@@ -24,15 +24,21 @@
                 <input type="text" name="name" id="signName">
             </div>
             <div class="">
+                <label for="signSexe">Sexe</label>
+                <select name="sexe" id="signSexe">
+                    <option value="man">Homme</option>
+                    <option value="woman">Femme</option>
+                </select>
+            </div>
+        </div>
+        <div class="">
+            <div class="">
                 <label for="signSize">Taille</label>
                 <input type="number" name="size" id="signSize">
             </div>
             <div class="">
-                <label for="signSexe">Sexe</label>
-                <select name="sexe" id="signSexe">
-                    <option value="men">Homme</option>
-                    <option value="women">Femme</option>
-                </select>
+                <label for="signWeight">Votre poids actuel</label>
+                <input type="number" name="weight" id="signWeight">
             </div>
         </div>
         <input type="button" value="OK" onClick="checkInputs()">
@@ -45,6 +51,7 @@
     const password = document.getElementById('signPassword');
     const userName = document.getElementById('signName');
     const size = document.getElementById('signSize');
+    const weight = document.getElementById('signWeight');
     const form = document.getElementById('sign__form');
     const errorCont = document.querySelector('.sign__error');
 
@@ -76,6 +83,14 @@
         } else if(size.value < 91 || size.value > 259) {
             error += `<p>- La taille doit etre d'une longueur comprise entre 90 et 260 cm.</p>`
         } else if(!size.value.match(/^[0-9]*$/)) {
+            error += `<p>- La taille doit contenir que des chiffres.</p>`
+        }
+        
+        if(weight.value === '') {
+            error += `<p>- La taille ne doit pas etre vide.</p>`
+        } else if(weight.value < 31 || weight.value > 249) {
+            error += `<p>- La taille doit etre d'une longueur comprise entre 90 et 260 cm.</p>`
+        } else if(!weight.value.match(/^[0-9]*$/)) {
             error += `<p>- La taille doit contenir que des chiffres.</p>`
         }
 
