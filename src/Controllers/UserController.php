@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Lib\DatabaseConnection;
 use App\Models\UserModel;
-use App\Models\StateModel;
+use App\Models\StatsModel;
 
 class UserController {
 
@@ -33,7 +33,7 @@ class UserController {
             $id = $userModel->createUser($email, $password, $name, $size, $sexe);
             
             if($id !== "") {
-                $statModel = new StateModel();
+                $statModel = new StatsModel();
                 $statModel->connection = new DatabaseConnection();
 
                 $addingWeight = $statModel->addWeight($weight, $size, null, $sexe, $age, $id);

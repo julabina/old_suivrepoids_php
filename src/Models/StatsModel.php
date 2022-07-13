@@ -6,7 +6,7 @@ use App\Lib\DatabaseConnection;
 use \DateTime;
 use \Ramsey\Uuid\Uuid;
 
-class StateModel {
+class StatsModel {
 
     public DatabaseConnection $connection;
 
@@ -48,6 +48,22 @@ class StateModel {
         $affectedLine = $statement->execute([$newId, $userId, NULL, NULL, NULL, 1]);
         
         return ($affectedLine > 0);
+
+    }
+
+    public function getAllObjectif($userId) {
+
+        $statement = $this->connection->getConnection()->query(
+            "SELECT * FROM objectifs WHERE userId = '$userId'"
+        );
+
+        $objectifs = [];
+
+        while(($row = $statement->fetch())) {
+            $objectifs[] = $row;
+        }
+
+        return $objectifs;
 
     }
 
