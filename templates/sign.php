@@ -87,11 +87,11 @@
         }
         
         if(weight.value === '') {
-            error += `<p>- La taille ne doit pas etre vide.</p>`
+            error += `<p>- Le poids ne doit pas etre vide.</p>`
         } else if(weight.value < 31 || weight.value > 249) {
-            error += `<p>- La taille doit etre d'une longueur comprise entre 90 et 260 cm.</p>`
+            error += `<p>- Le poids doit etre  compris entre 90 et 260 kg.</p>`
         } else if(!weight.value.match(/^[0-9]*$/)) {
-            error += `<p>- La taille doit contenir que des chiffres.</p>`
+            error += `<p>- Le poids doit contenir que des chiffres.</p>`
         }
 
         if(error !== '') {

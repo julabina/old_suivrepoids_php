@@ -1,0 +1,21 @@
+.obj {
+    &__change {
+        &__tabs {
+            display: flex;
+            &__tab {
+                cursor: pointer;
+                &--active {
+                    font-weight: 600;
+                }
+                &:hover {
+                    opacity: 0.7;
+                }
+            }
+        }
+        &__tabsCont {
+            &--hidden {
+                display: none;
+            }
+        }
+    }
+}

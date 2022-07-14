@@ -37,7 +37,7 @@ class UserController {
                 $statModel->connection = new DatabaseConnection();
 
                 $addingWeight = $statModel->addWeight($weight, $size, null, $sexe, $age, $id);
-                $addingObjectif = $statModel->addObjectif($id);
+                $addingObjectif = $statModel->addObjectif($id, NULL, NULL, NULL);
                 $this->log();
             } else {
                 echo 'pas ok';

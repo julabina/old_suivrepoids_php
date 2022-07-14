@@ -17,8 +17,6 @@ class StatsModel {
 
         if($recordDate === NULL) {
             $date = new \DateTime();
-            var_dump($date);
-            echo $date->format('Y-m-d H:i:s');
         } else {
             $date = "";
         }
@@ -36,17 +34,37 @@ class StatsModel {
         
     }
     
-    public function addObjectif($userId) {
+    public function addObjectif($userId, $weight, $imc, $img) {
+
+        $success = $this->removeCurrent($userId);
+
+        if($success) {
+            
+            $v4 = Uuid::uuid4();
+            $newId = $v4->toString();
+            
+            $statement = $this->connection->getConnection()->prepare(
+                "INSERT INTO objectifs(id, userId, weight_goal, imc_goal, img_goal, current, created_at) VALUES (?, ?, ?, ?, ?, ?, NOW())"
+            );
+            
+            $affectedLine = $statement->execute([$newId, $userId, $weight, $imc, $img, 1]);
+            
+            return ($affectedLine > 0);
+            
+        } else {
+            return false;
+        }
         
-        $v4 = Uuid::uuid4();
-        $newId = $v4->toString();
+    }
+    
+    private function removeCurrent($userId) {
         
         $statement = $this->connection->getConnection()->prepare(
-            "INSERT INTO objectifs(id, userId, weight_goal, imc_goal, img_goal, current, created_at) VALUES (?, ?, ?, ?, ?, ?, NOW())"
+            "UPDATE objectifs SET current = ? WHERE userId = ?"
         );
         
-        $affectedLine = $statement->execute([$newId, $userId, NULL, NULL, NULL, 1]);
-        
+        $affectedLine = $statement->execute([0, $userId]);
+
         return ($affectedLine > 0);
 
     }
@@ -54,7 +72,7 @@ class StatsModel {
     public function getAllObjectif($userId) {
 
         $statement = $this->connection->getConnection()->query(
-            "SELECT * FROM objectifs WHERE userId = '$userId'"
+            "SELECT * FROM objectifs WHERE userId = '$userId' ORDER BY created_at DESC"
         );
 
         $objectifs = [];
