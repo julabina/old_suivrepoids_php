@@ -5,7 +5,6 @@
       <title><?= $title ?></title>
       <link href="/suivi_poids/css/style.css" rel="stylesheet" type="text/css" /> 
    </head>
-
    <body>
       <?= $content ?>
    </body>

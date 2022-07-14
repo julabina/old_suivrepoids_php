@@ -30,10 +30,16 @@
             </div>
         </div>
         <a href="/suivi_poids/objectifs"><div>
-            <h4>Votre objectif</h4>
+            <h4>Votre objectif actuel</h4>
             <div>
                 <?php if($userData->weight_goal === NULL && $userData->imc_goal === NULL && $userData->img_goal === NULL): ?>
                 <h3>Vous pouvez définir un objectif ici !!</h3>
+                <?php elseif($userData->weight_goal !== null): ?>
+                    <h3><?= $userData->weight_goal; ?></h3>
+                <?php elseif($userData->imc_goal !== null): ?>
+                    <h3><?= $userData->imc_goal; ?></h3>
+                <?php elseif($userData->img_goal !== null): ?>
+                    <h3><?= $userData->img_goal; ?></h3>
                 <?php endif; ?>
                 <!-- <p>Phrase en rapport a la reussite ou non</p> -->
             </div>

@@ -64,4 +64,26 @@ class StatsController {
         }
     }
 
+    public function showImc() {
+
+        if(isset($_SESSION['name']) && isset($_SESSION['user']) && isset($_SESSION['userId']) && isset($_SESSION['size']) && (isset($_SESSION['sexe']) && ($_SESSION['sexe'] === "man" || $_SESSION['sexe'] === "woman")) && isset($_SESSION['auth']) && $_SESSION['auth'] === true) {
+            
+
+
+        }
+
+        require('templates/imc.php');
+    }
+
+    public function showImg() {
+
+        if(isset($_SESSION['name']) && isset($_SESSION['user']) && isset($_SESSION['userId']) && isset($_SESSION['size']) && (isset($_SESSION['sexe']) && ($_SESSION['sexe'] === "man" || $_SESSION['sexe'] === "woman")) && isset($_SESSION['auth']) && $_SESSION['auth'] === true) {
+            
+
+            
+        }
+
+        require('templates/img.php');
+    }
+
 }
