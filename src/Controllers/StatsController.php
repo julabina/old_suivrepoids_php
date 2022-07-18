@@ -28,15 +28,15 @@ class StatsController {
     public function addObjectif() {
         
         SESSION_START();
-    
+        
         if(!isset($_SESSION['name']) || !isset($_SESSION['user']) || !isset($_SESSION['userId']) || !isset($_SESSION['size']) || (!isset($_SESSION['sexe']) || ($_SESSION['sexe'] !== "man" && $_SESSION['sexe'] !== "woman")) || !isset($_SESSION['auth']) || $_SESSION['auth'] !== true) {
             return header('Location: /suivi_poids/login');
         }
-
+        
         $weight = NULL;
         $imc = NULL;
         $img = NULL;
-
+        
         if(isset($_POST['objChangeWeight'])) {
             if($_POST['objChangeWeight'] !== "" && preg_match('/^[0-9]*$/', $_POST['objChangeWeight']) && ($_POST['objChangeWeight'] > 30 && $_POST['objChangeWeight'] < 250)) {
                 $weight = $_POST['objChangeWeight'];
@@ -52,29 +52,33 @@ class StatsController {
         } else {
             header('Location: /suivi_poids/');
         }
-
+        
         $statsModel = new StatsModel();
         $statsModel->connection = new DatabaseConnection();
         $success = $statsModel->addObjectif($_SESSION['userId'], $weight, $imc, $img);
-
+        
         if($success) {
             header('Location: /suivi_poids/objectifs');
         } else {
             header('Location: /suivi_poids/objectifs');
         }
     }
-
+    
     public function showImc() {
 
-        if(isset($_SESSION['name']) && isset($_SESSION['user']) && isset($_SESSION['userId']) && isset($_SESSION['size']) && (isset($_SESSION['sexe']) && ($_SESSION['sexe'] === "man" || $_SESSION['sexe'] === "woman")) && isset($_SESSION['auth']) && $_SESSION['auth'] === true) {
+        SESSION_START();
+
+        if(isset($_SESSION['name']) && isset($_SESSION['user'])  && isset($_SESSION['userId']) && isset($_SESSION['size']) && (isset($_SESSION['sexe']) && isset($_SESSION['auth'])) && $_SESSION['auth'] === true) {
             
-
-
+            $statsModel = new StatsModel();
+            $statsModel->connection = new DatabaseConnection();
+            $imcInfos = $statsModel->getImc($_SESSION['userId']);
+            
         }
-
+        
         require('templates/imc.php');
     }
-
+    
     public function showImg() {
 
         if(isset($_SESSION['name']) && isset($_SESSION['user']) && isset($_SESSION['userId']) && isset($_SESSION['size']) && (isset($_SESSION['sexe']) && ($_SESSION['sexe'] === "man" || $_SESSION['sexe'] === "woman")) && isset($_SESSION['auth']) && $_SESSION['auth'] === true) {

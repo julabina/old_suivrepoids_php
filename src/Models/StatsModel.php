@@ -21,8 +21,8 @@ class StatsModel {
             $date = "";
         }
 
-        $imc = $this->getImc($weight, $size);
-        $img = $this->getImg($sexe, $imc, $age);
+        $imc = $this->calculImc($weight, $size);
+        $img = $this->calculImg($sexe, $imc, $age);
 
         $statement = $this->connection->getConnection()->prepare(
             "INSERT INTO weight_infos(id, userId, user_weight, imc, img, record_date, created_at) VALUES (?, ?, ?, ?, ?, ?, NOW())"
@@ -85,12 +85,28 @@ class StatsModel {
 
     }
 
-    private function getImc($weight, $size) {
+    public function getImc($userId) {
+
+        $statement = $this->connection->getConnection()->query(
+            "SELECT size, user_weight FROM users RIGHT JOIN weight_infos ON users.userId = weight_infos.userId WHERE users.userId = '$userId' AND weight_infos.record_date = (SELECT MAX(record_date) FROM weight_infos)"
+        );
+
+        $userInfos = $statement->fetch();
+
+        $imc = $this->calculImc($userInfos['user_weight'], $userInfos['size']);
+        
+        $imcArr = ["imc" => $imc];
+
+        return $userImcInfos = $userInfos + $imcArr;
+
+    }
+
+    private function calculImc($weight, $size) {
         $newSize = $size / 100;
         return number_format($weight / ($newSize*$newSize), 2);
     }
 
-    private function getImg($sexe, $imc, $age) {
+    private function calculImg($sexe, $imc, $age) {
 
         $newImc = number_format($imc, 0);
 
