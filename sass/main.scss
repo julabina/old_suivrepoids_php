@@ -1,7 +1,10 @@
+@import './utils/variable';
 @import './utils/mixin';
 
 @import './base/reset';
 @import './base/typo';
+
+@import './layout/header';
 
 @import './pages/dashboard';
 @import './pages/home';

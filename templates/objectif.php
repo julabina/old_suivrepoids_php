@@ -7,29 +7,30 @@
 ?>
 
 <?php ob_start(); ?>
-<main>
 
+<header>
     <h1>Mes objectifs</h1>
+</header>
+
+<main class="obj">
     
-    <section>
+    <section class="obj__current">
         <h2>objectif courant</h2>
 
-        <div>
-            <div>
-                <?php foreach($objectifs as $objectif): ?>
-                    <?php if($objectif['current']): ?>
-                        <?php if($objectif['weight_goal'] === null && $objectif['imc_goal'] === null && $objectif['img_goal'] === null): ?>
-                            <h3>Aucun objectifs défini</h3>
-                        <?php elseif($objectif['weight_goal'] !== null): ?>
-                            <h3><?= $objectif['weight_goal']; ?></h3>
-                        <?php elseif($objectif['imc_goal'] !== null): ?>
-                            <h3><?= $objectif['imc_goal']; ?></h3>
-                        <?php elseif($objectif['img_goal'] !== null): ?>
-                            <h3><?= $objectif['img_goal']; ?></h3>
-                        <?php endif; ?>
+        <div class="obj__current__cont">
+            <?php foreach($objectifs as $objectif): ?>
+                <?php if($objectif['current']): ?>
+                    <?php if($objectif['weight_goal'] === null && $objectif['imc_goal'] === null && $objectif['img_goal'] === null): ?>
+                        <h3>Aucun objectifs défini</h3>
+                    <?php elseif($objectif['weight_goal'] !== null): ?>
+                        <h3>Atteindre <?= $objectif['weight_goal']; ?> kg</h3>
+                    <?php elseif($objectif['imc_goal'] !== null): ?>
+                        <h3><?= $objectif['imc_goal']; ?></h3>
+                    <?php elseif($objectif['img_goal'] !== null): ?>
+                        <h3><?= $objectif['img_goal']; ?></h3>
                     <?php endif; ?>
-                <?php endforeach; ?>
-            </div>
+                <?php endif; ?>
+            <?php endforeach; ?>
         </div>
 
     </section>
@@ -52,11 +53,11 @@
             <div class="obj__change__tabsCont__errorCont obj__change__tabsCont__errorCont__weight"></div>
             <form id="objFormWeight" action="/suivi_poids/objectif" method="post">
                 <h3></h3>
-                <div>
+                <div class='obj__change__tabsCont__input'>
                     <label for="objChangeWeight">poids</label>
                     <input type="number" name="objChangeWeight" id="changeWeight">
                 </div>
-                <input onClick="verifyChangingWeight()" type="button" value="ok">
+                <input class="obj__change__tabsCont__btn" onClick="verifyChangingWeight()" type="button" value="ok">
             </form>
         </div>
         <!-- imc tab -->
@@ -64,11 +65,11 @@
             <div class="obj__change__tabsCont__errorCont obj__change__tabsCont__errorCont__imc"></div>
             <form id="objFormImc" action="/suivi_poids/objectif" method="post">
                 <h3></h3>
-                <div>
+                <div class='obj__change__tabsCont__input'>
                     <label for="objChangeImc">imc</label>
                     <input type="number" name="objChangeImc" id="changeImc">
                 </div>
-                <input onClick="verifyChangingImc()" type="button" value="ok">
+                <input class="obj__change__tabsCont__btn" onClick="verifyChangingImc()" type="button" value="ok">
             </form>
         </div>
         <!-- img tab -->
@@ -76,16 +77,17 @@
             <div class="obj__change__tabsCont__errorCont obj__change__tabsCont__errorCont__img"></div>
             <form id="objFormImg" action="/suivi_poids/objectif" method="post">
                 <h3></h3>
-                <div>
+                <div class='obj__change__tabsCont__input'>
                     <label for="objChangeImg">img</label>
                     <input type="number" name="objChangeImg" id="changeImg">
                 </div>
-                <input onClick="verifyChangingImg()" type="button" value="ok">
+                <input class="obj__change__tabsCont__btn" onClick="verifyChangingImg()" type="button" value="ok">
             </form>
         </div>
     </section>
 
-    <section>       
+    <section class="obj__old">   
+        <h2>Mes anciens objectifs</h2>    
         <?php foreach($objectifs as $objectif): ?>
             <?php if($objectif['current'] === 0): ?>
                 <?php if($objectif['weight_goal'] !== null): ?>

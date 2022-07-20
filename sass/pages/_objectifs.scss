@@ -1,11 +1,52 @@
 .obj {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    &__current {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        h2 {
+            font-size: 1.2em;
+        }
+        &__cont {
+            border: 1px solid black;
+            border-radius: 5px;
+            width: 500px;
+            padding: 20px 0;
+            margin: 20px 0 70px;
+            h3 {
+                text-align: center;
+            }
+        }
+    }
     &__change {
+        h2 {
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.1em;
+            margin-bottom: 25px;
+        }
         &__tabs {
             display: flex;
             &__tab {
+                display: flex;
+                align-items: center;
+                justify-content: center;
                 cursor: pointer;
+                width: 150px;
+                height: 40px;
+                border-top: 1px solid black;
+                border-bottom: 1px solid black;
+                border-right: 1px solid black;
+                background: cyan;
+                &:first-child {
+                    border-left: 1px solid black;
+                }
                 &--active {
                     font-weight: 600;
+                    background: red;
                 }
                 &:hover {
                     opacity: 0.7;
@@ -13,9 +54,44 @@
             }
         }
         &__tabsCont {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 25px 0;
+            max-width: 450px;
             &--hidden {
                 display: none;
             }
+            &__errorCont {
+                color: map-get($map: $colors, $key: error);
+                font-size: 0.9em;
+            }
+            &__input {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                input {
+                    width: 320px;
+                    height: 30px;
+                    margin: 20px 0;
+                }
+            }
+            &__btn {
+                width: 320px;
+                height: 35px;
+                border: 5px solid black;
+                border-radius: 7px;
+                font-size: 1em;
+                background: white;
+                cursor: pointer;
+                &:hover {
+                    background: indigoe;
+                }
+            }
         }
+    }
+    &__old {
+        display: flex;
+        flex-direction: column;
     }
 }
