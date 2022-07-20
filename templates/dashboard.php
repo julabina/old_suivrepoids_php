@@ -10,6 +10,7 @@
 
 <header>
     <h1>Tableau de bord</h1>
+    <?php var_dump($userData); ?>
     <h2><?= $userData->name; ?></h2>
 </header>
 

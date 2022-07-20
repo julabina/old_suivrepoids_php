@@ -67,8 +67,8 @@ class StatsController {
     public function showImc() {
 
         SESSION_START();
-
-        if(isset($_SESSION['name']) && isset($_SESSION['user'])  && isset($_SESSION['userId']) && isset($_SESSION['size']) && (isset($_SESSION['sexe']) && isset($_SESSION['auth'])) && $_SESSION['auth'] === true) {
+        
+        if(isset($_SESSION['name']) && isset($_SESSION['user']) && isset($_SESSION['userId']) && isset($_SESSION['size']) && (isset($_SESSION['sexe']) && isset($_SESSION['auth'])) && $_SESSION['auth'] === true) {
             
             $statsModel = new StatsModel();
             $statsModel->connection = new DatabaseConnection();
@@ -80,10 +80,14 @@ class StatsController {
     }
     
     public function showImg() {
+        
+        SESSION_START();
 
         if(isset($_SESSION['name']) && isset($_SESSION['user']) && isset($_SESSION['userId']) && isset($_SESSION['size']) && (isset($_SESSION['sexe']) && ($_SESSION['sexe'] === "man" || $_SESSION['sexe'] === "woman")) && isset($_SESSION['auth']) && $_SESSION['auth'] === true) {
             
-
+            $statsModel = new StatsModel();
+            $statsModel->connection = new DatabaseConnection();
+            $imgInfos = $statsModel->getImg($_SESSION['userId']);
             
         }
 

@@ -79,6 +79,7 @@ class UserModel {
         $test = $statement->fetch();
         
         $userInfos = new User();
+        var_dump($test);
 
         if($test > 0) {
             $userInfos->userId = $userId;

@@ -98,7 +98,7 @@ class UserController {
            
         }
         
-        require('templates/dashboard.php');
+        /* require('templates/dashboard.php'); */
 
     }
 

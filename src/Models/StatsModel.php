@@ -101,6 +101,35 @@ class StatsModel {
 
     }
 
+    public function getImg($userId) {
+
+        $statement = $this->connection->getConnection()->query(
+            "SELECT size, is_man, birthday, user_weight FROM users RIGHT JOIN weight_infos ON users.userId = weight_infos.userId WHERE users.userId = '$userId' AND weight_infos.record_date = (SELECT MAX(record_date) FROM weight_infos)"
+        );
+
+        $userInfos = $statement->fetch();
+
+        $imc = $this->calculImc($userInfos['user_weight'], $userInfos['size']);
+
+        if($userInfos['is_man'] === 1) {
+            $sexe = "man";
+        } else {
+            $sexe = "woman";
+        } 
+
+        $birthdayTimestamp = strtotime($userInfos['birthday']);
+        $currentDate = time();
+        $birthToNow = $currentDate - $birthdayTimestamp;
+        $age = floor($birthToNow / 31536000);
+        
+        $img = $this->calculImg($sexe, $imc, $age);
+
+        $imgArr = ["img" => $img];
+
+        return $userImgInfos = $userInfos + $imgArr;
+
+    }
+
     private function calculImc($weight, $size) {
         $newSize = $size / 100;
         return number_format($weight / ($newSize*$newSize), 2);
