@@ -11,6 +11,7 @@ $router->get('/imc', 'Stats#showImc');
 $router->get('/img', 'Stats#showImg');
 $router->get('/login', function(){ require('templates/log.php'); });
 $router->post('/login', 'User#log');
+$router->get('/logout', 'User#logout');
 $router->get('/sign', function(){ require('templates/sign.php'); });
 $router->post('/sign', 'User#sign');
 

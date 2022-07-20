@@ -83,6 +83,18 @@ class UserController {
 
     }
 
+    public function logout() {
+
+        session_start();
+        
+        $_SESSION = array();
+
+        session_destroy();
+
+        header('Location: /suivi_poids/');
+
+    }
+
     public function dash() {
 
         SESSION_START();
