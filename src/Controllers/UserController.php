@@ -16,7 +16,8 @@ class UserController {
             (isset($_POST['name']) && $_POST['name'] !== "" && preg_match('/^[a-zA-Zé èà]*$/', $_POST['name']) && (strlen($_POST['name']) > 2 || strlen($_POST['name']) < 25)) &&
             (isset($_POST['size']) && preg_match('/^[0-9]*$/', $_POST['size']) && ($_POST['size'] > 90 && $_POST['size'] < 260)) && 
             (isset($_POST['weight']) && preg_match('/^[0-9]*$/', $_POST['weight']) && ($_POST['weight'] > 30 && $_POST['weight'] < 250)) && 
-            (isset($_POST['sexe']) && ($_POST['sexe'] === "man" || $_POST['sexe'] === "woman"))
+            (isset($_POST['sexe']) && ($_POST['sexe'] === "man" || $_POST['sexe'] === "woman")) &&
+            (isset($_POST['birthday']) && preg_match('/^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)(?:19\d{2}|20[01][0-9]|2022)$/i', $_POST['birthday']))
         ) {
             
             $email = $_POST['email'];
@@ -25,12 +26,13 @@ class UserController {
             $size = $_POST['size'];
             $weight = $_POST['weight'];
             $sexe = $_POST['sexe'];
+            $birthday = $_POST['birthday'];
             $age = 30;
             
             $userModel = new UserModel();
             $userModel->connection = new DatabaseConnection();
             
-            $id = $userModel->createUser($email, $password, $name, $size, $sexe);
+            $id = $userModel->createUser($email, $password, $name, $size, $sexe, $birthday);
             
             if($id !== "") {
                 $statModel = new StatsModel();
@@ -98,7 +100,7 @@ class UserController {
            
         }
         
-        /* require('templates/dashboard.php'); */
+        require('templates/dashboard.php');
 
     }
 

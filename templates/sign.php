@@ -23,6 +23,12 @@
                 <label for="signName">Prénom/pseudo</label>
                 <input type="text" name="name" id="signName">
             </div>
+            <div>
+                <label for="signBirthday">Date de naissance (jj/mm/aaaa)</label>
+                <input type="text" name="birthday" id="signBirthday">
+            </div>
+        </div>
+        <div class="">
             <div class="">
                 <label for="signSexe">Sexe</label>
                 <select name="sexe" id="signSexe">
@@ -30,8 +36,6 @@
                     <option value="woman">Femme</option>
                 </select>
             </div>
-        </div>
-        <div class="">
             <div class="">
                 <label for="signSize">Taille</label>
                 <input type="number" name="size" id="signSize">
@@ -50,6 +54,7 @@
     const email = document.getElementById('signEmail');
     const password = document.getElementById('signPassword');
     const userName = document.getElementById('signName');
+    const userBirthday = document.getElementById('signBirthday');
     const size = document.getElementById('signSize');
     const weight = document.getElementById('signWeight');
     const form = document.getElementById('sign__form');
@@ -76,6 +81,12 @@
             error += `<p>- Le nom ne doit avoir une taille comprise entre 2 et 25 caracteres.</p>`
         } else if (!userName.value.match(/^[a-zA-Zé èà]*$/)) {
             error += `<p>- Le nom doit contenir que des lettres.</p>`
+        }
+        
+        if(userBirthday.value === "") {
+            error += `<p>- La date de naissance ne doit pas etre vide.</p>`
+        } else if(!userBirthday.value.match(/^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)(?:19\d{2}|20[01][0-9]|2022)$/i)) {
+            error += `<p>- La date de naissance doit etre au format jj/mm/aaaa et etre entre 1900 et 2022.</p>`
         }
         
         if(size.value === '') {

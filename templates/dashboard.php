@@ -10,7 +10,7 @@
 
 <header>
     <h1>Tableau de bord</h1>
-    <?php var_dump($userData); ?>
+    
     <h2><?= $userData->name; ?></h2>
 </header>
 
@@ -18,16 +18,16 @@
     <section>
         <div>
             <div>
-                <h4>Votre poids au ------</h4>
+                <h4>Votre poids au <?= $userData->recordDate; ?></h4>
                 <h3><?= $userData->weight; ?></h3>
             </div>
             <div>
-                <h4>Votre IMC au ------</h4>
+                <h4>Votre IMC</h4>
                 <h3><?= floor($userData->imc); ?></h3>
             </div>
             <div>
-                <h4>Votre IMG au ------</h4>
-                <h3><?= $userData->img; ?></h3>
+                <h4>Votre IMG</h4>
+                <h3><?= $userData->img; ?>%</h3>
             </div>
         </div>
         <a href="/suivi_poids/objectifs"><div>
