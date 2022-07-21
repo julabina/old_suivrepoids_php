@@ -2,7 +2,7 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Roboto:wght@400;500;700&display=swap");
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -61,18 +61,87 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
+h1 {
+  font-family: "Roboto Slab", serif;
+}
+
+main {
+  z-index: 1;
+}
+
 header {
+  position: fixed;
+  top: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: aqua;
+  z-index: 10;
+  background-color: #fdfdfd;
   height: 60px;
-  margin-bottom: 20px;
   width: 100%;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.336);
 }
 header h1 {
+  display: flex;
+  align-items: center;
   font-size: 1.4em;
   font-weight: 600;
+  color: #1b1b1b;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  width: 1480px;
+}
+.header__logoutBtn {
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+  border-radius: 2px;
+  padding: 15px 0;
+  background: #0C2E8A;
+  color: #fdfdfd;
+  transition: opacity 150ms ease-in-out;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin: 0 5px;
+  width: 160px;
+  padding: 10px 0 10px;
+  font-size: 0.9em;
+}
+.header__logoutBtn:hover {
+  opacity: 0.7;
+  transition: opacity 150ms ease-in-out;
+}
+.header__notConnectBtns {
+  display: flex;
+  justify-content: space-between;
+}
+.header__notConnectBtns a {
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+  border-radius: 2px;
+  padding: 15px 0;
+  background: #0C2E8A;
+  color: #fdfdfd;
+  transition: opacity 150ms ease-in-out;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin: 0 5px;
+  width: 160px;
+  padding: 10px 0 10px;
+  font-size: 0.9em;
+}
+.header__notConnectBtns a:hover {
+  opacity: 0.7;
+  transition: opacity 150ms ease-in-out;
+}
+
+#headerLogBtn {
+  background: white;
+  color: #1b1b1b;
 }
 
 .dash__infos {
@@ -135,14 +204,23 @@ header h1 {
   width: 100%;
 }
 .home__basics {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  padding-top: 30px;
+  background-image: url("../assets/home-1.webp");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
 }
 .home__basics h1 {
   font-weight: 600;
-  font-size: 1.5em;
-  margin: 40px 0 30px;
+  letter-spacing: 0.7px;
+  font-size: 2em;
+  margin: 0 0 50px;
 }
 .home__basics h2 {
   margin-bottom: 30px;
@@ -151,46 +229,68 @@ header h1 {
   text-decoration: none;
   color: inherit;
   text-align: center;
-  border: 5px solid #2704c2;
-  border-radius: 10px;
-  padding: 25px 0;
+  border-radius: 2px;
+  padding: 15px 0;
+  background: #0C2E8A;
+  color: #fdfdfd;
+  transition: opacity 150ms ease-in-out;
+  text-transform: uppercase;
+  font-weight: 500;
   width: 600px;
 }
 .home__basics__toDash:hover {
-  background: cyan;
+  opacity: 0.7;
+  transition: opacity 150ms ease-in-out;
 }
-.home__basics__notConnectBtns, .home__basics__calculBtns {
+.home__basics__notConnectBtns {
   display: flex;
   justify-content: space-between;
-  width: 600px;
 }
-.home__basics__notConnectBtns a, .home__basics__calculBtns a {
+.home__basics__notConnectBtns a {
   text-decoration: none;
   color: inherit;
   text-align: center;
-  border: 5px solid #2704c2;
-  border-radius: 10px;
-  padding: 25px 0;
-  margin-top: 30px;
-  width: 285px;
+  border-radius: 2px;
+  padding: 15px 0;
+  background: #0C2E8A;
+  color: #fdfdfd;
+  transition: opacity 150ms ease-in-out;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin: 30px 25px 0;
+  width: 180px;
 }
-.home__basics__notConnectBtns a:hover, .home__basics__calculBtns a:hover {
-  background: cyan;
+.home__basics__notConnectBtns a:hover {
+  opacity: 0.7;
+  transition: opacity 150ms ease-in-out;
 }
-.home__basics__logoutBtn {
+.home__basics__para {
+  text-transform: uppercase;
+  font-size: 3em;
+  font-weight: 700;
+  color: #1b1b1b;
+}
+.home__basics__scrollBtn {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  padding: 0;
-}
-.home__basics__logoutBtn button {
-  background: white;
-  border: 5px solid blue;
-  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 10px;
+  background: rgba(253, 253, 253, 0.6);
+  height: 50px;
+  width: 50px;
+  border: 3px solid rgba(27, 27, 27, 0.9);
+  border-radius: 50%;
   cursor: pointer;
+  transition: opacity 100ms ease-in-out;
 }
-.home__basics__logoutBtn button:hover {
-  background: red;
+.home__basics__scrollBtn img {
+  object-fit: cover;
+  width: 25px;
+}
+.home__basics__scrollBtn:hover {
+  opacity: 0.7;
+  transition: opacity 100ms ease-in-out;
 }
 
 .obj {

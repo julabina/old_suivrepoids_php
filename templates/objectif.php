@@ -9,7 +9,9 @@
 <?php ob_start(); ?>
 
 <header>
-    <h1>Mes objectifs</h1>
+    <div class="header">
+        <h1>Mes objectifs</h1>
+    </div>
 </header>
 
 <main class="obj">

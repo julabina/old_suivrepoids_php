@@ -3,13 +3,22 @@
     flex-direction: column;
     width: 100%;
     &__basics {
+        position: relative;
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
+        padding-top: 30px;
+        background-image: url("../assets/home-1.webp");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100vh;
         h1 {
             font-weight: 600;
-            font-size: 1.5em;
-            margin: 40px 0 30px;
+            letter-spacing: 0.7px;
+            font-size: 2em;
+            margin: 0 0 50px;
         }
         h2 {
             margin-bottom: 30px;
@@ -18,29 +27,41 @@
             @include homeBtn;
             width: 600px;
         }
-        &__notConnectBtns, &__calculBtns {
+        &__notConnectBtns {
             display: flex;
             justify-content: space-between;
-            width: 600px;
             a {
                 @include homeBtn;
-                margin-top: 30px;
-                width: 285px;
+                margin: 30px 25px 0;
+                width: 180px;
             }
         }
-        &__logoutBtn {
+        &__para {
+            text-transform: uppercase;
+            font-size: 3em;
+            font-weight: 700;
+            color: map-get($map: $colors, $key:lightBlack );
+        }
+        &__scrollBtn {
             position: absolute;
-            top: 10px;
-            right: 10px;
-            padding: 0;
-            button {
-                background: white;
-                border: 5px solid blue;
-                border-radius: 10px;
-                cursor: pointer;
-                &:hover {
-                    background: red;
-                }
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            bottom: 10px;
+            background: transparentize(map-get($colors, lightWhite), 0.4);
+            height: 50px;
+            width: 50px;
+            border: 3px solid transparentize(map-get($map: $colors, $key: lightBlack), 0.1);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: opacity 100ms ease-in-out;
+            img {
+                object-fit: cover;
+                width: 25px;
+            }
+            &:hover {
+                opacity: 0.7;
+                transition: opacity 100ms ease-in-out;
             }
         }
     }
