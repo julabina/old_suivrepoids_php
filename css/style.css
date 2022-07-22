@@ -389,4 +389,139 @@ header h1 {
   flex-direction: column;
 }
 
+.sign {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.sign__back {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  text-decoration: none;
+  font-size: 0.9em;
+  color: inherit;
+}
+.sign__back:hover {
+  color: blue;
+}
+.sign h1 {
+  font-size: 1.8em;
+  font-weight: 600;
+  margin-top: 20px;
+}
+.sign__error {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  color: #d80404;
+  line-height: 1.3;
+  padding: 25px 15px;
+  height: 200px;
+  width: 560px;
+}
+.sign__form__logs {
+  display: flex;
+  width: 100%;
+  margin-bottom: 18px;
+}
+.sign__form__logs__email, .sign__form__logs__password {
+  display: flex;
+  flex-direction: column;
+  margin: 0 15px;
+  width: 250px;
+}
+.sign__form__logs__email label, .sign__form__logs__password label {
+  margin-bottom: 5px;
+  font-size: 0.9em;
+}
+.sign__form__logs__email input, .sign__form__logs__password input {
+  height: 40px;
+  border: 1px solid rgba(165, 165, 165, 0.5);
+  padding-left: 15px;
+}
+.sign__form__name {
+  display: flex;
+  width: 100%;
+  margin-bottom: 18px;
+}
+.sign__form__name__firstname, .sign__form__name__birthday {
+  display: flex;
+  flex-direction: column;
+  margin: 0 15px;
+  width: 250px;
+}
+.sign__form__name__firstname label, .sign__form__name__birthday label {
+  margin-bottom: 5px;
+  font-size: 0.9em;
+}
+.sign__form__name__firstname input, .sign__form__name__birthday input {
+  height: 40px;
+  border: 1px solid rgba(165, 165, 165, 0.5);
+  padding-left: 15px;
+}
+.sign__form__stats {
+  display: flex;
+  width: 100%;
+  margin-bottom: 18px;
+}
+.sign__form__stats__size, .sign__form__stats__weight {
+  display: flex;
+  flex-direction: column;
+  margin: 0 15px;
+  width: 180px;
+}
+.sign__form__stats__size label, .sign__form__stats__weight label {
+  margin-bottom: 5px;
+  font-size: 0.9em;
+}
+.sign__form__stats__size input, .sign__form__stats__weight input {
+  height: 40px;
+  border: 1px solid rgba(165, 165, 165, 0.5);
+  padding-left: 15px;
+}
+.sign__form__stats__sexe {
+  display: flex;
+  flex-direction: column;
+  margin: 0 15px;
+  width: 110px;
+}
+.sign__form__stats__sexe label {
+  margin-bottom: 5px;
+  font-size: 0.9em;
+}
+.sign__form__stats__sexe select {
+  height: 40px;
+  padding-left: 15px;
+  border-color: rgba(165, 165, 165, 0.5);
+  background-color: white;
+}
+.sign__form__checkCont {
+  margin-left: 15px;
+  margin-bottom: 30px;
+}
+.sign__form__btnCont {
+  display: flex;
+  justify-content: start;
+  margin: 0 15px;
+}
+.sign__form__btnCont__submitBtn {
+  font-size: 1em;
+  font-family: "Roboto", sans-serif;
+  border: none;
+  border-radius: 2px;
+  padding: 15px 0;
+  background: #0C2E8A;
+  color: #fdfdfd;
+  transition: opacity 150ms ease-in-out;
+  text-transform: uppercase;
+  font-weight: 500;
+  width: 180px;
+}
+.sign__form__btnCont__submitBtn:hover {
+  opacity: 0.7;
+  transition: opacity 150ms ease-in-out;
+}
+
 /*# sourceMappingURL=style.css.map */

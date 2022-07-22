@@ -14,3 +14,17 @@
         transition: opacity 150ms ease-in-out;
     }
 }
+
+@mixin form {
+    display: flex;
+    flex-direction: column;
+    label {
+        margin-bottom: 5px;
+        font-size: 0.9em;
+    }
+    input {
+        height: 40px;
+        border: 1px solid map-get($map: $colors, $key: transLightGray);
+        padding-left: 15px;
+    }
+}

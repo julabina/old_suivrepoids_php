@@ -2,5 +2,6 @@ $colors :(
     primary: #0C2E8A,
     error : #d80404,
     lightWhite : #fdfdfd,
-    lightBlack: #1b1b1b
+    lightBlack: #1b1b1b,
+    transLightGray: transparentize(#a5a5a5, 0.5)
 );

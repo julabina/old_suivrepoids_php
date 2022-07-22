@@ -28,8 +28,8 @@
         <?php else: ?>
             <h2 class="home__basics__para">Une phrase d'accroche pertinante</h2>
             <div class="home__basics__notConnectBtns">
-                <a href="/suivi_poids/sign">Creer un compte</a>
                 <a href="/suivi_poids/login">Se connecter</a>
+                <a href="/suivi_poids/sign">Creer un compte</a>
             </div>
         <?php endif; ?>
         <div class="home__basics__scrollBtn">

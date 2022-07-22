@@ -2,50 +2,58 @@
 
 
 <?php ob_start(); ?>
-<main>    
+
+<main class="sign">   
+    <a href="/suivi_poids/" class="sign__back">< retour</a> 
     <h1>S'enregistrer</h1>
     
     <div class="sign__error"></div>
     
-    <form id="sign__form" action="/suivi_poids/sign" method="post">
-        <div class="/suivi_poids/sign">
-            <div class="">
+    <form class="sign__form" id="sign__form" action="/suivi_poids/sign" method="post">
+        <div class="sign__form__logs">
+            <div class="sign__form__logs__email">
                 <label for="signEmail">Adresse email</label>
                 <input type="email" name="email" id="signEmail">
             </div>
-            <div class="">
+            <div class="sign__form__logs__password">
                 <label for="signPassword">Mot de passe</label>
                 <input type="password" name="password" id="signPassword">
             </div>
         </div>
-        <div class="">
-            <div class="">
+        <div class="sign__form__name">
+            <div class="sign__form__name__firstname">
                 <label for="signName">Prénom/pseudo</label>
                 <input type="text" name="name" id="signName">
             </div>
-            <div>
+            <div class="sign__form__name__birthday">
                 <label for="signBirthday">Date de naissance (jj/mm/aaaa)</label>
                 <input type="text" name="birthday" id="signBirthday">
             </div>
         </div>
-        <div class="">
-            <div class="">
+        <div class="sign__form__stats">
+            <div class="sign__form__stats__sexe">
                 <label for="signSexe">Sexe</label>
                 <select name="sexe" id="signSexe">
                     <option value="man">Homme</option>
                     <option value="woman">Femme</option>
                 </select>
             </div>
-            <div class="">
+            <div class="sign__form__stats__size">
                 <label for="signSize">Taille</label>
                 <input type="number" name="size" id="signSize">
             </div>
-            <div class="">
+            <div class="sign__form__stats__weight">
                 <label for="signWeight">Votre poids actuel</label>
                 <input type="number" name="weight" id="signWeight">
             </div>
         </div>
-        <input type="button" value="OK" onClick="checkInputs()">
+        <div class="sign__form__checkCont">
+            <input type="checkbox" name="checkCgu" id="signCheckCgu">
+            <label for="signCheckCgu">J'ai lu et j'accepte les <a href="/suivi_poids/cgu/">Conditions Générales d'Utilisation</a>.</label>
+        </div>
+        <div class="sign__form__btnCont">
+            <input class="sign__form__btnCont__submitBtn" type="button" value="Créer un compte" onClick="checkInputs()">
+        </div>
     </form>
 
 </main>
@@ -57,6 +65,7 @@
     const userBirthday = document.getElementById('signBirthday');
     const size = document.getElementById('signSize');
     const weight = document.getElementById('signWeight');
+    const cgu = document.getElementById('signCheckCgu');
     const form = document.getElementById('sign__form');
     const errorCont = document.querySelector('.sign__error');
 
@@ -104,12 +113,16 @@
         } else if(!weight.value.match(/^[0-9]*$/)) {
             error += `<p>- Le poids doit contenir que des chiffres.</p>`
         }
+        
+        if(!cgu.checked) {
+            error += `<p>- Vous devez accepter les conditions générales d'utilisation.</p>`
+        } 
 
         if(error !== '') {
             errorCont.innerHTML = error;
         } else {
             errorCont.innerHTML = "";
-            form.submit();
+            /* form.submit(); */
         }
     };
 </script>
