@@ -66,6 +66,7 @@ class UserModel {
                 $userInfo[] = $user['firstname'];
                 $userInfo[] = $user['size'];
                 $userInfo[] = $user['is_man'];
+                $userInfo[] = $user['birthday'];
             }
         }
 

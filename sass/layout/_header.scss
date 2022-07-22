@@ -24,10 +24,10 @@ header {
     width: 1480px;
     &__logoutBtn {
         @include homeBtn;
-            margin: 0 5px;
-            width: 160px;
-            padding: 10px 0 10px;
-            font-size: 0.9em;
+        margin: 0 5px;
+        width: 160px;
+        padding: 10px 0 10px;
+        font-size: 0.9em;
     }
     &__notConnectBtns {
         display: flex;
@@ -39,6 +39,9 @@ header {
             padding: 10px 0 10px;
             font-size: 0.9em;
         }
+    }
+    a {
+        text-decoration: none
     }
 }
 

@@ -2,7 +2,7 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Roboto:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap");
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -55,6 +55,19 @@ table {
 
 *, *::before, *::after {
   box-sizing: border-box;
+}
+
+/* remove input number arrow */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
 
 body {
@@ -138,16 +151,33 @@ header h1 {
   opacity: 0.7;
   transition: opacity 150ms ease-in-out;
 }
+.header a {
+  text-decoration: none;
+}
 
 #headerLogBtn {
   background: white;
   color: #1b1b1b;
 }
 
+.dash {
+  padding-top: 60px;
+  background: #f5f5f5;
+  min-height: 100vh;
+}
 .dash__infos {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 30px;
+}
+.dash__infos h2 {
+  font-family: "Roboto Slab", serif;
+  font-size: 1.7em;
+  font-weight: 600;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+  color: #1b1b1b;
 }
 .dash__infos__cont {
   display: flex;
@@ -158,12 +188,14 @@ header h1 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 2px solid black;
-  height: 100px;
+  height: 140px;
   width: 250px;
-  border-radius: 10px;
-  padding-bottom: 10px;
+  border-radius: 3px;
+  padding: 27px 0 20px 0;
   margin: 0 15px;
+  background-color: white;
+  box-shadow: 0 3px 20px rgba(0, 0, 0, 0.205);
+  cursor: pointer;
 }
 .dash__infos__cont__infoBox h4 {
   margin-bottom: 20px;
@@ -171,13 +203,25 @@ header h1 {
 .dash__infos__cont__infoBox h3 {
   font-size: 1.6em;
   font-weight: 600;
+  color: #1b1b1b;
+}
+.dash__infos__cont__infoBox p {
+  font-size: 0.8em;
+  font-weight: 300;
+  height: 13px;
+  margin-top: 5px;
+}
+.dash__infos__cont__infoBox:hover {
+  border: 1px solid rgba(165, 165, 165, 0.5);
 }
 .dash__obj {
   width: 810px;
-  border: 2px solid black;
-  border-radius: 10px;
+  height: 150px;
+  border-radius: 5px;
   margin-top: 30px;
-  padding: 15px;
+  padding: 25px 0;
+  background: white;
+  box-shadow: 0 3px 20px rgba(0, 0, 0, 0.205);
 }
 .dash__obj h4 {
   margin-bottom: 30px;
@@ -189,13 +233,105 @@ header h1 {
   font-weight: 600;
   margin-bottom: 15px;
   text-align: center;
+  color: #1b1b1b;
 }
 .dash__obj p {
   text-align: center;
+  font-weight: 300;
 }
-.dash__link {
+.dash__obj--success {
+  background: #5CB85C;
+}
+.dash__obj:hover {
+  border: 1px solid rgba(165, 165, 165, 0.5);
+}
+.dash a {
   text-decoration: none;
   color: inherit;
+}
+
+.dashAddWeight {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.725);
+}
+.dashAddWeight__modal {
+  position: absolute;
+  top: 42%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fdfdfd;
+  padding: 50px 30px 30px;
+  border-radius: 5px;
+}
+.dashAddWeight__modal__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+.dashAddWeight__modal__form label {
+  margin-bottom: 5px;
+  font-size: 0.9em;
+}
+.dashAddWeight__modal__form input {
+  height: 40px;
+  border: 1px solid rgba(165, 165, 165, 0.5);
+  padding-left: 15px;
+}
+.dashAddWeight__modal__form label {
+  font-weight: 600;
+  font-size: 1.15em;
+  margin-bottom: 12px;
+}
+.dashAddWeight__modal__form__error {
+  width: 100%;
+  height: 14px;
+  margin-left: 30px;
+  color: #d80404;
+  margin-bottom: 5px;
+}
+.dashAddWeight__modal__form__submitBtn {
+  font-size: 1em;
+  font-family: "Roboto", sans-serif;
+  border: none;
+  border-radius: 2px;
+  padding: 15px 0;
+  background: #0C2E8A;
+  color: #fdfdfd;
+  transition: opacity 150ms ease-in-out;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 20px;
+  width: 140px;
+  padding: inherit;
+  padding-right: 15px;
+}
+.dashAddWeight__modal__form__submitBtn:hover {
+  opacity: 0.7;
+  transition: opacity 150ms ease-in-out;
+}
+.dashAddWeight__modal__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.3em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 150ms ease-in-out;
+}
+.dashAddWeight__modal__close:hover {
+  opacity: 0.7;
+  transition: opacity 150ms ease-in-out;
+}
+.dashAddWeight--hidden {
+  display: none;
 }
 
 .home {
@@ -209,7 +345,7 @@ header h1 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-top: 30px;
+  padding-bottom: 60px;
   background-image: url("../assets/home-1.webp");
   background-position: center;
   background-repeat: no-repeat;
@@ -389,11 +525,92 @@ header h1 {
   flex-direction: column;
 }
 
+.log {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f5f5f5;
+  height: 100vh;
+}
+.log__back {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  text-decoration: none;
+  font-size: 0.9em;
+  color: inherit;
+}
+.log__back:hover {
+  color: blue;
+}
+.log h1 {
+  font-size: 1.8em;
+  font-weight: 600;
+  margin-top: 20px;
+}
+.log__error {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  color: #d80404;
+  line-height: 1.3;
+  padding-bottom: 5px;
+  height: 200px;
+  width: 280px;
+}
+.log__form {
+  background: white;
+  width: 320px;
+  padding: 40px 20px;
+  border-radius: 3px;
+  box-shadow: 0 3px 20px rgba(0, 0, 0, 0.205);
+}
+.log__form__email, .log__form__password {
+  display: flex;
+  flex-direction: column;
+  margin: 0 15px;
+  width: 250px;
+  margin-bottom: 18px;
+}
+.log__form__email label, .log__form__password label {
+  margin-bottom: 5px;
+  font-size: 0.9em;
+}
+.log__form__email input, .log__form__password input {
+  height: 40px;
+  border: 1px solid rgba(165, 165, 165, 0.5);
+  padding-left: 15px;
+}
+.log__form__btnCont {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+.log__form__btnCont__submitBtn {
+  font-size: 1em;
+  font-family: "Roboto", sans-serif;
+  border: none;
+  border-radius: 2px;
+  padding: 15px 0;
+  background: #0C2E8A;
+  color: #fdfdfd;
+  transition: opacity 150ms ease-in-out;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  width: 160px;
+}
+.log__form__btnCont__submitBtn:hover {
+  opacity: 0.7;
+  transition: opacity 150ms ease-in-out;
+}
+
 .sign {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  background: #f5f5f5;
+  height: 100vh;
 }
 .sign__back {
   position: absolute;
@@ -417,9 +634,16 @@ header h1 {
   justify-content: end;
   color: #d80404;
   line-height: 1.3;
-  padding: 25px 15px;
+  padding-bottom: 5px;
   height: 200px;
   width: 560px;
+}
+.sign__form {
+  background: white;
+  width: 600px;
+  padding: 40px 20px;
+  border-radius: 3px;
+  box-shadow: 0 3px 20px rgba(0, 0, 0, 0.247);
 }
 .sign__form__logs {
   display: flex;
@@ -517,6 +741,7 @@ header h1 {
   transition: opacity 150ms ease-in-out;
   text-transform: uppercase;
   font-weight: 500;
+  cursor: pointer;
   width: 180px;
 }
 .sign__form__btnCont__submitBtn:hover {

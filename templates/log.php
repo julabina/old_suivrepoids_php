@@ -2,21 +2,27 @@
 
 <?php ob_start(); ?>
 
-<h1>Se connecter</h1>
-
-<div class="log__error"></div>
-
-<form id="log__form" action="/suivi_poids/login" method="post">
-    <div>
-        <label for="logEmail">Email</label>
-        <input type="email" name="email" id="logEmail">
-    </div>
-    <div>
-        <label for="logPassword">Mot de passe</label>
-        <input type="password" name="password" id="logPassword">
-    </div>
-    <input type="button" value="ok" onClick="checkLogInputs()">
-</form>
+<main class="log">
+    <a href="/suivi_poids/" class="log__back">< retour</a>
+    <h1>Se connecter</h1>
+    
+    <div class="log__error"></div>
+    
+    <form class="log__form" id="log__form" action="/suivi_poids/login" method="post">
+        <div class="log__form__email">
+            <label for="logEmail">Email</label>
+            <input type="email" name="email" id="logEmail">
+        </div>
+        <div class="log__form__password">
+            <label for="logPassword">Mot de passe</label>
+            <input type="password" name="password" id="logPassword">
+        </div>
+        <div class="log__form__btnCont">
+            <input class="log__form__btnCont__submitBtn" type="button" value="Se connecter" onClick="checkLogInputs()">
+        </div>
+    </form>
+    
+</main>
 
 <script>
     const email = document.getElementById('logEmail');

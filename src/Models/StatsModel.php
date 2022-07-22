@@ -10,7 +10,7 @@ class StatsModel {
 
     public DatabaseConnection $connection;
 
-    public function addWeight($weight, $size, $recordDate, $sexe, $age, $id) {
+    public function addWeight($weight, $size, $recordDate, $sexe, $birthDate, $id) {
 
         $v4 = Uuid::uuid4();
         $newId = $v4->toString();
@@ -20,6 +20,11 @@ class StatsModel {
         } else {
             $date = "";
         }
+
+        $birthdayTimestamp = strtotime($birthDate);
+        $currentDate = time();
+        $birthToNow = $currentDate - $birthdayTimestamp;
+        $age = floor($birthToNow / 31536000);
 
         $imc = $this->calculImc($weight, $size);
         $img = $this->calculImg($sexe, $imc, $age);
@@ -131,7 +136,10 @@ class StatsModel {
     }
 
     private function calculImc($weight, $size) {
+        echo $size;
+        echo $weight;
         $newSize = $size / 100;
+        echo $newSize;
         return number_format($weight / ($newSize*$newSize), 2);
     }
 

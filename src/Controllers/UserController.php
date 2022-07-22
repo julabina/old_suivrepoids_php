@@ -75,6 +75,7 @@ class UserController {
                     }
                     $_SESSION['userId'] = $user[0];
                     $_SESSION['auth'] = true;
+                    $_SESSION['birthday'] = $user[4];
                 } 
 
             }

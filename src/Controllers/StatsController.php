@@ -58,9 +58,9 @@ class StatsController {
         $success = $statsModel->addObjectif($_SESSION['userId'], $weight, $imc, $img);
         
         if($success) {
-            header('Location: /suivi_poids/objectifs');
+            header('Location: /suivi_poids/dashboard');
         } else {
-            header('Location: /suivi_poids/objectifs');
+            header('Location: /suivi_poids/dashboard');
         }
     }
     
@@ -92,6 +92,32 @@ class StatsController {
         }
 
         require('templates/img.php');
+    }
+
+    public function addWeight() {
+
+        SESSION_START();
+        
+        if(isset($_SESSION['name']) && isset($_SESSION['user']) && isset($_SESSION['userId']) && isset($_SESSION['size']) && (isset($_SESSION['sexe']) && ($_SESSION['sexe'] === "man" || $_SESSION['sexe'] === "woman")) && isset($_SESSION['auth']) && $_SESSION['auth'] === true && isset($_SESSION['birthday'])) {
+            
+            if(isset($_POST['addWeight']) && $_POST['addWeight'] !== "" && ($_POST['addWeight'] < 261 && $_POST['addWeight'] > 29)) {
+
+                $newWeight = $_POST['addWeight'];
+
+                $statsModel = new StatsModel();
+                $statsModel->connection = new DatabaseConnection();
+                $success = $statsModel->addWeight($newWeight,$_SESSION['size'] , null, $_SESSION['sexe'], $_SESSION['birthday'] ,$_SESSION['userId']);
+
+                if($success) {   
+                    header('Location: /suivi_poids/dashboard');         
+                } else {
+                    header('Location: /suivi_poids/dashboard');
+                }
+                
+            }
+
+        } 
+
     }
 
 }

@@ -9,6 +9,7 @@ $router->get('/objectifs', 'Stats#showObjectif');
 $router->post('/objectif', 'Stats#addObjectif');
 $router->get('/imc', 'Stats#showImc');
 $router->get('/img', 'Stats#showImg');
+$router->post('/addWeight', 'Stats#addWeight');
 $router->get('/login', function(){ require('templates/log.php'); });
 $router->post('/login', 'User#log');
 $router->get('/logout', 'User#logout');

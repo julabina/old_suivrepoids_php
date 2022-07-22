@@ -1,8 +1,20 @@
 .dash {
+    padding-top: 60px;
+    background: map-get($colors, primaryBackground);
+    min-height: 100vh;
     &__infos {
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin-top: 30px;
+        h2 {
+            font-family: 'Roboto Slab', serif;
+            font-size: 1.7em;
+            font-weight: 600;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            color: map-get($map: $colors, $key: lightBlack);
+        }
         &__cont {
             display: flex;
             justify-content: space-between;
@@ -11,28 +23,42 @@
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                border:2px solid black;
-                height: 100px;
+                height: 140px;
                 width: 250px;
-                border-radius: 10px;
-                padding-bottom: 10px;
+                border-radius: 3px;
+                padding: 27px 0 20px 0;
                 margin: 0 15px;
+                background-color: white;
+                box-shadow: 0 3px 20px rgba(0, 0, 0, 0.205);
+                cursor: pointer;
                 h4 {
                     margin-bottom: 20px;
                 }
                 h3 {
                     font-size: 1.6em;
                     font-weight: 600;
+                    color: map-get($map: $colors, $key: lightBlack);
+                }
+                p {
+                    font-size: 0.8em;
+                    font-weight: 300;
+                    height: 13px;
+                    margin-top: 5px;
+                }
+                &:hover {
+                    border: 1px solid map-get($map: $colors, $key: transLightGray);
                 }
             }
         }
     }
     &__obj {
         width: 810px;
-        border: 2px solid black;
-        border-radius: 10px;
+        height: 150px;
+        border-radius: 5px;
         margin-top: 30px;
-        padding: 15px;
+        padding: 25px 0 ;
+        background: white;
+        box-shadow: 0 3px 20px rgba(0, 0, 0, 0.205);
         h4 {
             margin-bottom: 30px;
             font-size: 1.1em;
@@ -43,13 +69,79 @@
             font-weight: 600;
             margin-bottom: 15px;
             text-align: center;
+            color: map-get($map: $colors, $key: lightBlack);
         }
         p {
             text-align: center;
+            font-weight: 300;
+        }
+        &--success {
+            background: map-get($map: $colors, $key: successGreen);
+        }
+        &:hover {
+            border: 1px solid map-get($map: $colors, $key: transLightGray);
         }
     }
-    &__link {
+    a {
         text-decoration: none;
         color: inherit;
+    }
+}
+
+.dashAddWeight {
+    position: fixed;
+    z-index: 100;
+    top: 0;bottom: 0;
+    left: 0;right: 0;
+    background: rgba(0, 0, 0, 0.725);
+    &__modal {
+        position: absolute;
+        top: 42%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: map-get($colors, lightWhite);
+        padding: 50px 30px 30px;
+        border-radius: 5px;
+        &__form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            @include form;
+            label {
+                font-weight: 600;
+                font-size: 1.15em;
+                margin-bottom: 12px;
+            }
+            &__error {
+                width: 100%;
+                height: 14px;
+                margin-left: 30px;
+                color: map-get($map: $colors, $key: error);
+                margin-bottom: 5px;
+            }
+            &__submitBtn {
+                @include submitBtn;
+                margin-top: 20px;
+                width: 140px;
+                padding: inherit;
+                padding-right: 15px;
+            }
+        }
+        &__close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.3em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 150ms ease-in-out;
+            &:hover {
+                opacity: 0.7;
+                transition: opacity 150ms ease-in-out;
+            }
+        }
+    }
+    &--hidden {
+        display: none;
     }
 }
