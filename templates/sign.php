@@ -122,7 +122,7 @@
             errorCont.innerHTML = error;
         } else {
             errorCont.innerHTML = "";
-            /* form.submit(); */
+            form.submit();
         }
     };
 </script>

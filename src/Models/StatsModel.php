@@ -10,7 +10,19 @@ class StatsModel {
 
     public DatabaseConnection $connection;
 
-    public function addWeight($weight, $size, $recordDate, $sexe, $birthDate, $id) {
+    /**
+     * add new weight to one user
+     * 
+     * @param string $weight
+     * @param string $size
+     * @param $recordedDate
+     * @param string $sexe
+     * @param string $birthdate
+     * @param string $id
+     * 
+     * @return boolean
+     */
+    public function addWeight(string $weight, string $size, $recordDate, string $sexe, string $birthDate, string $id): bool {
 
         $v4 = Uuid::uuid4();
         $newId = $v4->toString();
@@ -39,7 +51,17 @@ class StatsModel {
         
     }
     
-    public function addObjectif($userId, $weight, $imc, $img) {
+    /**
+     * add new goal to one user
+     * 
+     * @param string $userId
+     * @param string $weight
+     * @param string $imc
+     * @param string $img
+     * 
+     * @return boolean
+     */
+    public function addGoal(string $userId, string $weight, string $imc, string $img): bool {
 
         $success = $this->removeCurrent($userId);
 
@@ -49,7 +71,7 @@ class StatsModel {
             $newId = $v4->toString();
             
             $statement = $this->connection->getConnection()->prepare(
-                "INSERT INTO objectifs(id, userId, weight_goal, imc_goal, img_goal, current, created_at) VALUES (?, ?, ?, ?, ?, ?, NOW())"
+                "INSERT INTO goals(id, userId, weight_goal, imc_goal, img_goal, current, created_at) VALUES (?, ?, ?, ?, ?, ?, NOW())"
             );
             
             $affectedLine = $statement->execute([$newId, $userId, $weight, $imc, $img, 1]);
@@ -62,10 +84,17 @@ class StatsModel {
         
     }
     
-    private function removeCurrent($userId) {
+    /**
+     * remove from last goal the current status
+     * 
+     * @param string $userId
+     * 
+     * @return boolean
+     */
+    private function removeCurrent(string $userId): bool {
         
         $statement = $this->connection->getConnection()->prepare(
-            "UPDATE objectifs SET current = ? WHERE userId = ?"
+            "UPDATE goals SET current = ? WHERE userId = ?"
         );
         
         $affectedLine = $statement->execute([0, $userId]);
@@ -74,26 +103,40 @@ class StatsModel {
 
     }
 
-    public function getAllObjectif($userId) {
+    /**
+     * get all user goals
+     * 
+     * @param string $userId
+     * 
+     * @return array
+     */
+    public function getAllGoals(string $userId): array {
 
         $statement = $this->connection->getConnection()->query(
-            "SELECT * FROM objectifs WHERE userId = '$userId' ORDER BY created_at DESC"
+            "SELECT * FROM goals WHERE userId = '$userId' ORDER BY created_at DESC"
         );
 
-        $objectifs = [];
+        $goals = [];
 
         while(($row = $statement->fetch())) {
-            $objectifs[] = $row;
+            $goals[] = $row;
         }
 
-        return $objectifs;
+        return $goals;
 
     }
 
-    public function getImc($userId) {
+    /**
+     * get user bmi
+     * 
+     * @param string $userId
+     * 
+     * @return array
+     */
+    public function getImc(string $userId): array {
 
         $statement = $this->connection->getConnection()->query(
-            "SELECT size, user_weight FROM users RIGHT JOIN weight_infos ON users.userId = weight_infos.userId WHERE users.userId = '$userId' AND weight_infos.record_date = (SELECT MAX(record_date) FROM weight_infos)"
+            "SELECT size, user_weight FROM users RIGHT JOIN weight_infos ON users.userId = weight_infos.userId WHERE users.userId = '$userId' AND weight_infos.record_date = (SELECT MAX(record_date) FROM weight_infos WHERE weight_infos.userId = '$userId')"
         );
 
         $userInfos = $statement->fetch();
@@ -106,10 +149,17 @@ class StatsModel {
 
     }
 
-    public function getImg($userId) {
+    /**
+     * get user bfp 
+     * 
+     * @param string $userId
+     * 
+     * @return array
+     */
+    public function getImg(string $userId): array {
 
         $statement = $this->connection->getConnection()->query(
-            "SELECT size, is_man, birthday, user_weight FROM users RIGHT JOIN weight_infos ON users.userId = weight_infos.userId WHERE users.userId = '$userId' AND weight_infos.record_date = (SELECT MAX(record_date) FROM weight_infos)"
+            "SELECT size, is_man, birthday, user_weight FROM users RIGHT JOIN weight_infos ON users.userId = weight_infos.userId WHERE users.userId = '$userId' AND weight_infos.record_date = (SELECT MAX(record_date) FROM weight_infos WHERE weight_infos.userId = '$userId')"
         );
 
         $userInfos = $statement->fetch();
@@ -135,15 +185,31 @@ class StatsModel {
 
     }
 
-    private function calculImc($weight, $size) {
-        echo $size;
-        echo $weight;
+    /**
+     * calcul the user bmi
+     * 
+     * @param string $weight
+     * @param string $size
+     * 
+     * @return int
+     */
+    private function calculImc(string $weight, string $size): int {
+        
         $newSize = $size / 100;
-        echo $newSize;
+        
         return number_format($weight / ($newSize*$newSize), 2);
     }
 
-    private function calculImg($sexe, $imc, $age) {
+    /**
+     * calcul the user bfp
+     * 
+     * @param string $sexe
+     * @param string $imc
+     * @param string $age
+     * 
+     * @return int
+     */
+    private function calculImg(string $sexe, string $imc, string $age): int {
 
         $newImc = number_format($imc, 0);
 

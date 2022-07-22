@@ -7,7 +7,10 @@ use App\Models\StatsModel;
 
 class StatsController {
 
-    public function showObjectif() {
+    /**
+     * open goal page and display goal
+     */
+    public function showGoals() {
 
         SESSION_START();
 
@@ -19,13 +22,16 @@ class StatsController {
         
         $statsModel = new StatsModel();
         $statsModel->connection = new DatabaseConnection();
-        $objectifs = $statsModel->getAllObjectif($id);
+        $goals = $statsModel->getAllGoals($id);
         
-        require('templates/objectif.php');
+        require('templates/goals.php');
         
     }
     
-    public function addObjectif() {
+    /**
+     * add user new goal
+     */
+    public function addGoal() {
         
         SESSION_START();
         
@@ -55,7 +61,7 @@ class StatsController {
         
         $statsModel = new StatsModel();
         $statsModel->connection = new DatabaseConnection();
-        $success = $statsModel->addObjectif($_SESSION['userId'], $weight, $imc, $img);
+        $success = $statsModel->addGoal($_SESSION['userId'], $weight, $imc, $img);
         
         if($success) {
             header('Location: /suivi_poids/dashboard');
@@ -64,6 +70,9 @@ class StatsController {
         }
     }
     
+    /**
+     * open imc page
+     */
     public function showImc() {
 
         SESSION_START();
@@ -79,6 +88,9 @@ class StatsController {
         require('templates/imc.php');
     }
     
+    /**
+     * open img page
+     */
     public function showImg() {
         
         SESSION_START();
@@ -94,6 +106,9 @@ class StatsController {
         require('templates/img.php');
     }
 
+    /**
+     * add user new weight
+     */
     public function addWeight() {
 
         SESSION_START();

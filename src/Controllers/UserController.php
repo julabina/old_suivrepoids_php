@@ -8,6 +8,9 @@ use App\Models\StatsModel;
 
 class UserController {
 
+    /**
+     * create user account
+     */
     public function sign() {
 
         if(
@@ -39,7 +42,7 @@ class UserController {
                 $statModel->connection = new DatabaseConnection();
 
                 $addingWeight = $statModel->addWeight($weight, $size, null, $sexe, $age, $id);
-                $addingObjectif = $statModel->addObjectif($id, NULL, NULL, NULL);
+                $addingGoal = $statModel->addGoal($id, NULL, NULL, NULL);
                 $this->log();
             } else {
                 echo 'pas ok';
@@ -48,6 +51,10 @@ class UserController {
 
     }
 
+    /**
+     * log one user,
+     * create php session if ok
+     */
     public function log() {
 
             if(
@@ -84,6 +91,9 @@ class UserController {
 
     }
 
+    /**
+     * disconnect user and clear php session
+     */
     public function logout() {
 
         session_start();
@@ -96,7 +106,10 @@ class UserController {
 
     }
 
-    public function dash() {
+    /**
+     * open the user dashboard if user is logged
+     */
+    public function showDash() {
 
         SESSION_START();
 

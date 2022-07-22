@@ -23,6 +23,17 @@ class UserModel {
 
     public DatabaseConnection $connection;
 
+    /**
+     * add new user to database
+     * @param string $email
+     * @param string $password
+     * @param string $name
+     * @param string $size
+     * @param string $sexe
+     * @param string $birthday
+     * 
+     * @return string
+     */
     public function createUser(string $email, string $password, string $name, string $size, string $sexe, string $birthday): string {
 
         $v4 = Uuid::uuid4();
@@ -51,6 +62,15 @@ class UserModel {
         }
     }
 
+    /**
+     * verify if user password is ok,
+     * if ok get user infos
+     * 
+     * @param string $email
+     * @param string $password
+     * 
+     * @return array
+     */
     public function logUser(string $email, string $password): array {
 
         $statement = $this->connection->getConnection()->query(
@@ -74,10 +94,17 @@ class UserModel {
 
     }
 
-    public function getStats($userId): User {
+    /**
+     * get user stats
+     * 
+     * @param string $userId
+     * 
+     * @return User
+     */
+    public function getStats(string $userId): User {
 
         $statement = $this->connection->getConnection()->query(
-            "SELECT size, firstname, is_man, weight_goal, imc_goal, img_goal, imc, img, user_weight, record_date FROM users RIGHT JOIN objectifs ON users.userId = objectifs.userId RIGHT JOIN weight_infos ON users.userId = weight_infos.userId WHERE users.userId = '$userId' AND objectifs.current = 1 AND weight_infos.record_date = (SELECT MAX(record_date) FROM weight_infos)"
+            "SELECT size, firstname, is_man, weight_goal, imc_goal, img_goal, imc, img, user_weight, record_date FROM users RIGHT JOIN goals ON users.userId = goals.userId RIGHT JOIN weight_infos ON users.userId = weight_infos.userId WHERE users.userId = '$userId' AND goals.current = 1 AND weight_infos.record_date = (SELECT MAX(record_date) FROM weight_infos WHERE weight_infos.userId = '$userId')"
         );
         
         $test = $statement->fetch();

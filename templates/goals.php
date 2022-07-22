@@ -20,16 +20,16 @@
         <h2>objectif courant</h2>
 
         <div class="obj__current__cont">
-            <?php foreach($objectifs as $objectif): ?>
-                <?php if($objectif['current']): ?>
-                    <?php if($objectif['weight_goal'] === null && $objectif['imc_goal'] === null && $objectif['img_goal'] === null): ?>
-                        <h3>Aucun objectifs défini</h3>
-                    <?php elseif($objectif['weight_goal'] !== null): ?>
-                        <h3>Atteindre <?= $objectif['weight_goal']; ?> kg</h3>
-                    <?php elseif($objectif['imc_goal'] !== null): ?>
-                        <h3><?= $objectif['imc_goal']; ?></h3>
-                    <?php elseif($objectif['img_goal'] !== null): ?>
-                        <h3><?= $objectif['img_goal']; ?></h3>
+            <?php foreach($goals as $goal): ?>
+                <?php if($goal['current']): ?>
+                    <?php if($goal['weight_goal'] === null && $goal['imc_goal'] === null && $goal['img_goal'] === null): ?>
+                        <h3>Aucun goals défini</h3>
+                    <?php elseif($goal['weight_goal'] !== null): ?>
+                        <h3>Atteindre <?= $goal['weight_goal']; ?> kg</h3>
+                    <?php elseif($goal['imc_goal'] !== null): ?>
+                        <h3><?= $goal['imc_goal']; ?></h3>
+                    <?php elseif($goal['img_goal'] !== null): ?>
+                        <h3><?= $goal['img_goal']; ?></h3>
                     <?php endif; ?>
                 <?php endif; ?>
             <?php endforeach; ?>
@@ -90,19 +90,19 @@
 
     <section class="obj__old">   
         <h2>Mes anciens objectifs</h2>    
-        <?php foreach($objectifs as $objectif): ?>
-            <?php if($objectif['current'] === 0): ?>
-                <?php if($objectif['weight_goal'] !== null): ?>
+        <?php foreach($goals as $goal): ?>
+            <?php if($goal['current'] === 0): ?>
+                <?php if($goal['weight_goal'] !== null): ?>
                     <div>
-                        <h3><?= $objectif['weight_goal']; ?> kg</h3>
+                        <h3><?= $goal['weight_goal']; ?> kg</h3>
                     </div>
-                <?php elseif($objectif['imc_goal'] !== null): ?>
+                <?php elseif($goal['imc_goal'] !== null): ?>
                     <div>
-                        <h3><?= $objectif['imc_goal']; ?></h3>
+                        <h3><?= $goal['imc_goal']; ?></h3>
                     </div>
-                <?php elseif($objectif['img_goal'] !== null): ?>
+                <?php elseif($goal['img_goal'] !== null): ?>
                     <div>
-                        <h3><?= $objectif['img_goal']; ?> %</h3>
+                        <h3><?= $goal['img_goal']; ?> %</h3>
                     </div>
                 <?php endif; ?>
             <?php endif; ?>

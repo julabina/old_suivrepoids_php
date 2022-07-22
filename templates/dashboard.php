@@ -45,6 +45,7 @@
             <div class="dash__obj__content">
                 <?php if($userData->weight_goal === NULL && $userData->imc_goal === NULL && $userData->img_goal === NULL): ?>
                     <h3>Vous pouvez définir un objectif ici !!</h3>
+                <!-- if goal is weight -->
                 <?php elseif($userData->weight_goal !== null): ?>
                     <?php if($userData->weight <= $userData->weight_goal): ?>
                         <?= "<script> successfulObj(); </script>"; ?>
@@ -53,11 +54,23 @@
                         <h4>Votre objectif actuel</h4>
                     <?php endif; ?>
                     <h3>Atteindre le poids de <?= $userData->weight_goal; ?> kg</h3>
+                <!-- if goal is imc -->
                 <?php elseif($userData->imc_goal !== null): ?>
-                    <h4>Votre objectif actuel</h4>
+                    <?php if($userData->imc <= $userData->imc_goal): ?>
+                        <?= "<script> successfulObj(); </script>"; ?>
+                        <h4>Objectif Atteint, Félicitation !</h4>
+                    <?php else: ?>
+                        <h4>Votre objectif actuel</h4>
+                    <?php endif; ?>
                     <h3><?= $userData->imc_goal; ?></h3>
+                <!-- if goal is img -->
                 <?php elseif($userData->img_goal !== null): ?>
-                    <h4>Votre objectif actuel</h4>
+                    <?php if($userData->img <= $userData->img_goal): ?>
+                        <?= "<script> successfulObj(); </script>"; ?>
+                        <h4>Objectif Atteint, Félicitation !</h4>
+                    <?php else: ?>
+                        <h4>Votre objectif actuel</h4>
+                    <?php endif; ?>
                     <h3><?= $userData->img_goal; ?>%</h3>
                 <?php endif; ?>
                 <!-- <p>Phrase en rapport a la reussite ou non</p> -->
