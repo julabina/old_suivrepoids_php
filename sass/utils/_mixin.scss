@@ -52,24 +52,36 @@
     flex-direction: column;
     align-items: center;
     padding-top: 70px;
+    background: map-get($colors,  primaryBackground);
+    min-height: 100vh;
     h2 {
         margin: 20px 0 90px;
         font-size: 1.4em;
         font-weight: 600;
         color: map-get($map: $colors, $key:lightBlack );
     }
-    &__subTitle {
-        font-size: 1.1em;
-    }
-    h3 {
-        font-weight: 700;
-        color: map-get($map: $colors, $key: lightBlack);
-        font-size: 2em;
-        margin: 10px 0 70px;
-    }
-    h4 {
-        font-size: 1.2em;
-        font-weight: 600;
-        margin: 10px 0 70px;
+    &__userSection {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: white;
+        width: 500px;
+        padding: 30px;
+        border-radius: 3px;
+        box-shadow: 0 7px 15px rgba(0, 0, 0, 0.151);
+        &__subTitle {
+            font-size: 1.1em;
+        }
+        h3 {
+            font-weight: 700;
+            color: map-get($map: $colors, $key: lightBlack);
+            font-size: 2em;
+            margin: 10px 0 70px;
+        }
+        h4 {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin: 10px 0 70px;
+        }
     }
 }

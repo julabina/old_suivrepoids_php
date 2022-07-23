@@ -10,12 +10,12 @@
 
 <header>
     <div class="header">
-        <a href="/suivi_poids/"><h1>TITRE DU SITE</h1></a>
+        <a class="header__titleLink" href="/suivi_poids/"><h1>TITRE DU SITE</h1></a>
+        <a class="header__toDashboard" href="/suivi_poids/dashboard">Tableau de bord</a>
     </div>
 </header>
 
 <main class="obj">
-    <a href="/suivi_poids/dashboard" class="backToHome backToHome--withHeader">< retour</a>    
 
     <section class="obj__current">
         <h2>Mon objectif actuel</h2>
@@ -96,18 +96,25 @@
         <h2>Mes anciens objectifs</h2>    
         <?php foreach($goals as $goal): ?>
             <?php if($goal['current'] === 0): ?>
+                <?php
+                    $goalDate = strtotime($goal['created_at']);
+                    $newDate = date('d-m-Y', $goalDate);
+                ?>
                 <?php if($goal['weight_goal'] !== null): ?>
-                    <div>
-                        <h3><?= $goal['weight_goal']; ?> kg</h3>
-                    </div>
+                    <article class="obj__old__card">
+                        <h3>Atteindre <?= $goal['weight_goal']; ?> kg</h3>
+                        <p>le <?= $newDate; ?>.</p>
+                    </article>
                 <?php elseif($goal['imc_goal'] !== null): ?>
-                    <div>
-                        <h3><?= $goal['imc_goal']; ?></h3>
-                    </div>
+                    <article class="obj__old__card">
+                        <h3>Atteindre un IMC de <?= $goal['imc_goal']; ?></h3>
+                        <p>le <?= $newDate; ?>.</p>
+                    </article>
                 <?php elseif($goal['img_goal'] !== null): ?>
-                    <div>
-                        <h3><?= $goal['img_goal']; ?> %</h3>
-                    </div>
+                    <article class="obj__old__card">
+                        <h3>Atteindre un IMG de <?= $goal['img_goal']; ?>%</h3>
+                        <p>le <?= $newDate; ?>.</p>
+                    </article>
                 <?php endif; ?>
             <?php endif; ?>
         <?php endforeach; ?>    

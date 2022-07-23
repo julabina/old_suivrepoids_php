@@ -62,7 +62,7 @@
                     <?php else: ?>
                         <h4>Votre objectif actuel</h4>
                     <?php endif; ?>
-                    <h3><?= $userData->imc_goal; ?></h3>
+                    <h3>Atteindre un IMC de <?= $userData->imc_goal; ?></h3>
                 <!-- if goal is img -->
                 <?php elseif($userData->img_goal !== null): ?>
                     <?php if($userData->img <= $userData->img_goal): ?>
@@ -71,7 +71,7 @@
                     <?php else: ?>
                         <h4>Votre objectif actuel</h4>
                     <?php endif; ?>
-                    <h3><?= $userData->img_goal; ?>%</h3>
+                    <h3>Atteindre un IMG de <?= $userData->img_goal; ?>%</h3>
                 <?php endif; ?>
                 <!-- <p>Phrase en rapport a la reussite ou non</p> -->
             </div>

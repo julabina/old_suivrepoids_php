@@ -122,5 +122,12 @@
         border-radius: 3px;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.185);
         margin-bottom: 40px;
+        &__card {
+            border: 1px solid black;
+            margin-bottom: 10px;
+            text-align: center;
+            padding: 10px 0;
+            line-height: 1.4;
+        }
     }
 }

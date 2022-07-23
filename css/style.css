@@ -92,7 +92,7 @@ header {
   background-color: #fdfdfd;
   height: 60px;
   width: 100%;
-  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.336);
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.226);
 }
 header h1 {
   display: flex;
@@ -107,7 +107,11 @@ header h1 {
   justify-content: space-between;
   width: 1080px;
 }
-.header__logoutBtn {
+.header__titleLink {
+  display: flex;
+  align-items: center;
+}
+.header__logoutBtn, .header__toDashboard {
   text-decoration: none;
   color: inherit;
   text-align: center;
@@ -123,7 +127,7 @@ header h1 {
   padding: 10px 0 10px;
   font-size: 0.9em;
 }
-.header__logoutBtn:hover {
+.header__logoutBtn:hover, .header__toDashboard:hover {
   opacity: 0.7;
   transition: opacity 150ms ease-in-out;
 }
@@ -449,6 +453,8 @@ header h1 {
   flex-direction: column;
   align-items: center;
   padding-top: 70px;
+  background: #f5f5f5;
+  min-height: 100vh;
 }
 .bmi h2 {
   margin: 20px 0 90px;
@@ -456,16 +462,26 @@ header h1 {
   font-weight: 600;
   color: #1b1b1b;
 }
-.bmi__subTitle {
+.bmi__userSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white;
+  width: 500px;
+  padding: 30px;
+  border-radius: 3px;
+  box-shadow: 0 7px 15px rgba(0, 0, 0, 0.151);
+}
+.bmi__userSection__subTitle {
   font-size: 1.1em;
 }
-.bmi h3 {
+.bmi__userSection h3 {
   font-weight: 700;
   color: #1b1b1b;
   font-size: 2em;
   margin: 10px 0 70px;
 }
-.bmi h4 {
+.bmi__userSection h4 {
   font-size: 1.2em;
   font-weight: 600;
   margin: 10px 0 70px;
@@ -476,6 +492,8 @@ header h1 {
   flex-direction: column;
   align-items: center;
   padding-top: 70px;
+  background: #f5f5f5;
+  min-height: 100vh;
 }
 .bfp h2 {
   margin: 20px 0 90px;
@@ -483,16 +501,26 @@ header h1 {
   font-weight: 600;
   color: #1b1b1b;
 }
-.bfp__subTitle {
+.bfp__userSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white;
+  width: 500px;
+  padding: 30px;
+  border-radius: 3px;
+  box-shadow: 0 7px 15px rgba(0, 0, 0, 0.151);
+}
+.bfp__userSection__subTitle {
   font-size: 1.1em;
 }
-.bfp h3 {
+.bfp__userSection h3 {
   font-weight: 700;
   color: #1b1b1b;
   font-size: 2em;
   margin: 10px 0 70px;
 }
-.bfp h4 {
+.bfp__userSection h4 {
   font-size: 1.2em;
   font-weight: 600;
   margin: 10px 0 70px;
@@ -637,6 +665,13 @@ header h1 {
   border-radius: 3px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.185);
   margin-bottom: 40px;
+}
+.obj__old__card {
+  border: 1px solid black;
+  margin-bottom: 10px;
+  text-align: center;
+  padding: 10px 0;
+  line-height: 1.4;
 }
 
 .log {
