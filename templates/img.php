@@ -2,14 +2,24 @@
 
 <?php ob_start(); ?>
 
-<main>
-    <h1>TITRE IMG</h1>
+<header>
+    <div class="header">
+        <a href="/suivi_poids/"><h1>TITRE DU SITE</h1></a>
+    </div>
+</header>
+
+<main class="bfp">
+
+    <a href="/suivi_poids/dashboard" class="backToHome backToHome--withHeader">< retour</a>
+
+    <h2>Calculer votre indice de masse graisseuse (IMG).</h2>
 
     <?php if(isset($_SESSION['name']) && isset($_SESSION['user']) && isset($_SESSION['userId']) && isset($_SESSION['size']) && (isset($_SESSION['sexe']) && ($_SESSION['sexe'] === "man" || $_SESSION['sexe'] === "woman")) && isset($_SESSION['auth']) && $_SESSION['auth'] === true): ?>
-        <h2>Votre img est de <?= $imgInfos['img']; ?>%.</h2>
+        <p class="bfp__subTitle">Votre IMG est de</p>
+        <h3><?= $imgInfos['img']; ?>%</h3>
 
-        <p>Avec votre IMG, vous etes (selon Deurenberg)</p>
-        <h3><?php 
+        <p>Avec votre IMG, vous etes/avez (selon Deurenberg)</p>
+        <h4><?php 
             if($imgInfos['is_man'] === 0) {
                 if($imgInfos['img'] < 25) {
                     echo "Trop maigre";
@@ -27,7 +37,7 @@
                     echo "Trop de graisse";
                 }
             }
-            ?></h3>
+            ?></h4>
     <?php endif; ?>
 
 </main>

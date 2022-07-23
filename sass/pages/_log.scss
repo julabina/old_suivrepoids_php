@@ -4,9 +4,6 @@
     align-items: center;
     background: map-get($map: $colors, $key: primaryBackground);
     height: 100vh;
-    &__back {
-        @include backBtn;
-    }
     h1 {
         font-size: 1.8em;
         font-weight: 600;

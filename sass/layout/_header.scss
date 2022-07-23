@@ -21,7 +21,7 @@ header {
 .header {
     display: flex;
     justify-content: space-between;
-    width: 1480px;
+    width: 1080px;
     &__logoutBtn {
         @include homeBtn;
         margin: 0 5px;

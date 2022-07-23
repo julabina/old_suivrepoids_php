@@ -33,18 +33,6 @@
     }
 }
 
-@mixin backBtn {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    text-decoration: none;
-    font-size: 0.9em;
-    color: inherit;
-    &:hover {
-        color: blue;
-    }
-}
-
 @mixin form {
     display: flex;
     flex-direction: column;
@@ -56,5 +44,32 @@
         height: 40px;
         border: 1px solid map-get($map: $colors, $key: transLightGray);
         padding-left: 15px;
+    }
+}
+
+@mixin userStatsBmiBfp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 70px;
+    h2 {
+        margin: 20px 0 90px;
+        font-size: 1.4em;
+        font-weight: 600;
+        color: map-get($map: $colors, $key:lightBlack );
+    }
+    &__subTitle {
+        font-size: 1.1em;
+    }
+    h3 {
+        font-weight: 700;
+        color: map-get($map: $colors, $key: lightBlack);
+        font-size: 2em;
+        margin: 10px 0 70px;
+    }
+    h4 {
+        font-size: 1.2em;
+        font-weight: 600;
+        margin: 10px 0 70px;
     }
 }

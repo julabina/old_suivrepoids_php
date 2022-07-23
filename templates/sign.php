@@ -4,7 +4,7 @@
 <?php ob_start(); ?>
 
 <main class="sign">   
-    <a href="/suivi_poids/" class="sign__back">< retour</a> 
+    <a href="/suivi_poids/" class="backToHome">< retour</a> 
     <h1>S'enregistrer</h1>
     
     <div class="sign__error"></div>

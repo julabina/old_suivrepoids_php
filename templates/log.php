@@ -3,7 +3,7 @@
 <?php ob_start(); ?>
 
 <main class="log">
-    <a href="/suivi_poids/" class="log__back">< retour</a>
+    <a href="/suivi_poids/" class="backToHome">< retour</a>
     <h1>Se connecter</h1>
     
     <div class="log__error"></div>

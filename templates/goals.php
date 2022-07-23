@@ -10,26 +10,27 @@
 
 <header>
     <div class="header">
-        <h1>Mes objectifs</h1>
+        <a href="/suivi_poids/"><h1>TITRE DU SITE</h1></a>
     </div>
 </header>
 
 <main class="obj">
-    
+    <a href="/suivi_poids/dashboard" class="backToHome backToHome--withHeader">< retour</a>    
+
     <section class="obj__current">
-        <h2>objectif courant</h2>
+        <h2>Mon objectif actuel</h2>
 
         <div class="obj__current__cont">
             <?php foreach($goals as $goal): ?>
                 <?php if($goal['current']): ?>
                     <?php if($goal['weight_goal'] === null && $goal['imc_goal'] === null && $goal['img_goal'] === null): ?>
-                        <h3>Aucun goals défini</h3>
+                        <h3>Aucun objectif défini</h3>
                     <?php elseif($goal['weight_goal'] !== null): ?>
                         <h3>Atteindre <?= $goal['weight_goal']; ?> kg</h3>
                     <?php elseif($goal['imc_goal'] !== null): ?>
-                        <h3><?= $goal['imc_goal']; ?></h3>
+                        <h3>Atteindre un IMC de <?= $goal['imc_goal']; ?></h3>
                     <?php elseif($goal['img_goal'] !== null): ?>
-                        <h3><?= $goal['img_goal']; ?></h3>
+                        <h3>Atteindre un IMG de <?= $goal['img_goal']; ?>%</h3>
                     <?php endif; ?>
                 <?php endif; ?>
             <?php endforeach; ?>
@@ -41,7 +42,7 @@
         <h2>Changer d'objectif</h2>
         <div class='obj__change__tabs'>
             <div onClick='changeTab(0)' class='obj__change__tabs__tab obj__change__tabs__tab--active'>
-                <h4>Poids</h4>
+                <h4>POIDS</h4>
             </div>
             <div onClick='changeTab(1)' class='obj__change__tabs__tab'>
                 <h4>IMC</h4>
@@ -54,36 +55,39 @@
         <div class='obj__change__tabsCont'>
             <div class="obj__change__tabsCont__errorCont obj__change__tabsCont__errorCont__weight"></div>
             <form id="objFormWeight" action="/suivi_poids/objectif" method="post">
-                <h3></h3>
                 <div class='obj__change__tabsCont__input'>
-                    <label for="objChangeWeight">poids</label>
+                    <label for="objChangeWeight">Entrer le poids que vous souhaitez atteindre</label>
                     <input type="number" name="objChangeWeight" id="changeWeight">
                 </div>
-                <input class="obj__change__tabsCont__btn" onClick="verifyChangingWeight()" type="button" value="ok">
+                <div class="obj__change__tabsCont__submitBtnCont">
+                    <input class="obj__change__tabsCont__submitBtnCont__btn" onClick="verifyChangingWeight()" type="button" value="Valider">
+                </div>
             </form>
         </div>
         <!-- imc tab -->
         <div class='obj__change__tabsCont obj__change__tabsCont--hidden'>
             <div class="obj__change__tabsCont__errorCont obj__change__tabsCont__errorCont__imc"></div>
             <form id="objFormImc" action="/suivi_poids/objectif" method="post">
-                <h3></h3>
                 <div class='obj__change__tabsCont__input'>
-                    <label for="objChangeImc">imc</label>
+                    <label for="objChangeImc">Entrer l'IMC que vous souhaitez atteindre</label>
                     <input type="number" name="objChangeImc" id="changeImc">
                 </div>
-                <input class="obj__change__tabsCont__btn" onClick="verifyChangingImc()" type="button" value="ok">
+                <div class="obj__change__tabsCont__submitBtnCont">
+                    <input class="obj__change__tabsCont__submitBtnCont__btn" onClick="verifyChangingImc()" type="button" value="Valider">
+                </div>
             </form>
         </div>
         <!-- img tab -->
         <div class='obj__change__tabsCont obj__change__tabsCont--hidden'>
             <div class="obj__change__tabsCont__errorCont obj__change__tabsCont__errorCont__img"></div>
             <form id="objFormImg" action="/suivi_poids/objectif" method="post">
-                <h3></h3>
                 <div class='obj__change__tabsCont__input'>
-                    <label for="objChangeImg">img</label>
+                    <label for="objChangeImg">Entrer l'IMG que vous souhaitez atteindre</label>
                     <input type="number" name="objChangeImg" id="changeImg">
                 </div>
-                <input class="obj__change__tabsCont__btn" onClick="verifyChangingImg()" type="button" value="ok">
+                <div class="obj__change__tabsCont__submitBtnCont">
+                    <input class="obj__change__tabsCont__submitBtnCont__btn" onClick="verifyChangingImg()" type="button" value="Valider">
+                </div>
             </form>
         </div>
     </section>

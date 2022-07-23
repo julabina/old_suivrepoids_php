@@ -2,14 +2,23 @@
 
 <?php ob_start(); ?>
 
-<main>
-    <h1>TITRE IMC</h1>
+<header>
+    <div class="header">
+        <a href="/suivi_poids/"><h1>TITRE DU SITE</h1></a>
+    </div>
+</header>
+
+<main class="bmi">
+    <a href="/suivi_poids/dashboard" class="backToHome backToHome--withHeader">< retour</a>
+
+    <h2>Calculer votre indice de masse corporel (IMC).</h2>
 
     <?php if(isset($_SESSION['name']) && isset($_SESSION['user']) && isset($_SESSION['userId']) && isset($_SESSION['size']) && (isset($_SESSION['sexe']) && ($_SESSION['sexe'] === "man" || $_SESSION['sexe'] === "woman")) && isset($_SESSION['auth']) && $_SESSION['auth'] === true): ?>
-        <h2>Votre imc est de <?= floor($imcInfos['imc']); ?>.</h2>
+        <p class="bmi__subTitle">Votre IMC est de</p>
+        <h3><?= floor($imcInfos['imc']); ?></h3>
 
         <p>Avec votre IMC, vous etes (selon l'OMS) en </p>
-        <h3><?php 
+        <h4><?php 
             if($imcInfos['imc'] < 16.5) {
                 echo "Maigreur extreme";
             } elseif($imcInfos['imc'] >= 16.5 && $imcInfos['imc'] < 18.5) {
@@ -25,7 +34,7 @@
             } elseif($imcInfos['imc'] >= 40) {
                 echo "Obésité morbide";
             }
-        ?></h3>
+        ?></h4>
 
         <p>Selon votre taille votre poids idéal se situe entre <?php 
             $size = $imcInfos['size'] / 100;

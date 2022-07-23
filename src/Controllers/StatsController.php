@@ -40,7 +40,7 @@ class StatsController {
         }
         
         $weight = NULL;
-        $imc = NULL;
+        $bmi = NULL;
         $img = NULL;
         
         if(isset($_POST['objChangeWeight'])) {
@@ -49,7 +49,7 @@ class StatsController {
             }
         } else if(isset($_POST['objChangeImc'])) {
             if($_POST['objChangeImc'] !== "" && preg_match('/^[0-9]*$/', $_POST['objChangeImc']) && ($_POST['objChangeImc'] > 10 && $_POST['objChangeImc'] < 80)) {
-                $imc = $_POST['objChangeImc'];
+                $bmi = $_POST['objChangeImc'];
             }
         } else if(isset($_POST['objChangeImg'])) {
             if($_POST['objChangeImg'] !== "" && preg_match('/^[0-9]*$/', $_POST['objChangeImg']) && ($_POST['objChangeImg'] > 10 && $_POST['objChangeImg'] < 80)) {
@@ -61,7 +61,7 @@ class StatsController {
         
         $statsModel = new StatsModel();
         $statsModel->connection = new DatabaseConnection();
-        $success = $statsModel->addGoal($_SESSION['userId'], $weight, $imc, $img);
+        $success = $statsModel->addGoal($_SESSION['userId'], $weight, $bmi, $img);
         
         if($success) {
             header('Location: /suivi_poids/dashboard');

@@ -3,53 +3,69 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
+    padding-top: 100px;
+    background: map-get($colors, primaryBackground);
+    min-height: 100vh;
+    h2 {
+        text-align: center;
+        font-weight: 600;
+        font-size: 1.3em;
+        margin-bottom: 25px;
+        color: map-get($map: $colors, $key:lightBlack );
+    }
     &__current {
         display: flex;
         flex-direction: column;
         align-items: center;
-        h2 {
-            font-size: 1.2em;
-        }
+        background: white;
+        padding: 40px;
+        width: 580px;
+        border-radius: 3px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.137);
         &__cont {
-            border: 1px solid black;
-            border-radius: 5px;
+            border: 1px solid rgba(0, 0, 0, 0.329);
+            border-radius: 3px;
             width: 500px;
             padding: 20px 0;
-            margin: 20px 0 70px;
+            margin: 20px 0 10px;
             h3 {
                 text-align: center;
             }
         }
     }
     &__change {
-        h2 {
-            text-align: center;
-            font-weight: 600;
-            font-size: 1.1em;
-            margin-bottom: 25px;
-        }
+        background: white;
+        padding: 40px;
+        width: 580px;
+        margin: 50px 0;
+        border-radius: 3px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.185);
         &__tabs {
             display: flex;
+            margin-top: 50px;
             &__tab {
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 cursor: pointer;
-                width: 150px;
-                height: 40px;
+                width: 166.67px;
+                height: 50px;
                 border-top: 1px solid black;
                 border-bottom: 1px solid black;
                 border-right: 1px solid black;
-                background: cyan;
+                background: map-get($map: $colors, $key:lightWhite );
+                transition: opacity 150ms ease-in-out;
                 &:first-child {
                     border-left: 1px solid black;
                 }
                 &--active {
                     font-weight: 600;
-                    background: red;
+                    background: map-get($map: $colors, $key: primary);
+                    color: map-get($map: $colors, $key:lightWhite );
                 }
                 &:hover {
                     opacity: 0.7;
+                    transition: opacity 150ms ease-in-out;
                 }
             }
         }
@@ -58,7 +74,10 @@
             flex-direction: column;
             align-items: center;
             padding: 25px 0;
-            max-width: 450px;
+            max-width:501px;
+            border-bottom: 1px solid black;
+            border-right: 1px solid black;
+            border-left: 1px solid black;
             &--hidden {
                 display: none;
             }
@@ -66,26 +85,30 @@
                 color: map-get($map: $colors, $key: error);
                 font-size: 0.9em;
             }
+            label {
+                font-weight: 600;
+                font-size: 1.05em;
+                margin: 20px 0 10px;
+            }
             &__input {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 input {
-                    width: 320px;
-                    height: 30px;
+                    width: 250px;
+                    height: 40px;
                     margin: 20px 0;
+                    padding-left: 15px;
                 }
             }
-            &__btn {
-                width: 320px;
-                height: 35px;
-                border: 5px solid black;
-                border-radius: 7px;
-                font-size: 1em;
-                background: white;
-                cursor: pointer;
-                &:hover {
-                    background: indigoe;
+            &__submitBtnCont {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+                margin-top: 15px;
+                &__btn {
+                    @include submitBtn;
+                    width: 120px;
                 }
             }
         }
@@ -93,5 +116,11 @@
     &__old {
         display: flex;
         flex-direction: column;
+        background: white;
+        padding: 40px;
+        width: 580px;
+        border-radius: 3px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.185);
+        margin-bottom: 40px;
     }
 }

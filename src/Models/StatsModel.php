@@ -55,13 +55,13 @@ class StatsModel {
      * add new goal to one user
      * 
      * @param string $userId
-     * @param string $weight
-     * @param string $imc
-     * @param string $img
+     * @param $weight
+     * @param $imc
+     * @param $img
      * 
      * @return boolean
      */
-    public function addGoal(string $userId, string $weight, string $imc, string $img): bool {
+    public function addGoal(string $userId, $weight, $imc, $img): bool {
 
         $success = $this->removeCurrent($userId);
 

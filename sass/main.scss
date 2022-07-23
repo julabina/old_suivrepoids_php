@@ -7,8 +7,12 @@
 @import './layout/main';
 @import './layout/header';
 
+@import './components/components';
+
 @import './pages/dashboard';
 @import './pages/home';
+@import './pages/bmi';
+@import './pages/bfp';
 @import './pages/goals';
 @import './pages/log';
 @import './pages/sign';
