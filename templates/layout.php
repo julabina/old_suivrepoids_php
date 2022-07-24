@@ -7,5 +7,8 @@
    </head>
    <body>
       <?= $content ?>
+      <footer>
+         
+      </footer>
    </body>
 </html>

@@ -64,3 +64,9 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+/* smooth scroll */
+
+html {
+    scroll-behavior: smooth;
+}

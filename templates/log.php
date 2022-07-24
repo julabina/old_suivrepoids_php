@@ -1,27 +1,37 @@
 <?php $title = 'login'; ?>
 
+<?php SESSION_START(); ?>
+
 <?php ob_start(); ?>
 
 <main class="log">
     <a href="/suivi_poids/" class="backToHome">< retour</a>
-    <h1>Se connecter</h1>
-    
-    <div class="log__error"></div>
-    
-    <form class="log__form" id="log__form" action="/suivi_poids/login" method="post">
-        <div class="log__form__email">
-            <label for="logEmail">Email</label>
-            <input type="email" name="email" id="logEmail">
-        </div>
-        <div class="log__form__password">
-            <label for="logPassword">Mot de passe</label>
-            <input type="password" name="password" id="logPassword">
-        </div>
-        <div class="log__form__btnCont">
-            <input class="log__form__btnCont__submitBtn" type="button" value="Se connecter" onClick="checkLogInputs()">
-        </div>
-    </form>
-    
+    <?php if(isset($_SESSION['name']) && isset($_SESSION['user']) && isset($_SESSION['userId']) && isset($_SESSION['size']) && (isset($_SESSION['sexe']) && ($_SESSION['sexe'] === "man" || $_SESSION['sexe'] === "woman")) && isset($_SESSION['auth']) && $_SESSION['auth'] === true): ?>
+        <div class="log__notConnected">
+            <h1>Vous etes deja connecter !</h1>
+            <div class="log__notConnected__linkCont">
+                <a href="/suivi_poids/logout">Se deconnecter</a>
+            </div>
+        </div> 
+    <?php else: ?>
+        <h1>Se connecter</h1>
+        
+        <div class="log__error"></div>
+        
+        <form class="log__form" id="log__form" action="/suivi_poids/login" method="post">
+            <div class="log__form__email">
+                <label for="logEmail">Email</label>
+                <input type="email" name="email" id="logEmail">
+            </div>
+            <div class="log__form__password">
+                <label for="logPassword">Mot de passe</label>
+                <input type="password" name="password" id="logPassword">
+            </div>
+            <div class="log__form__btnCont">
+                <input class="log__form__btnCont__submitBtn" type="button" value="Se connecter" onClick="checkLogInputs()">
+            </div>
+        </form>
+    <?php endif; ?>
 </main>
 
 <script>

@@ -5,7 +5,14 @@
 <header>
     <div class="header">
         <a class="header__titleLink" href="/suivi_poids/"><h1>TITRE DU SITE</h1></a>
-        <a class="header__toDashboard" href="/suivi_poids/dashboard">Tableau de bord</a>
+        <?php if(isset($_SESSION['name']) && isset($_SESSION['user']) && isset($_SESSION['userId']) && isset($_SESSION['size']) && (isset($_SESSION['sexe']) && ($_SESSION['sexe'] === "man" || $_SESSION['sexe'] === "woman")) && isset($_SESSION['auth']) && $_SESSION['auth'] === true): ?>
+            <a class="header__toDashboard" href="/suivi_poids/dashboard">Tableau de bord</a>
+        <?php else: ?>
+            <div class="header__notConnectBtns">
+                <a id="headerLogBtn" href="/suivi_poids/login">Se connecter</a>
+                <a href="/suivi_poids/sign">Creer un compte</a>
+            </div>
+        <?php endif; ?>        
     </div>
 </header>
 

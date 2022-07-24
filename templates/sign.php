@@ -1,60 +1,70 @@
 <?php $title = 'signup'; ?>
 
+<?php SESSION_START(); ?>
 
 <?php ob_start(); ?>
 
 <main class="sign">   
     <a href="/suivi_poids/" class="backToHome">< retour</a> 
-    <h1>S'enregistrer</h1>
-    
-    <div class="sign__error"></div>
-    
-    <form class="sign__form" id="sign__form" action="/suivi_poids/sign" method="post">
-        <div class="sign__form__logs">
-            <div class="sign__form__logs__email">
-                <label for="signEmail">Adresse email</label>
-                <input type="email" name="email" id="signEmail">
-            </div>
-            <div class="sign__form__logs__password">
-                <label for="signPassword">Mot de passe</label>
-                <input type="password" name="password" id="signPassword">
+    <?php if(isset($_SESSION['name']) && isset($_SESSION['user']) && isset($_SESSION['userId']) && isset($_SESSION['size']) && (isset($_SESSION['sexe']) && ($_SESSION['sexe'] === "man" || $_SESSION['sexe'] === "woman")) && isset($_SESSION['auth']) && $_SESSION['auth'] === true): ?>
+        <div class="log__notConnected">
+            <h1>Vous etes deja connecter !</h1>
+            <div class="log__notConnected__linkCont">
+                <a href="/suivi_poids/logout">Se deconnecter</a>
             </div>
         </div>
-        <div class="sign__form__name">
-            <div class="sign__form__name__firstname">
-                <label for="signName">Prénom/pseudo</label>
-                <input type="text" name="name" id="signName">
+    <?php else: ?>
+        <h1>S'enregistrer</h1>
+        
+        <div class="sign__error"></div>
+        
+        <form class="sign__form" id="sign__form" action="/suivi_poids/sign" method="post">
+            <div class="sign__form__logs">
+                <div class="sign__form__logs__email">
+                    <label for="signEmail">Adresse email</label>
+                    <input type="email" name="email" id="signEmail">
+                </div>
+                <div class="sign__form__logs__password">
+                    <label for="signPassword">Mot de passe</label>
+                    <input type="password" name="password" id="signPassword">
+                </div>
             </div>
-            <div class="sign__form__name__birthday">
-                <label for="signBirthday">Date de naissance (jj/mm/aaaa)</label>
-                <input type="text" name="birthday" id="signBirthday">
+            <div class="sign__form__name">
+                <div class="sign__form__name__firstname">
+                    <label for="signName">Prénom/pseudo</label>
+                    <input type="text" name="name" id="signName">
+                </div>
+                <div class="sign__form__name__birthday">
+                    <label for="signBirthday">Date de naissance (jj/mm/aaaa)</label>
+                    <input type="text" name="birthday" id="signBirthday">
+                </div>
             </div>
-        </div>
-        <div class="sign__form__stats">
-            <div class="sign__form__stats__sexe">
-                <label for="signSexe">Sexe</label>
-                <select name="sexe" id="signSexe">
-                    <option value="man">Homme</option>
-                    <option value="woman">Femme</option>
-                </select>
+            <div class="sign__form__stats">
+                <div class="sign__form__stats__sexe">
+                    <label for="signSexe">Sexe</label>
+                    <select name="sexe" id="signSexe">
+                        <option value="man">Homme</option>
+                        <option value="woman">Femme</option>
+                    </select>
+                </div>
+                <div class="sign__form__stats__size">
+                    <label for="signSize">Taille</label>
+                    <input type="number" name="size" id="signSize">
+                </div>
+                <div class="sign__form__stats__weight">
+                    <label for="signWeight">Votre poids actuel</label>
+                    <input type="number" name="weight" id="signWeight">
+                </div>
             </div>
-            <div class="sign__form__stats__size">
-                <label for="signSize">Taille</label>
-                <input type="number" name="size" id="signSize">
+            <div class="sign__form__checkCont">
+                <input type="checkbox" name="checkCgu" id="signCheckCgu">
+                <label for="signCheckCgu">J'ai lu et j'accepte les <a href="/suivi_poids/cgu/">Conditions Générales d'Utilisation</a>.</label>
             </div>
-            <div class="sign__form__stats__weight">
-                <label for="signWeight">Votre poids actuel</label>
-                <input type="number" name="weight" id="signWeight">
+            <div class="sign__form__btnCont">
+                <input class="sign__form__btnCont__submitBtn" type="button" value="Créer un compte" onClick="checkInputs()">
             </div>
-        </div>
-        <div class="sign__form__checkCont">
-            <input type="checkbox" name="checkCgu" id="signCheckCgu">
-            <label for="signCheckCgu">J'ai lu et j'accepte les <a href="/suivi_poids/cgu/">Conditions Générales d'Utilisation</a>.</label>
-        </div>
-        <div class="sign__form__btnCont">
-            <input class="sign__form__btnCont__submitBtn" type="button" value="Créer un compte" onClick="checkInputs()">
-        </div>
-    </form>
+        </form>
+    <?php endif; ?>
 
 </main>
 

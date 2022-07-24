@@ -41,4 +41,7 @@
             }
         }
     }
+    &__notConnected {
+        @include notConnected;
+    }
 }

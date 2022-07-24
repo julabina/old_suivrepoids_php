@@ -85,4 +85,7 @@
             }
         }
     }
+    &__notConnected {
+        @include notConnected;
+    }
 }

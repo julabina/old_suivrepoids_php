@@ -85,3 +85,16 @@
         }
     }
 }
+
+@mixin notConnected {
+    margin-top: 200px;
+    &__linkCont {
+        display: flex;
+        justify-content: center;
+        margin-top: 50px;
+        a {
+            @include homeBtn;
+            width: 160px;
+        }
+    }
+}
