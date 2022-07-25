@@ -2,7 +2,7 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Fredoka+One&family=Roboto:wght@300;400;500;700&display=swap");
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -590,20 +590,21 @@ footer {
   min-height: 100vh;
 }
 .bmi h2 {
-  margin: 20px 0 90px;
-  font-size: 1.4em;
-  font-weight: 600;
-  color: #1b1b1b;
+  margin: 20px 0 80px;
+  font-family: "Fredoka One", cursive;
+  font-size: 2em;
+  color: #0C2E8A;
 }
 .bmi__userSection {
   display: flex;
   flex-direction: column;
   align-items: center;
   background: white;
-  width: 500px;
+  width: 600px;
   padding: 30px;
   border-radius: 3px;
   box-shadow: 0 7px 15px rgba(0, 0, 0, 0.151);
+  margin-bottom: 50px;
 }
 .bmi__userSection__subTitle {
   font-size: 1.1em;
@@ -619,6 +620,124 @@ footer {
   font-weight: 600;
   margin: 10px 0 70px;
 }
+.bmi__tools {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white;
+  width: 600px;
+  padding: 30px;
+  border-radius: 3px;
+  box-shadow: 0 7px 15px rgba(0, 0, 0, 0.151);
+  margin-bottom: 50px;
+}
+.bmi__tools p {
+  line-height: 1.4;
+  letter-spacing: 0.4px;
+  margin-bottom: 10px;
+}
+.bmi__tools__form {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 30px;
+}
+.bmi__tools__form__cont {
+  display: flex;
+  justify-content: space-around;
+}
+.bmi__tools__form__cont__field {
+  display: flex;
+  flex-direction: column;
+  margin: 0 15px;
+}
+.bmi__tools__form__cont__field label {
+  font-size: 0.9em;
+  margin-bottom: 8px;
+}
+.bmi__tools__form__cont__field input {
+  height: 35px;
+  width: 171px;
+  padding-left: 15px;
+}
+.bmi__tools__form__btnCont {
+  display: flex;
+  justify-content: center;
+  margin-top: 35px;
+}
+.bmi__tools__form__btnCont input {
+  font-size: 1em;
+  font-family: "Roboto", sans-serif;
+  border: none;
+  border-radius: 2px;
+  padding: 15px 0;
+  background: #0C2E8A;
+  color: #fdfdfd;
+  transition: opacity 150ms ease-in-out;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  width: 100px;
+}
+.bmi__tools__form__btnCont input:hover {
+  opacity: 0.7;
+  transition: opacity 150ms ease-in-out;
+}
+.bmi__tools__error {
+  color: #d80404;
+  width: 90%;
+  margin: 30px 0 5px;
+}
+.bmi__tools__results {
+  text-align: center;
+}
+.bmi__tools__results__score {
+  font-size: 2.4em;
+  font-weight: 600;
+  color: #0C2E8A;
+}
+.bmi__tools__results--hidden {
+  display: none;
+}
+.bmi__tools__interpretation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 0 10px;
+}
+.bmi__tools__interpretation h3 {
+  font-size: 1.3em;
+  font-weight: 600;
+  margin: 30px 0 20px;
+}
+.bmi__tools__interpretation__array {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #EEEEEE;
+  color: #1b1b1b;
+}
+.bmi__tools__interpretation__array__row {
+  display: flex;
+  padding: 0 15px;
+  align-items: center;
+  height: 40px;
+}
+.bmi__tools__interpretation__array__row p {
+  line-height: inherit;
+  margin-bottom: 0;
+}
+.bmi__tools__interpretation__array__row--alt {
+  background: #0C2E8A;
+  color: #fdfdfd;
+}
+.bmi__tools__interpretation__array__row__score {
+  text-align: end;
+  width: 55%;
+  padding-right: 35px;
+  font-size: 1.1em;
+  font-weight: 600;
+}
 
 .bfp {
   display: flex;
@@ -629,20 +748,21 @@ footer {
   min-height: 100vh;
 }
 .bfp h2 {
-  margin: 20px 0 90px;
-  font-size: 1.4em;
-  font-weight: 600;
-  color: #1b1b1b;
+  margin: 20px 0 80px;
+  font-family: "Fredoka One", cursive;
+  font-size: 2em;
+  color: #0C2E8A;
 }
 .bfp__userSection {
   display: flex;
   flex-direction: column;
   align-items: center;
   background: white;
-  width: 500px;
+  width: 600px;
   padding: 30px;
   border-radius: 3px;
   box-shadow: 0 7px 15px rgba(0, 0, 0, 0.151);
+  margin-bottom: 50px;
 }
 .bfp__userSection__subTitle {
   font-size: 1.1em;
@@ -657,6 +777,149 @@ footer {
   font-size: 1.2em;
   font-weight: 600;
   margin: 10px 0 70px;
+}
+.bfp__tools {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white;
+  width: 600px;
+  padding: 30px;
+  border-radius: 3px;
+  box-shadow: 0 7px 15px rgba(0, 0, 0, 0.151);
+  margin-bottom: 50px;
+}
+.bfp__tools p {
+  line-height: 1.4;
+  letter-spacing: 0.4px;
+  margin-bottom: 10px;
+}
+.bfp__tools__form {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 30px;
+}
+.bfp__tools__form__cont {
+  display: flex;
+  justify-content: space-around;
+}
+.bfp__tools__form__cont__field {
+  display: flex;
+  flex-direction: column;
+  margin: 0 15px;
+}
+.bfp__tools__form__cont__field label {
+  font-size: 0.9em;
+  margin-bottom: 8px;
+}
+.bfp__tools__form__cont__field input {
+  height: 35px;
+  width: 171px;
+  padding-left: 15px;
+}
+.bfp__tools__form__btnCont {
+  display: flex;
+  justify-content: center;
+  margin-top: 35px;
+}
+.bfp__tools__form__btnCont input {
+  font-size: 1em;
+  font-family: "Roboto", sans-serif;
+  border: none;
+  border-radius: 2px;
+  padding: 15px 0;
+  background: #0C2E8A;
+  color: #fdfdfd;
+  transition: opacity 150ms ease-in-out;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  width: 100px;
+}
+.bfp__tools__form__btnCont input:hover {
+  opacity: 0.7;
+  transition: opacity 150ms ease-in-out;
+}
+.bfp__tools__error {
+  color: #d80404;
+  width: 90%;
+  margin: 30px 0 5px;
+}
+.bfp__tools__results {
+  text-align: center;
+}
+.bfp__tools__results__score {
+  font-size: 2.4em;
+  font-weight: 600;
+  color: #0C2E8A;
+}
+.bfp__tools__results--hidden {
+  display: none;
+}
+.bfp__tools__interpretation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 0 10px;
+}
+.bfp__tools__interpretation h3 {
+  font-size: 1.3em;
+  font-weight: 600;
+  margin: 30px 0 20px;
+}
+.bfp__tools__interpretation__array {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #EEEEEE;
+  color: #1b1b1b;
+}
+.bfp__tools__interpretation__array__row {
+  display: flex;
+  padding: 0 15px;
+  align-items: center;
+  height: 40px;
+}
+.bfp__tools__interpretation__array__row p {
+  line-height: inherit;
+  margin-bottom: 0;
+}
+.bfp__tools__interpretation__array__row--alt {
+  background: #0C2E8A;
+  color: #fdfdfd;
+}
+.bfp__tools__interpretation__array__row__score {
+  text-align: end;
+  width: 55%;
+  padding-right: 35px;
+  font-size: 1.1em;
+  font-weight: 600;
+}
+.bfp__tools span {
+  letter-spacing: initial;
+  font-weight: 300;
+}
+.bfp__tools li {
+  list-style: square;
+  margin-left: 12px;
+}
+.bfp__tools__form__cont {
+  margin-top: 20px;
+}
+.bfp__tools__form select {
+  height: 35px;
+  width: 171px;
+  padding-left: 15px;
+}
+.bfp__tools__interpretation h4 {
+  margin: 20px 0 15px;
+  font-weight: 600;
+}
+.bfp__tools__disclaimer {
+  margin-top: 30px;
+  font-size: 0.8em;
+  font-weight: 300;
 }
 
 .obj {

@@ -52,7 +52,96 @@
             ?>kg.</p>
         </section>
     <?php endif; ?>
+
+    <section class="bmi__tools">
+        <p>L'indice de masse corporelle permet de rapidement évaluer votre corpulence avec votre poids et votre taille indépendamment de votre sexe.</p>
+        <p>Il se calcul simplement en divisant le poids par le carré de la taille (en metre).Un IMC normal (selon l'OMS) se situe entre 18,5 et 25.</p>
+        <p>Pour connaitre le votre, rien de plus simple, il vous suffit de remplir les champs ci dessous.</p>
+        <div class="bmi__tools__error"></div>
+        <form class="bmi__tools__form">
+            <div class="bmi__tools__form__cont">
+                <div class="bmi__tools__form__cont__field">
+                    <label for="bmiWeight">Poids en kg</label>
+                    <input type="number" name="weight" id="bmiWeight" placeholder="80">
+                </div>
+                <div class="bmi__tools__form__cont__field">
+                    <label for="bmiSize">Taille en cm</label>
+                    <input type="number" name="size" id="bmiSize" placeholder="175">
+                </div>
+            </div>
+            <div class="bmi__tools__form__btnCont">
+                <input onClick="verifyForm()" type="button" value="Calculer">
+            </div>
+        </form>
+        <div class="bmi__tools__results bmi__tools__results--hidden">
+                <p class="bmi__tools__results__title"></p>
+                <p class="bmi__tools__results__score"></p>
+        </div>
+        <div class="bmi__tools__interpretation">
+            <h3>Interprétation de l'IMC (selon l'OMS)</h3>
+            <div class="bmi__tools__interpretation__array">
+                <div class="bmi__tools__interpretation__array__row"><p class="bmi__tools__interpretation__array__row__score">En dessous de 16,5</p><p class="bmi__tools__interpretation__array__row__status">Maigreur extreme</p></div>
+                <div class="bmi__tools__interpretation__array__row bmi__tools__interpretation__array__row--alt"><p class="bmi__tools__interpretation__array__row__score">Entre 16,5 et 18.4</p><p class="bmi__tools__interpretation__array__row__status">Maigreur</p></div>
+                <div class="bmi__tools__interpretation__array__row"><p class="bmi__tools__interpretation__array__row__score">Entre 18.5 et 24.9</p><p class="bmi__tools__interpretation__array__row__status">Corpulence normal</p></div>
+                <div class="bmi__tools__interpretation__array__row bmi__tools__interpretation__array__row--alt"><p class="bmi__tools__interpretation__array__row__score">Entre 25 et 29.9</p><p class="bmi__tools__interpretation__array__row__status">Surpoids</p></div>
+                <div class="bmi__tools__interpretation__array__row"><p class="bmi__tools__interpretation__array__row__score">Entre 30 et 34.9</p><p class="bmi__tools__interpretation__array__row__status">Obésité modérée</p></div>
+                <div class="bmi__tools__interpretation__array__row bmi__tools__interpretation__array__row--alt"><p class="bmi__tools__interpretation__array__row__score">Entre 35 et 39.9</p><p class="bmi__tools__interpretation__array__row__status">Obésité sévère</p></div>
+                <div class="bmi__tools__interpretation__array__row"><p class="bmi__tools__interpretation__array__row__score">Au dessus de 40</p><p class="bmi__tools__interpretation__array__row__status">Obésité morbide</p></div>
+            </div>
+        </div>
+    </section>
 </main>
+
+<script>
+    const weight = document.getElementById('bmiWeight');
+    const size = document.getElementById('bmiSize');
+
+    const verifyForm = () => {
+        const errorCont = document.querySelector(".bmi__tools__error");
+        const error = document.createElement('p');
+        
+        errorCont.innerHTML = "";
+        let err = false;
+        
+        if(weight.value === "" || size.value === "") {
+            const errorMsg = '- Tous les champs sont requis.';
+            errorCont.appendChild(error);
+            return error.textContent = errorMsg;
+        } else if (!weight.value.match(/^[0-9]*$/) || !size.value.match(/^[0-9]*$/)) {
+            const errorMsg = '- Tous les champs doivent etre des nombres.';
+            errorCont.appendChild(error);
+            return error.textContent = errorMsg;
+        } 
+        if(weight.value < 30 || weight.value > 250) {
+            const errorWeightCont = document.createElement('p');
+            const weightError = '- Le poids doit etre compris entre 30 et 250 kg';
+            errorCont.appendChild(errorWeightCont);
+            errorWeightCont.textContent = weightError;
+            err = true;
+        }
+        if(size.value < 90 || size.value > 260) {
+            const errorSizeCont = document.createElement('p');
+            const sizeError = '- La taille doit etre comprise entre 90 et 260 cm';
+            errorCont.appendChild(errorSizeCont);
+            errorSizeCont.textContent = sizeError;
+            err = true;
+        }
+        if(!err) {
+            calculBmi();
+        }
+    };
+
+    const calculBmi = () => {
+        const resultDiv = document.querySelector(".bmi__tools__results");
+        const resultCont = document.querySelector(".bmi__tools__results__score");
+
+        newSize = size.value / 100;
+        result = weight.value / (newSize*newSize);
+
+        resultDiv.classList.remove("bmi__tools__results--hidden");
+        resultCont.textContent = Math.floor(result);
+    };
+</script>
 
 <?php $content = ob_get_clean(); ?>
 

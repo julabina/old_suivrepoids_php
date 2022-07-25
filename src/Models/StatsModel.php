@@ -180,8 +180,9 @@ class StatsModel {
         $img = $this->calculImg($sexe, $imc, $age);
 
         $imgArr = ["img" => $img];
+        $ageArr = ["age" => $age];
 
-        return $userImgInfos = $userInfos + $imgArr;
+        return $userImgInfos = $userInfos + $imgArr + $ageArr;
 
     }
 
