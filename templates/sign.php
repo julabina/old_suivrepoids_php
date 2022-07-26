@@ -97,7 +97,7 @@
         if(userName.value === "") {
             error += `<p>- Le nom ne doit pas etre vide.</p>`
         } else if (userName.value.length < 3 || userName.value.length > 24) {
-            error += `<p>- Le nom ne doit avoir une taille comprise entre 2 et 25 caracteres.</p>`
+            error += `<p>- Le nom doit avoir une taille comprise entre 3 et 24 caracteres.</p>`
         } else if (!userName.value.match(/^[a-zA-Zé èà]*$/)) {
             error += `<p>- Le nom doit contenir que des lettres.</p>`
         }
@@ -110,7 +110,7 @@
         
         if(size.value === '') {
             error += `<p>- La taille ne doit pas etre vide.</p>`
-        } else if(size.value < 91 || size.value > 259) {
+        } else if(size.value < 90 || size.value > 260) {
             error += `<p>- La taille doit etre d'une longueur comprise entre 90 et 260 cm.</p>`
         } else if(!size.value.match(/^[0-9]*$/)) {
             error += `<p>- La taille doit contenir que des chiffres.</p>`
@@ -118,7 +118,7 @@
         
         if(weight.value === '') {
             error += `<p>- Le poids ne doit pas etre vide.</p>`
-        } else if(weight.value < 31 || weight.value > 249) {
+        } else if(weight.value < 30 || weight.value > 260) {
             error += `<p>- Le poids doit etre  compris entre 30 et 260 kg.</p>`
         } else if(!weight.value.match(/^[0-9]*$/)) {
             error += `<p>- Le poids doit contenir que des chiffres.</p>`

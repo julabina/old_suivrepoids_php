@@ -167,8 +167,8 @@
 
         if(inputWeight.value === "") {
             error = '<p>- Le champ ne doit pas etre vide ou doit contenir que des chiffres.</p>';
-        } else if (inputWeight.value < 31 || inputWeight.value > 249) {
-            error = '<p>- Le poids doit etre compris entre 30 et 250 kg.</p>';           
+        } else if (inputWeight.value < 30 || inputWeight.value > 260) {
+            error = '<p>- Le poids doit etre compris entre 30 et 260 kg.</p>';           
         } 
 
         errorWeight.innerHTML = error;
@@ -184,7 +184,7 @@
         
         if(inputImc.value === "") {
             error = '<p>- Le champ ne doit pas etre vide ou doit contenir que des chiffres.</p>';
-        } else if (inputImc.value < 11 || inputImc.value > 79) {
+        } else if (inputImc.value < 10 || inputImc.value > 80) {
             error = '<p>- L\'imc doit etre compris entre 10 et 80.</p>';           
         }
 
@@ -201,7 +201,7 @@
         
         if(inputImg.value === "") {
             error = '<p>- Le champ ne doit pas etre vide ou doit contenir que des chiffres.</p>';
-        } else if (inputImg.value < 1 || inputImg.value > 89) {
+        } else if (inputImg.value < 1 || inputImg.value > 90) {
             error = '<p>- L\'img doit etre compris entre 1 et 90 %.</p>';           
         } 
     

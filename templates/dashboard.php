@@ -112,9 +112,9 @@
     
         if(addWeight.value === '') {
             modalError = '- Le poids ne doit pas etre vide.';
-        } else if(addWeight.value < 31) {
+        } else if(addWeight.value < 30) {
             modalError = '- Le poids doit etre superieur à 30 kg.';
-        } else if(addWeight.value > 249) {
+        } else if(addWeight.value > 260) {
             modalError = '- Le poids doit etre inférieur à 260 kg.';
         } else if(!addWeight.value.match(/^[0-9]*$/)) {
             modalError = '- Le poids ne doit contenir que des chiffres.';

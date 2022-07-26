@@ -156,7 +156,7 @@
 
         if(inputs[0].value === "") {
             error += `<p>- Le nom ne doit pas etre vide.</p>`
-        } else if (inputs[0].value.length < 2 || inputs[0].value.length > 24) {
+        } else if (inputs[0].value.length < 2 || inputs[0].value.length > 25) {
             error += `<p>- Le nom ne doit avoir une taille comprise entre 2 et 25 caracteres.</p>`
         } else if (!inputs[0].value.match(/^[a-zA-Zé èà]*$/)) {
             error += `<p>- Le nom doit contenir que des lettres.</p>`
@@ -164,7 +164,7 @@
 
         if(inputs[1].value === '') {
             error += `<p>- La taille ne doit pas etre vide.</p>`
-        } else if(inputs[1].value < 91 || inputs[1].value > 259) {
+        } else if(inputs[1].value < 90 || inputs[1].value > 260) {
             error += `<p>- La taille doit etre d'une longueur comprise entre 90 et 260 cm.</p>`
         } else if(!inputs[1].value.match(/^[0-9]*$/)) {
             error += `<p>- La taille doit contenir que des chiffres.</p>`

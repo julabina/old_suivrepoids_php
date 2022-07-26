@@ -184,14 +184,21 @@ class UserController {
             return header('Location: /suivi_poids/login');
         }
 
-        $userModel = new UserModel();
-        $userModel->connection = new DatabaseConnection();
-        $success = $userModel->modifyUser($_SESSION['userId'], $_POST['name'], $_POST['size'], $_POST['sexe'], $_POST['birthday']); 
-        
-        if($success){
-            header('Location: /suivi_poids/profil');
-        } else {
-            header('Location: /suivi_poids/');
+        if(
+            (isset($_POST['name']) && $_POST['name'] !== "" && preg_match('/^[a-zA-Zé èà]*$/', $_POST['name']) && (strlen($_POST['name']) > 2 || strlen($_POST['name']) < 25)) &&
+            (isset($_POST['size']) && preg_match('/^[0-9]*$/', $_POST['size']) && ($_POST['size'] > 90 && $_POST['size'] < 260)) && 
+            (isset($_POST['sexe']) && ($_POST['sexe'] === "man" || $_POST['sexe'] === "woman")) &&
+            (isset($_POST['birthday']) && preg_match('/^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)(?:19\d{2}|20[01][0-9]|2022)$/i', $_POST['birthday']))
+        ) {            
+            $userModel = new UserModel();
+            $userModel->connection = new DatabaseConnection();
+            $success = $userModel->modifyUser($_SESSION['userId'], $_POST['name'], $_POST['size'], $_POST['sexe'], $_POST['birthday']); 
+            
+            if($success){
+                header('Location: /suivi_poids/profil');
+            } else {
+                header('Location: /suivi_poids/');
+            }
         }
         
     }
@@ -206,6 +213,11 @@ class UserController {
         if(!isset($_SESSION['name']) || !isset($_SESSION['user']) || !isset($_SESSION['userId']) || !isset($_SESSION['size']) || (!isset($_SESSION['sexe']) || ($_SESSION['sexe'] !== "man" && $_SESSION['sexe'] !== "woman")) || !isset($_SESSION['auth']) || $_SESSION['auth'] !== true) {
             return header('Location: /suivi_poids/login');
         }
+
+        if(
+            (isset($_POST['oldPassword']) && $_POST['oldPassword'] !== "" && preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/', $_POST['oldPassword'])) &&
+            (isset($_POST['newPassword']) && $_POST['newPassword'] !== "" && preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/', $_POST['newPassword']))
+        )
 
         $userModel = new UserModel();
         $userModel->connection = new DatabaseConnection();
