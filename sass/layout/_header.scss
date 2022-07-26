@@ -26,13 +26,6 @@ header {
         display: flex;
         align-items: center
     }
-    &__logoutBtn, &__toDashboard {
-        @include homeBtn;
-        margin: 0 5px;
-        width: 160px;
-        padding: 10px 0 10px;
-        font-size: 0.9em;
-    }
     &__notConnectBtns {
         display: flex;
         justify-content: space-between;
@@ -42,6 +35,35 @@ header {
             width: 160px;
             padding: 10px 0 10px;
             font-size: 0.9em;
+        }
+    }
+    &__connected {
+        display: flex;
+        &__logoutBtn, &__toDashboard {
+            @include homeBtn;
+            margin: 0 5px;
+            width: 160px;
+            padding: 10px 0 10px;
+            font-size: 0.9em;
+        }
+        &__userProfil {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: map-get($map: $colors, $key: primary);
+            height: 34px;
+            width: 34px;
+            border-radius: 50%;
+            margin-left: 11px;
+            cursor: pointer;
+            transition: opacity 150ms ease-in-out;
+            img {
+                height: 20px;
+            }
+            &:hover {
+                opacity: 0.7;
+                transition: opacity 150ms ease-in-out;
+            }
         }
     }
     a {

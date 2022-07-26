@@ -10,6 +10,7 @@ $router->post('/objectif', 'Stats#addGoal');
 $router->get('/imc', 'Stats#showImc');
 $router->get('/img', 'Stats#showImg');
 $router->post('/addWeight', 'Stats#addWeight');
+$router->get('/profil', 'User#showProfil');
 $router->get('/login', function(){ require('templates/log.php'); });
 $router->post('/login', 'User#log');
 $router->get('/logout', 'User#logout');

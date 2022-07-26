@@ -18,6 +18,12 @@
 <header class="dashHeader">
     <div class="header">
         <a href="/suivi_poids/"><h1>TITRE DU SITE</h1></a>
+        <div class="header__connected">
+            <a class="header__connected__logoutBtn" href="/suivi_poids/logout">Se deconnecter</a>
+            <a href="/suivi_poids/profil"><div class="header__connected__userProfil">
+                <img src="../suivi_poids/assets/user.svg" alt="user icon">
+            </div></a>
+        </div>
     </div>
 </header>
 

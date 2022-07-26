@@ -16,6 +16,8 @@ class User {
     public $weight_goal;
     public $imc_goal;
     public $img_goal;
+    public string $email;
+    public $birthday;
     public $recordDate;
 }
 
@@ -107,29 +109,62 @@ class UserModel {
             "SELECT size, firstname, is_man, weight_goal, imc_goal, img_goal, imc, img, user_weight, record_date FROM users RIGHT JOIN goals ON users.userId = goals.userId RIGHT JOIN weight_infos ON users.userId = weight_infos.userId WHERE users.userId = '$userId' AND goals.current = 1 AND weight_infos.record_date = (SELECT MAX(record_date) FROM weight_infos WHERE weight_infos.userId = '$userId')"
         );
         
-        $test = $statement->fetch();
+        $userStats = $statement->fetch();
         
         $userInfos = new User();
 
-        if($test > 0) {
+        if($userStats > 0) {
             $userInfos->userId = $userId;
-            $userInfos->name = $test['firstname'];
-            $userInfos->size = $test['size'];
-            if($test['is_man'] === 1) {
+            $userInfos->name = $userStats['firstname'];
+            $userInfos->size = $userStats['size'];
+            if($userStats['is_man'] === 1) {
                 $userInfos->sexe = "man";
-            } elseif ($test['is_man'] === 0) {
+            } elseif ($userStats['is_man'] === 0) {
                 $userInfos->sexe = "woman";
             }
-            $userInfos->weight = $test['user_weight'];
-            $userInfos->imc = number_format($test['imc'], 2);
-            $userInfos->img = number_format($test['img'], 2);
-            $userInfos->weight_goal = $test['weight_goal'];
-            $userInfos->imc_goal = $test['imc_goal'];
-            $userInfos->img_goal = $test['img_goal'];
-            $userInfos->recordDate = date('d-m-Y', strtotime($test['record_date']));
+            $userInfos->weight = $userStats['user_weight'];
+            $userInfos->imc = number_format($userStats['imc'], 2);
+            $userInfos->img = number_format($userStats['img'], 2);
+            $userInfos->weight_goal = $userStats['weight_goal'];
+            $userInfos->imc_goal = $userStats['imc_goal'];
+            $userInfos->img_goal = $userStats['img_goal'];
+            $userInfos->recordDate = date('d-m-Y', strtotime($userStats['record_date']));
         }  
 
         return $userInfos;
+
+    }
+
+    /**
+     * get user infos
+     * 
+     * @param string $userId
+     * 
+     * @return User
+     */
+    public function getUserInfos(string $userId): User {
+
+        $statement = $this->connection->getConnection()->query(
+            "SELECT firstname, email, size, is_man, birthday FROM users WHERE userId = '$userId'"
+        );
+
+        $userProfilInfos = $statement->fetch();
+
+        $userInfos = new User();
+        
+        if($userProfilInfos > 0) {
+            $userInfos->name = $userProfilInfos['firstname'];
+            $userInfos->email = $userProfilInfos['email'];
+            $userInfos->size = $userProfilInfos['size'];
+            $userInfos->birthday = date('d/m/Y', strtotime($userProfilInfos['birthday']));
+            if($userProfilInfos['is_man'] === 1) {
+                $userInfos->sexe = "man";
+            } elseif ($userProfilInfos['is_man'] === 0) {
+                $userInfos->sexe = "woman";
+            }
+        }
+            
+        return $userInfos ;
 
     }
 

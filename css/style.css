@@ -116,26 +116,6 @@ header h1 {
   display: flex;
   align-items: center;
 }
-.header__logoutBtn, .header__toDashboard {
-  text-decoration: none;
-  color: inherit;
-  text-align: center;
-  border-radius: 2px;
-  padding: 15px 0;
-  background: #0C2E8A;
-  color: #fdfdfd;
-  transition: opacity 150ms ease-in-out;
-  text-transform: uppercase;
-  font-weight: 500;
-  margin: 0 5px;
-  width: 160px;
-  padding: 10px 0 10px;
-  font-size: 0.9em;
-}
-.header__logoutBtn:hover, .header__toDashboard:hover {
-  opacity: 0.7;
-  transition: opacity 150ms ease-in-out;
-}
 .header__notConnectBtns {
   display: flex;
   justify-content: space-between;
@@ -157,6 +137,48 @@ header h1 {
   font-size: 0.9em;
 }
 .header__notConnectBtns a:hover {
+  opacity: 0.7;
+  transition: opacity 150ms ease-in-out;
+}
+.header__connected {
+  display: flex;
+}
+.header__connected__logoutBtn, .header__connected__toDashboard {
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+  border-radius: 2px;
+  padding: 15px 0;
+  background: #0C2E8A;
+  color: #fdfdfd;
+  transition: opacity 150ms ease-in-out;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin: 0 5px;
+  width: 160px;
+  padding: 10px 0 10px;
+  font-size: 0.9em;
+}
+.header__connected__logoutBtn:hover, .header__connected__toDashboard:hover {
+  opacity: 0.7;
+  transition: opacity 150ms ease-in-out;
+}
+.header__connected__userProfil {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0C2E8A;
+  height: 34px;
+  width: 34px;
+  border-radius: 50%;
+  margin-left: 11px;
+  cursor: pointer;
+  transition: opacity 150ms ease-in-out;
+}
+.header__connected__userProfil img {
+  height: 20px;
+}
+.header__connected__userProfil:hover {
   opacity: 0.7;
   transition: opacity 150ms ease-in-out;
 }
@@ -524,10 +546,15 @@ footer {
   transition: transform 300ms ease-in-out;
 }
 .home__faq__cont__step__img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 50px;
   width: 50px;
   border-radius: 50%;
-  background: #000;
+}
+.home__faq__cont__step__img img {
+  height: 40px;
 }
 .home__faq__cont__step p {
   text-align: center;
@@ -1320,6 +1347,56 @@ footer {
 .sign__notConnected__linkCont a:hover {
   opacity: 0.7;
   transition: opacity 150ms ease-in-out;
+}
+
+.profil {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  min-height: 72vh;
+}
+.profil h2 {
+  font-size: 2.2em;
+  font-weight: 600;
+  margin: 80px 0 10px;
+  color: #1b1b1b;
+}
+.profil__nav {
+  display: flex;
+  flex-direction: column;
+}
+.profil__nav__subTitle {
+  font-size: 0.9em;
+  margin-bottom: 70px;
+  text-align: center;
+}
+.profil__nav__btn {
+  font-size: 1em;
+  font-family: "Roboto", sans-serif;
+  border: none;
+  border-radius: 2px;
+  padding: 15px 0;
+  background: #0C2E8A;
+  color: #fdfdfd;
+  transition: opacity 150ms ease-in-out;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  margin: 20px 0;
+  width: 260px;
+}
+.profil__nav__btn:hover {
+  opacity: 0.7;
+  transition: opacity 150ms ease-in-out;
+}
+.profil__nav__deleteBtn {
+  transition: all 170ms ease-in-out;
+}
+.profil__nav__deleteBtn:hover {
+  opacity: 1;
+  background: #d80404;
+  transition: all 170ms ease-in-out;
 }
 
 /*# sourceMappingURL=style.css.map */

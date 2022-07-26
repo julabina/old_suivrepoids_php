@@ -130,4 +130,23 @@ class UserController {
 
     }
 
+    /**
+     * Open the user profil page
+     */
+    public function showProfil() {
+
+        SESSION_START();
+
+        if(!isset($_SESSION['name']) || !isset($_SESSION['user']) || !isset($_SESSION['userId']) || !isset($_SESSION['size']) || (!isset($_SESSION['sexe']) || ($_SESSION['sexe'] !== "man" && $_SESSION['sexe'] !== "woman")) || !isset($_SESSION['auth']) || $_SESSION['auth'] !== true) {
+            return header('Location: /suivi_poids/login');
+        }
+
+        $userModel = new UserModel();
+        $userModel->connection = new DatabaseConnection();
+        $userInfos = $userModel->getUserInfos($_SESSION['userId']);
+
+        var_dump($userInfos);
+        require('templates/profil.php');
+    }
+
 }

@@ -6,7 +6,13 @@
     <div class="header">
         <a class="header__titleLink" href="/suivi_poids/"><h1>TITRE DU SITE</h1></a>
         <?php if(isset($_SESSION['name']) && isset($_SESSION['user']) && isset($_SESSION['userId']) && isset($_SESSION['size']) && (isset($_SESSION['sexe']) && ($_SESSION['sexe'] === "man" || $_SESSION['sexe'] === "woman")) && isset($_SESSION['auth']) && $_SESSION['auth'] === true): ?>
-            <a class="header__toDashboard" href="/suivi_poids/dashboard">Tableau de bord</a>
+            <div class="header__connected">
+                <a class="header__connected__toDashboard" href="/suivi_poids/dashboard">Tableau de bord</a>
+                <a class="header__connected__logoutBtn" href="/suivi_poids/logout">Se deconnecter</a>
+                <a href="/suivi_poids/profil"><div class="header__connected__userProfil">
+                    <img src="../suivi_poids/assets/user.svg" alt="user icon">
+                </div></a>
+            </div>
         <?php else: ?>
             <div class="header__notConnectBtns">
                 <a id="headerLogBtn" href="/suivi_poids/login">Se connecter</a>

@@ -10,7 +10,12 @@
     <div class="header">
         <h1>TITRE DU SITE</h1>
         <?php if(isset($_SESSION['name']) && isset($_SESSION['user']) && isset($_SESSION['userId']) && isset($_SESSION['size']) && (isset($_SESSION['sexe']) && ($_SESSION['sexe'] === "man" || $_SESSION['sexe'] === "woman")) && isset($_SESSION['auth']) && $_SESSION['auth'] === true): ?>
-            <a class="header__logoutBtn" href="/suivi_poids/logout">Se deconnecter</a>
+            <div class="header__connected">
+                <a class="header__connected__logoutBtn" href="/suivi_poids/logout">Se deconnecter</a>
+                <a href="/suivi_poids/profil"><div class="header__connected__userProfil">
+                    <img src="../suivi_poids/assets/user.svg" alt="user icon">
+                </div></a>
+            </div>
         <?php else: ?>
             <div class="header__notConnectBtns">
                 <a id="headerLogBtn" href="/suivi_poids/login">Se connecter</a>
@@ -52,21 +57,21 @@
             </div>
             <div class="home__faq__cont__step">
                 <div class="home__faq__cont__step__img">    
-                    <img src="" alt="">
+                    <img src="../suivi_poids/assets/weight.svg" alt="weight icon">
                 </div>
                 <h3>petit titre</h3>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum eum sunt excepturi!</p>
             </div>
             <div class="home__faq__cont__step">
                 <div class="home__faq__cont__step__img">    
-                    <img src="" alt="">
+                    <img src="../suivi_poids/assets/graph.svg" alt="graph icon">
                 </div>
                 <h3>petit titre</h3>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum eum sunt excepturi!</p>
             </div>
             <div class="home__faq__cont__step">
                 <div class="home__faq__cont__step__img">    
-                    <img src="" alt="">
+                    <img src="../suivi_poids/assets/money.svg" alt="money icon">
                 </div>
                 <h3>petit titre</h3>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum eum sunt excepturi!</p>

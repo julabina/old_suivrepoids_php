@@ -128,9 +128,14 @@
                 padding: 25px 25px 30px;
                 transition: transform 300ms ease-in-out;
                 &__img {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                     height: 50px;width: 50px;
                     border-radius: 50%;
-                    background: #000;
+                    img {
+                        height: 40px;
+                    }
                 }
                 p {
                     text-align: center;
