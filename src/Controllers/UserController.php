@@ -149,4 +149,74 @@ class UserController {
         require('templates/profil.php');
     }
 
+
+    /**
+     * delete user account
+     */
+    public function deleteUser() {
+
+        SESSION_START();
+        
+        if(!isset($_SESSION['name']) || !isset($_SESSION['user']) || !isset($_SESSION['userId']) || !isset($_SESSION['size']) || (!isset($_SESSION['sexe']) || ($_SESSION['sexe'] !== "man" && $_SESSION['sexe'] !== "woman")) || !isset($_SESSION['auth']) || $_SESSION['auth'] !== true) {
+            return header('Location: /suivi_poids/login');
+        }
+        
+        $userModel = new UserModel();
+        $userModel->connection = new DatabaseConnection();
+        $success = $userModel->deleteUser($_SESSION['userId']);
+        
+        if($success) {
+            $this->logout();
+        } else {
+            header('Location: /suivi_poids/');
+        }
+        
+    }
+    
+    /**
+     * modify user profil
+     */
+    public function modifyProfil(){
+        
+        SESSION_START();
+        
+        if(!isset($_SESSION['name']) || !isset($_SESSION['user']) || !isset($_SESSION['userId']) || !isset($_SESSION['size']) || (!isset($_SESSION['sexe']) || ($_SESSION['sexe'] !== "man" && $_SESSION['sexe'] !== "woman")) || !isset($_SESSION['auth']) || $_SESSION['auth'] !== true) {
+            return header('Location: /suivi_poids/login');
+        }
+
+        $userModel = new UserModel();
+        $userModel->connection = new DatabaseConnection();
+        $success = $userModel->modifyUser($_SESSION['userId'], $_POST['name'], $_POST['size'], $_POST['sexe'], $_POST['birthday']); 
+        
+        if($success){
+            header('Location: /suivi_poids/profil');
+        } else {
+            header('Location: /suivi_poids/');
+        }
+        
+    }
+
+    /**
+     * Modify user password
+     */
+    public function modifyPassword() {
+        
+        SESSION_START();
+        
+        if(!isset($_SESSION['name']) || !isset($_SESSION['user']) || !isset($_SESSION['userId']) || !isset($_SESSION['size']) || (!isset($_SESSION['sexe']) || ($_SESSION['sexe'] !== "man" && $_SESSION['sexe'] !== "woman")) || !isset($_SESSION['auth']) || $_SESSION['auth'] !== true) {
+            return header('Location: /suivi_poids/login');
+        }
+
+        $userModel = new UserModel();
+        $userModel->connection = new DatabaseConnection();
+        $success = $userModel->modifyUserPassword($_SESSION['userId'], $_POST['oldPassword'], $_POST['newPassword']); 
+        
+        if($success){
+            header('Location: /suivi_poids/profil');
+        } else {
+            header('Location: /suivi_poids/');
+        }   
+
+    }
+
 }

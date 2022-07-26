@@ -16,5 +16,8 @@ $router->post('/login', 'User#log');
 $router->get('/logout', 'User#logout');
 $router->get('/sign', function(){ require('templates/sign.php'); });
 $router->post('/sign', 'User#sign');
+$router->post('/modifyProfil', 'User#modifyProfil');
+$router->post('/modifyPassword', 'User#modifyPassword');
+$router->post('/delete', 'User#deleteUser');
 
 $router->run();

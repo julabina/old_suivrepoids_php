@@ -1354,13 +1354,19 @@ footer {
   flex-direction: column;
   align-items: center;
   padding-top: 20px;
-  min-height: 72vh;
+  min-height: 80vh;
 }
 .profil h2 {
   font-size: 2.2em;
   font-weight: 600;
   margin: 80px 0 10px;
   color: #1b1b1b;
+}
+.profil h3 {
+  font-size: 1.4em;
+  font-weight: 600;
+  text-align: center;
+  margin: 40px 0 20px;
 }
 .profil__nav {
   display: flex;
@@ -1397,6 +1403,186 @@ footer {
   opacity: 1;
   background: #d80404;
   transition: all 170ms ease-in-out;
+}
+.profil__nav--hidden {
+  display: none;
+}
+.profil__modify {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 50px;
+  width: 500px;
+}
+.profil__modify__errorCont {
+  min-height: 15px;
+  color: #d80404;
+  text-align: center;
+}
+.profil__modify__form {
+  margin-top: 25px;
+}
+.profil__modify__form__row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 25px;
+  width: 250px;
+}
+.profil__modify__form__row label {
+  margin-bottom: 5px;
+  font-size: 0.9em;
+}
+.profil__modify__form__row input {
+  height: 40px;
+  border: 1px solid rgba(165, 165, 165, 0.5);
+  padding-left: 15px;
+}
+.profil__modify__form__btnCont {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+.profil__modify__form__btnCont__btn {
+  font-size: 1em;
+  font-family: "Roboto", sans-serif;
+  border: none;
+  border-radius: 2px;
+  padding: 15px 0;
+  background: #0C2E8A;
+  color: #fdfdfd;
+  transition: opacity 150ms ease-in-out;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  width: 100px;
+  margin: 0 10px;
+}
+.profil__modify__form__btnCont__btn:hover {
+  opacity: 0.7;
+  transition: opacity 150ms ease-in-out;
+}
+.profil__modify--hidden {
+  display: none;
+}
+.profil__modify select {
+  height: 40px;
+  padding-left: 15px;
+}
+.profil__modifyPassword {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 50px;
+  width: 500px;
+}
+.profil__modifyPassword__errorCont {
+  min-height: 15px;
+  color: #d80404;
+  text-align: center;
+}
+.profil__modifyPassword__form {
+  margin-top: 25px;
+}
+.profil__modifyPassword__form__row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 25px;
+  width: 250px;
+}
+.profil__modifyPassword__form__row label {
+  margin-bottom: 5px;
+  font-size: 0.9em;
+}
+.profil__modifyPassword__form__row input {
+  height: 40px;
+  border: 1px solid rgba(165, 165, 165, 0.5);
+  padding-left: 15px;
+}
+.profil__modifyPassword__form__btnCont {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+.profil__modifyPassword__form__btnCont__btn {
+  font-size: 1em;
+  font-family: "Roboto", sans-serif;
+  border: none;
+  border-radius: 2px;
+  padding: 15px 0;
+  background: #0C2E8A;
+  color: #fdfdfd;
+  transition: opacity 150ms ease-in-out;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  width: 100px;
+  margin: 0 10px;
+}
+.profil__modifyPassword__form__btnCont__btn:hover {
+  opacity: 0.7;
+  transition: opacity 150ms ease-in-out;
+}
+.profil__modifyPassword--hidden {
+  display: none;
+}
+.profil__delete {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.76);
+}
+.profil__delete__modal {
+  position: absolute;
+  top: 42%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fdfdfd;
+  padding: 30px 35px;
+  border-radius: 3px;
+  text-align: center;
+}
+.profil__delete__modal h2 {
+  font-size: 1.7em;
+  margin-top: 0;
+}
+.profil__delete__modal p {
+  font-weight: 600;
+  color: #d80404;
+}
+.profil__delete__modal__btnCont {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.profil__delete__modal__btnCont__btn {
+  font-size: 1em;
+  font-family: "Roboto", sans-serif;
+  border: none;
+  border-radius: 2px;
+  padding: 15px 0;
+  background: #0C2E8A;
+  color: #fdfdfd;
+  transition: opacity 150ms ease-in-out;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 10px 0;
+  width: 100px;
+  margin: 45px 10px 0;
+  color: #fdfdfd;
+}
+.profil__delete__modal__btnCont__btn:hover {
+  opacity: 0.7;
+  transition: opacity 150ms ease-in-out;
+}
+.profil__delete__modal__btnCont__btn--deleteBtn {
+  background: #d80404;
+}
+.profil__delete--hidden {
+  display: none;
 }
 
 /*# sourceMappingURL=style.css.map */

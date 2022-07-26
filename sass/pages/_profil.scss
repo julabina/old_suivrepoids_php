@@ -3,12 +3,18 @@
     flex-direction: column;
     align-items: center;
     padding-top: 20px;
-    min-height: 72vh;
+    min-height: 80vh;
     h2 {
         font-size: 2.2em;
         font-weight: 600;
         margin: 80px 0 10px;
         color: map-get($map: $colors, $key: lightBlack);
+    }
+    h3 {
+        font-size: 1.4em;
+        font-weight: 600;
+        text-align: center;
+        margin: 40px 0 20px;
     }
     &__nav {
         display: flex;
@@ -30,6 +36,62 @@
                 background: map-get($map: $colors, $key: error);
                 transition: all 170ms ease-in-out;
             }
+        }
+        &--hidden {
+            display: none
+        }
+    }
+    &__modify {
+        @include profilForm;
+        select {
+            height: 40px;
+            padding-left: 15px;
+        }
+    }
+    &__modifyPassword {
+        @include profilForm;
+    }
+    &__delete {
+        position: fixed;
+        z-index: 100;
+        top: 0;bottom: 0;
+        left: 0;right: 0;
+        background: rgba(0, 0, 0, 0.76);
+        &__modal {
+            position: absolute;
+            top: 42%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: map-get($colors, lightWhite);
+            padding: 30px 35px;
+            border-radius: 3px;
+            text-align: center;
+            h2 {
+                font-size: 1.7em;
+                margin-top: 0;
+            }
+            p {
+                font-weight: 600;
+                color: map-get($map: $colors, $key: error);
+            }
+            &__btnCont {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+                &__btn {
+                    @include submitBtn;
+                    padding: 10px 0;
+                    width: 100px;
+                    margin: 45px 10px 0;
+                    color: map-get($map: $colors, $key: lightWhite);
+                    &--deleteBtn {
+                        background: map-get($colors, error);
+                    }
+                }
+            }
+        }
+        &--hidden {
+            display: none;
         }
     }
 }

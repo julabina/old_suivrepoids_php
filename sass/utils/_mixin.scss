@@ -200,3 +200,37 @@
         }
     }
 }
+
+@mixin profilForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 50px ;
+    width: 500px;
+    &__errorCont {
+        min-height: 15px;
+        color: map-get($map: $colors, $key: error);
+        text-align: center;
+    }
+    &__form {
+        margin-top: 25px;
+        &__row {
+            @include form;
+            margin-bottom: 25px;
+            width: 250px;
+        }
+        &__btnCont {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            &__btn {
+                @include submitBtn;
+                width: 100px;
+                margin: 0 10px;
+            }
+        }
+    }
+    &--hidden {
+        display: none;
+    }
+}

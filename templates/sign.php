@@ -91,7 +91,7 @@
         if(password.value === "") {
             error += `<p>- Le mot de passe ne doit pas etre vide.</p>`
         } else if(!password.value.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/)) {
-            error += `<p>- Le mot de passe doit etre d'une longueur de 8 caracteres et contenir au moins une majuscule un chiffre et une lettre.</p>`
+            error += `<p>- Le mot de passe doit etre d'une longueur de 8 caracteres et contenir au moins une majuscule, un chiffre et une lettre.</p>`
         }
 
         if(userName.value === "") {

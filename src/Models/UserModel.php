@@ -168,4 +168,91 @@ class UserModel {
 
     }
 
+    
+    /**
+     * delete user account
+     * 
+     * @param string $userId
+     * 
+     * @return boolean
+     */
+    public function deleteUser(string $userId): bool {
+
+        $statement = $this->connection->getConnection()->prepare(
+            "DELETE FROM users WHERE users.userId = ?"
+        );
+
+        $affectedLine = $statement->execute([$userId]);
+
+        return ($affectedLine > 0);
+
+    }
+
+    /**
+     * modify user infos like name, size, sexe and bithday
+     * 
+     * @param string $userId
+     * @param string $name
+     * @param string $size
+     * @param string $sexe
+     * @param string $birthday
+     */
+    public function modifyUser(string $userId, string $name, string $size, string $sexe, string $birthday) {
+
+        if($sexe === 'man') {
+            $newSexe = 1;
+        } elseif ($sexe === 'woman') {
+            $newSexe = 0;
+        }
+
+        $birthDate = str_replace('/', '-', $birthday);
+        $newBirthday = date('Y-m-d H:i:s' , strtotime($birthDate));
+
+        $statement = $this->connection->getConnection()->prepare(
+            "UPDATE users SET size = ?, firstname = ?, is_man = ?, birthday = ? WHERE userId = ?"
+        );
+
+        $affectedLine = $statement->execute([$size, $name, $newSexe, $newBirthday, $userId]);
+
+        return ($affectedLine > 0);
+
+    }
+
+    /**
+     * update user password
+     * 
+     * @param string $userId
+     * @param string $old
+     * @param string $new
+     * 
+     * @return boolean
+     */
+    public function modifyUserPassword($userId, $old, $new): bool {
+
+        $connect = $this->connection->getConnection();
+
+        $firstStatement = $connect->query(
+            "SELECT user_pwd FROM users WHERE userId = '$userId'"
+        );
+
+        $user = $firstStatement->fetch();
+
+        if(password_verify($old, $user['user_pwd'])) {
+            
+            $newPassword = password_hash($new, PASSWORD_DEFAULT);
+
+            $statement = $connect->prepare(
+                "UPDATE users SET user_pwd = ? WHERE users.userId = ?"
+            );
+
+            $affectedLine = $statement->execute([$newPassword, $userId]);
+
+            return ($affectedLine > 0);
+
+        } else {
+            return false;
+        }
+
+    }
+
 }
