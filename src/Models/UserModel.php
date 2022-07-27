@@ -21,6 +21,13 @@ class User {
     public $recordDate;
 }
 
+class WeightData {
+    public string $weight;
+    public string $bmi;
+    public string $bfp;
+    public string $recordDate;
+}
+
 class UserModel {
 
     public DatabaseConnection $connection;
@@ -252,6 +259,36 @@ class UserModel {
         } else {
             return false;
         }
+
+    }
+
+    /**
+     * get all weight for one user
+     * 
+     * @param string $userId
+     * 
+     * @return array
+     */
+    public function getAllWeight(string $userId): array {
+
+        $statement = $this->connection->getConnection()->query(
+            "SELECT user_weight, imc, img, record_date FROM weight_infos WHERE userId = '$userId'"
+        );
+
+        $weightData = [];
+
+        while(($row = $statement->fetch())) {
+
+            $data = new WeightData();
+            $data->weight = $row['user_weight'];
+            $data->bmi = $row['imc'];
+            $data->bfp = $row['img'];
+            $data->recordDate = $row['record_date'];
+
+            $weightData[] = $data;
+        }
+
+        return $weightData;
 
     }
 

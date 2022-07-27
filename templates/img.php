@@ -1,4 +1,5 @@
 <?php $title = 'img'; ?>
+<?php $contentHead = "" ?>
 
 <?php ob_start(); ?>
 

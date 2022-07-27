@@ -119,7 +119,8 @@ class UserController {
         
         $userModel = new UserModel();
         $userModel->connection = new DatabaseConnection();
-        $userData = $userModel->getStats($_SESSION['userId']);   
+        $userData = $userModel->getStats($_SESSION['userId']);
+        $userWeightList = $userModel->getAllWeight($_SESSION['userId']);   
         
         
         if(!isset($userData->userId)) {

@@ -1,4 +1,5 @@
 <?php $title = 'home'; ?>
+<?php $contentHead = "" ?>
 
 <?php
     SESSION_START();

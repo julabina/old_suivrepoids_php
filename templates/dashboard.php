@@ -1,10 +1,59 @@
 <?php $title = 'dashboard'; ?>
+<?php ob_start(); ?>
+
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+
+        google.charts.load('current', {
+            packages: ['corechart']
+        });
+    
+        const drawChart = () => {
+            const dataChart = new google.visualization.DataTable();
+            dataChart.addColumn('date', 'lastWeight');
+            dataChart.addColumn('number', 'Poids');
+            dataChart.addColumn({type: 'string', role: 'tooltip'});                      
+            dataChart.addRows([
+                <?php foreach($userWeightList as $row): ?>
+                    [ new Date(<?= date('Y, m, d', strtotime($row->recordDate)); ?>),  <?= $row->weight; ?>, '<?= $row->weight; ?>kg le <?= date('d/m/Y', strtotime($row->recordDate)); ?>'],
+                <?php endforeach; ?>                    
+            ]);
+                
+            const chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+                
+            const options = {
+                title: 'Vos derniers poids ajoutés',
+                hAxis: {
+                    title: 'Temps',  
+                    titleTextStyle: {color: '#333'},
+                    format: 'dd/MM/yy',
+                    gridlines: {count: 10} 
+                },
+                vAxis: {
+                    minValue: 0,
+                    gridlines: {color: 'none'}
+                },
+                colors: ['#0C2E8A'],
+                pointSize: 5,
+                pointShape: 'square',
+                backgroundColor: '#FDFDFD',
+                /* legend: 'none', */
+            };
+            
+            // Instantiate and draw the chart.
+            chart.draw(dataChart, options);
+        }
+        
+        google.charts.setOnLoadCallback(drawChart);
+        </script>
+
+<?php $contentHead = ob_get_clean(); ?>
 
 <?php
     if(!isset($_SESSION['name']) || !isset($_SESSION['user']) || !isset($_SESSION['userId']) || !isset($_SESSION['size']) || (!isset($_SESSION['sexe']) || ($_SESSION['sexe'] !== "man" && $_SESSION['sexe'] !== "woman")) || !isset($_SESSION['auth']) || $_SESSION['auth'] !== true) {
         header('Location: /suivi_poids/login');
     }
-?>
+    ?>
 
 <?php ob_start(); ?>
 
@@ -15,7 +64,7 @@
     };
 </script>
 
-<header class="dashHeader">
+<!-- <header class="dashHeader">
     <div class="header">
         <a href="/suivi_poids/"><h1>TITRE DU SITE</h1></a>
         <div class="header__connected">
@@ -25,9 +74,19 @@
             </div></a>
         </div>
     </div>
-</header>
+</header> -->
 
 <main class="dash">
+    <?php
+    echo "////////////////////////////////////////////////////////////////////////////////////////////////";echo "<br />";
+    echo "////////////////////////////////////////////////////////////////////////////////////////////////";echo "<br />";
+    echo "////////////////////// MOIS POUR CHART PAS LE BON ////////////////////////";echo "<br />";
+    echo "////////////////////////////////////////////////////////////////////////////////////////////////";echo "<br />";
+    echo "////////////////////////////////////////////////////////////////////////////////////////////////";echo "<br />";
+    echo "<pre>";
+    print_r($userWeightList);
+    echo "</pre>";
+    ?>
     <section class="dash__infos">
         <h2>Tableau de bord</h2>
         <div class="dash__infos__cont">
@@ -84,6 +143,22 @@
             <p>Cliquer pour définir un nouvel objectif !</p>
         </div></a>
     </section>
+    <section class='dash__graph'>
+        <div class="dash__graph__mainCont">
+            <div class="dash__graph__mainCont__tabs">
+                <div onClick="handleGraph('line')" class="dash__graph__mainCont__tabs__tab dash__graph__mainCont__tabs__tab--active"><p>Graphique</p></div>
+                <div onClick="handleGraph('list')" class="dash__graph__mainCont__tabs__tab"><p>Liste</p></div>
+            </div>
+            <div class="dash__graph__mainCont__graphNav">
+                <select name="" id="">
+                    <option value=""></option>
+                </select>
+            </div>
+            <div class="dash__graph__mainCont__graph" id="chart_div">
+            </div>
+            <div class="dash__graph__mainCont__graph dash__graph__mainCont__graph--bot dash__graph__mainCont__graph--hidden"></div>
+        </div>
+    </section>
 </main>
 
 <!-- modal add weight begin -->
@@ -134,6 +209,23 @@
         } else {
             modal.classList.add("dashAddWeight--hidden");
         }
+    };
+
+    const handleGraph = (graph) => {
+        const tabs = document.querySelectorAll('.dash__graph__mainCont__tabs__tab');
+        const graphs = document.querySelectorAll('.dash__graph__mainCont__graph');
+
+        if(graph === "list") {
+            tabs[1].classList.add('dash__graph__mainCont__tabs__tab--active');
+            tabs[0].classList.remove('dash__graph__mainCont__tabs__tab--active');
+            graphs[0].classList.add('dash__graph__mainCont__graph--hidden');
+            graphs[1].classList.remove('dash__graph__mainCont__graph--hidden');
+        }else if(graph === "line") {
+            tabs[0].classList.add('dash__graph__mainCont__tabs__tab--active');
+            tabs[1].classList.remove('dash__graph__mainCont__tabs__tab--active');
+            graphs[1].classList.add('dash__graph__mainCont__graph--hidden');
+            graphs[0].classList.remove('dash__graph__mainCont__graph--hidden');
+        } 
     };
 
 </script>

@@ -1,4 +1,5 @@
 <?php $title = 'imc'; ?>
+<?php $contentHead = "" ?>
 
 <?php ob_start(); ?>
 

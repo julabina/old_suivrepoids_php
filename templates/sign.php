@@ -1,4 +1,5 @@
 <?php $title = 'signup'; ?>
+<?php $contentHead = "" ?>
 
 <?php SESSION_START(); ?>
 

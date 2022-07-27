@@ -1,4 +1,5 @@
 <?php $title = 'login'; ?>
+<?php $contentHead = "" ?>
 
 <?php SESSION_START(); ?>
 

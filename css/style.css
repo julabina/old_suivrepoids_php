@@ -301,6 +301,64 @@ footer {
   text-decoration: none;
   color: inherit;
 }
+.dash__graph {
+  margin: 30px 0 0;
+  padding-bottom: 30px;
+}
+.dash__graph__mainCont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 450px;
+}
+.dash__graph__mainCont__tabs {
+  display: flex;
+  width: 810px;
+}
+.dash__graph__mainCont__tabs__tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 150px;
+  background: rgba(128, 128, 128, 0.575);
+  margin-bottom: 0;
+  border-radius: 3px 3px 0 0;
+  border-bottom: none;
+  cursor: pointer;
+}
+.dash__graph__mainCont__tabs__tab--active {
+  border: none;
+  z-index: 10;
+  margin-bottom: -1px;
+  height: 51px;
+  background: #fdfdfd;
+  box-shadow: none;
+}
+.dash__graph__mainCont__graph {
+  display: flex;
+  justify-content: center;
+  width: 810px;
+  height: 420px;
+  border-radius: 0 3px 3px 3px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.199);
+}
+.dash__graph__mainCont__graph--hidden {
+  visibility: hidden;
+  height: 0;
+}
+.dash__graph__mainCont__graph--bot {
+  background: #fdfdfd;
+  margin-top: -2px;
+  height: auto;
+}
+.dash__graph__mainCont__graphNav {
+  z-index: 5;
+  width: 810px;
+  height: 50px;
+  background: #fdfdfd;
+  margin-bottom: -2px;
+}
 
 .dashAddWeight {
   position: fixed;
