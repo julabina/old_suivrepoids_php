@@ -21,12 +21,10 @@ class Router {
     
     /**
      * add route whith GET method to all routes
-     * 
      * @param string $path
      * @param function $callable
      * @param string $name
      * @param string $method
-     * 
      * @return call addRoute()
      */
     public function get(string $path, $callable, $name = NULL) {
@@ -37,12 +35,10 @@ class Router {
     
     /**
      * add route whith POST method to all routes
-     * 
      * @param string $path
      * @param function $callable
      * @param string $name
      * @param string $method
-     * 
      * @return call addRoute()
      */
     public function post(string $path, $callable, $name = NULL) {
@@ -53,11 +49,9 @@ class Router {
     
     /**
      * create and add route to routes array
-     * 
      * @param string $path
      * @param function $callable
      * @param string $name
-     * 
      * @return $route
      */
     public function addRoute(string $path, $callable, $name, string $method) {
@@ -77,9 +71,7 @@ class Router {
     
     /**
      * Check if road exist and if matche with $routes
-     * 
      * @throws RouterException
-     * 
      * @return call call()
      */
     public function run() {
@@ -96,16 +88,16 @@ class Router {
             
         }
         
-        throw new RouterException('No routes matches');
+        http_response_code(404);
+        header('Location: /suivi_poids/404');
+        /* throw new RouterException('No routes matches'); */
         
     }
 
     /**
      * check url and call getUrl
-     * 
      * @param string $name
      * @param array $params
-     * 
      * @return call getUrl()
      */
     public function url($name, $params = []) {

@@ -3,10 +3,45 @@
 namespace App\Controllers;
 
 use App\Lib\DatabaseConnection;
+use App\Lib\Jwt;
 use App\Models\UserModel;
 use App\Models\StatsModel;
 
 class UserController {
+
+    public function test(){
+
+        $jwt = new Jwt();
+        $id = "ze56tr6ez";
+        $token = $jwt->createToken($id);
+
+        if(!$jwt->isValid($token)) {
+            http_response_code(400);
+            echo "NOP invalide";
+            return; 
+        }
+        if(!$jwt->check($token)) {
+            http_response_code(403);
+            echo "NOP signature";
+            return; 
+        }
+        if($jwt->isExpired($token)) {
+            http_response_code(403);
+            echo "NOP2 expiré";
+            return; 
+        }
+
+        $payload = $jwt->getPayload($token);
+        
+        if($id === $payload['userId']) {
+
+            echo "FUNCTION LAUNCH";
+        } else {
+            echo "Pas bon userId";
+        }
+
+
+    }
 
     /**
      * create user account
@@ -83,6 +118,10 @@ class UserController {
                     $_SESSION['userId'] = $user[0];
                     $_SESSION['auth'] = true;
                     $_SESSION['birthday'] = $user[4];
+                    
+                    $jwt = new Jwt();
+                    $token = $jwt->createToken($user[0]);
+                    $_SESSION['token'] = $token;
                 } 
 
             }

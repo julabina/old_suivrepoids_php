@@ -3,6 +3,7 @@
 require 'vendor/autoload.php';
 $router = new App\Router\Router($_GET['url']);
 
+$router->get('/test', 'User#test');
 $router->get('/', function(){ require('templates/home.php'); });
 $router->get('/dashboard', 'User#showDash');
 $router->get('/objectifs', 'Stats#showGoals');
@@ -19,5 +20,6 @@ $router->post('/sign', 'User#sign');
 $router->post('/modifyProfil', 'User#modifyProfil');
 $router->post('/modifyPassword', 'User#modifyPassword');
 $router->post('/delete', 'User#deleteUser');
+$router->get('/404', function(){ require('templates/404.php'); });
 
 $router->run();

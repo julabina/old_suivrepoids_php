@@ -348,9 +348,15 @@ footer {
   height: 0;
 }
 .dash__graph__mainCont__graph--bot {
+  display: flex;
+  flex-direction: column;
   background: #fdfdfd;
   margin-top: -2px;
   height: auto;
+}
+.dash__graph__mainCont__graph__row {
+  display: flex;
+  justify-content: space-around;
 }
 .dash__graph__mainCont__graphNav {
   z-index: 5;
@@ -1641,6 +1647,37 @@ footer {
 }
 .profil__delete--hidden {
   display: none;
+}
+
+.notFound {
+  min-height: 75vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.notFound h1 {
+  font-size: 2.4em;
+  font-weight: 600;
+  margin-bottom: 50px;
+}
+.notFound__btn button {
+  font-size: 1em;
+  font-family: "Roboto", sans-serif;
+  border: none;
+  border-radius: 2px;
+  padding: 15px 0;
+  background: #0C2E8A;
+  color: #fdfdfd;
+  transition: opacity 150ms ease-in-out;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 10px;
+}
+.notFound__btn button:hover {
+  opacity: 0.7;
+  transition: opacity 150ms ease-in-out;
 }
 
 /*# sourceMappingURL=style.css.map */

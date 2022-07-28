@@ -6,6 +6,10 @@ class DatabaseConnection {
 
     private ?\PDO $database = null;
 
+    /**
+     * create a PDO connection to database
+     * @return PDO
+     */
     public function getConnection(): \PDO {
 
         if($this->database === null) {

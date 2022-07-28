@@ -40,7 +40,6 @@ class UserModel {
      * @param string $size
      * @param string $sexe
      * @param string $birthday
-     * 
      * @return string
      */
     public function createUser(string $email, string $password, string $name, string $size, string $sexe, string $birthday): string {
@@ -74,10 +73,8 @@ class UserModel {
     /**
      * verify if user password is ok,
      * if ok get user infos
-     * 
      * @param string $email
      * @param string $password
-     * 
      * @return array
      */
     public function logUser(string $email, string $password): array {
@@ -105,9 +102,7 @@ class UserModel {
 
     /**
      * get user stats
-     * 
      * @param string $userId
-     * 
      * @return User
      */
     public function getStats(string $userId): User {
@@ -144,9 +139,7 @@ class UserModel {
 
     /**
      * get user infos
-     * 
      * @param string $userId
-     * 
      * @return User
      */
     public function getUserInfos(string $userId): User {
@@ -178,9 +171,7 @@ class UserModel {
     
     /**
      * delete user account
-     * 
      * @param string $userId
-     * 
      * @return boolean
      */
     public function deleteUser(string $userId): bool {
@@ -197,7 +188,6 @@ class UserModel {
 
     /**
      * modify user infos like name, size, sexe and bithday
-     * 
      * @param string $userId
      * @param string $name
      * @param string $size
@@ -227,11 +217,9 @@ class UserModel {
 
     /**
      * update user password
-     * 
      * @param string $userId
      * @param string $old
      * @param string $new
-     * 
      * @return boolean
      */
     public function modifyUserPassword($userId, $old, $new): bool {
@@ -264,9 +252,7 @@ class UserModel {
 
     /**
      * get all weight for one user
-     * 
      * @param string $userId
-     * 
      * @return array
      */
     public function getAllWeight(string $userId): array {

@@ -24,7 +24,6 @@ class Route {
 
     /**
      * Regex method for manage param captur
-     * 
      * @param string $param
      * @param string $regex
      */
@@ -38,9 +37,7 @@ class Route {
     /**
      * check if url = route
      * and captur param
-     * 
      * @param string $url
-     * 
      * @return boolean
      */
     public function match(string $url): bool {
@@ -65,9 +62,7 @@ class Route {
     
     /**
      * Captur all param 
-     * 
      * @param array $match
-     * 
      * @return string
      */
     private function paramMatch($match): string {
@@ -81,7 +76,6 @@ class Route {
     
     /**
      * Call the callable route 
-     * 
      * @return call call_user_func_array()
      */
     public function call() {
@@ -101,9 +95,7 @@ class Route {
     
     /**
      * create url
-     * 
      * @param array $params
-     * 
      * @return string
      */
     public function getUrl($params): string {

@@ -12,14 +12,12 @@ class StatsModel {
 
     /**
      * add new weight to one user
-     * 
      * @param string $weight
      * @param string $size
      * @param $recordedDate
      * @param string $sexe
      * @param string $birthdate
      * @param string $id
-     * 
      * @return boolean
      */
     public function addWeight(string $weight, string $size, $recordDate, string $sexe, string $birthDate, string $id): bool {
@@ -53,12 +51,10 @@ class StatsModel {
     
     /**
      * add new goal to one user
-     * 
      * @param string $userId
      * @param $weight
      * @param $imc
      * @param $img
-     * 
      * @return boolean
      */
     public function addGoal(string $userId, $weight, $imc, $img): bool {
@@ -86,9 +82,7 @@ class StatsModel {
     
     /**
      * remove from last goal the current status
-     * 
      * @param string $userId
-     * 
      * @return boolean
      */
     private function removeCurrent(string $userId): bool {
@@ -105,9 +99,7 @@ class StatsModel {
 
     /**
      * get all user goals
-     * 
      * @param string $userId
-     * 
      * @return array
      */
     public function getAllGoals(string $userId): array {
@@ -128,9 +120,7 @@ class StatsModel {
 
     /**
      * get user bmi
-     * 
      * @param string $userId
-     * 
      * @return array
      */
     public function getImc(string $userId): array {
@@ -151,9 +141,7 @@ class StatsModel {
 
     /**
      * get user bfp 
-     * 
      * @param string $userId
-     * 
      * @return array
      */
     public function getImg(string $userId): array {
@@ -188,10 +176,8 @@ class StatsModel {
 
     /**
      * calcul the user bmi
-     * 
      * @param string $weight
      * @param string $size
-     * 
      * @return int
      */
     private function calculImc(string $weight, string $size): int {
@@ -203,11 +189,9 @@ class StatsModel {
 
     /**
      * calcul the user bfp
-     * 
      * @param string $sexe
      * @param string $imc
      * @param string $age
-     * 
      * @return int
      */
     private function calculImg(string $sexe, string $imc, string $age): int {

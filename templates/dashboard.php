@@ -64,7 +64,7 @@
     };
 </script>
 
-<!-- <header class="dashHeader">
+<header class="dashHeader">
     <div class="header">
         <a href="/suivi_poids/"><h1>TITRE DU SITE</h1></a>
         <div class="header__connected">
@@ -74,7 +74,7 @@
             </div></a>
         </div>
     </div>
-</header> -->
+</header>
 
 <main class="dash">
     <?php
@@ -156,7 +156,16 @@
             </div>
             <div class="dash__graph__mainCont__graph" id="chart_div">
             </div>
-            <div class="dash__graph__mainCont__graph dash__graph__mainCont__graph--bot dash__graph__mainCont__graph--hidden"></div>
+            <div class="dash__graph__mainCont__graph dash__graph__mainCont__graph--bot dash__graph__mainCont__graph--hidden">
+                <?php foreach($userWeightList as $weight): ?>
+                    <div class="dash__graph__mainCont__graph__row">
+                        <div class=""><p><?= date('d/m/Y',strtotime($weight->recordDate)); ?></p></div>
+                        <div class=""><p><?= $weight->weight; ?></p></div>
+                        <div class=""><p><?= $weight->bmi; ?></p></div>
+                        <div class=""><p><?= $weight->bfp; ?></p></div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
         </div>
     </section>
 </main>

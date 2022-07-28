@@ -130,9 +130,15 @@
                     height: 0;
                 }
                 &--bot {
+                    display: flex;
+                    flex-direction: column;
                     background: map-get($map: $colors, $key: lightWhite);
                     margin-top: -2px;
                     height: auto;
+                }
+                &__row {
+                    display: flex;
+                    justify-content: space-around;
                 }
             }
             &__graphNav {
