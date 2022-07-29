@@ -3,7 +3,11 @@
 require 'vendor/autoload.php';
 $router = new App\Router\Router($_GET['url']);
 
-$router->get('/test', 'User#test');
+$dotenv = Dotenv\Dotenv::createImmutable('./');
+$dotenv->load();
+
+$router->get('/test', function(){ echo "papillon"; });
+$router->post('/test', 'User#test');
 $router->get('/', function(){ require('templates/home.php'); });
 $router->get('/dashboard', 'User#showDash');
 $router->get('/objectifs', 'Stats#showGoals');

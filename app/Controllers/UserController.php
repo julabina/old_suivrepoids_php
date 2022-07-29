@@ -2,46 +2,11 @@
 
 namespace App\Controllers;
 
-use App\Lib\DatabaseConnection;
 use App\Lib\Jwt;
 use App\Models\UserModel;
 use App\Models\StatsModel;
 
 class UserController {
-
-    public function test(){
-
-        $jwt = new Jwt();
-        $id = "ze56tr6ez";
-        $token = $jwt->createToken($id);
-
-        if(!$jwt->isValid($token)) {
-            http_response_code(400);
-            echo "NOP invalide";
-            return; 
-        }
-        if(!$jwt->check($token)) {
-            http_response_code(403);
-            echo "NOP signature";
-            return; 
-        }
-        if($jwt->isExpired($token)) {
-            http_response_code(403);
-            echo "NOP2 expiré";
-            return; 
-        }
-
-        $payload = $jwt->getPayload($token);
-        
-        if($id === $payload['userId']) {
-
-            echo "FUNCTION LAUNCH";
-        } else {
-            echo "Pas bon userId";
-        }
-
-
-    }
 
     /**
      * create user account
@@ -68,20 +33,22 @@ class UserController {
             $age = 30;
             
             $userModel = new UserModel();
-            $userModel->connection = new DatabaseConnection();
             
             $id = $userModel->createUser($email, $password, $name, $size, $sexe, $birthday);
             
-            if($id !== "") {
+            if($id === "errSign") {
+                header('Location: /suivi_poids/sign?err=email');
+            } elseif($id !== "") {
                 $statModel = new StatsModel();
-                $statModel->connection = new DatabaseConnection();
 
                 $addingWeight = $statModel->addWeight($weight, $size, null, $sexe, $age, $id);
                 $addingGoal = $statModel->addGoal($id, NULL, NULL, NULL);
                 $this->log();
             } else {
-                echo 'pas ok';
+                header('Location: /suivi_poids/sign?err=sign');
             }
+        } else {
+            header('Location: /suivi_poids/sign?err=format');
         }
 
     }
@@ -101,7 +68,6 @@ class UserController {
                 $password = $_POST['password'];
 
                 $userModel = new UserModel();
-                $userModel->connection = new DatabaseConnection();
 
                 $user = $userModel->logUser($email, $password);
 
@@ -122,18 +88,27 @@ class UserController {
                     $jwt = new Jwt();
                     $token = $jwt->createToken($user[0]);
                     $_SESSION['token'] = $token;
-                } 
 
+                    header('Location: /suivi_poids');
+                } else {
+
+                    header('Location: /suivi_poids/login?err=log');
+
+                }
+
+            } else {
+
+                header('Location: /suivi_poids/login?err=format');
+            
             }
-        
-            header('Location: /suivi_poids/');
+            
 
     }
 
     /**
      * disconnect user and clear php session
      */
-    public function logout() {
+    public function logout($err = "") {
 
         session_start();
         
@@ -141,7 +116,12 @@ class UserController {
 
         session_destroy();
 
-        header('Location: /suivi_poids/');
+        if($err === "") {
+            header('Location: /suivi_poids/');
+        } else {
+            header('Location: /suivi_poids/login?err=' . $err);
+        }
+
 
     }
 
@@ -152,12 +132,11 @@ class UserController {
 
         SESSION_START();
 
-        if(!isset($_SESSION['name']) || !isset($_SESSION['user']) || !isset($_SESSION['userId']) || !isset($_SESSION['size']) || (!isset($_SESSION['sexe']) || ($_SESSION['sexe'] !== "man" && $_SESSION['sexe'] !== "woman")) || !isset($_SESSION['auth']) || $_SESSION['auth'] !== true) {
+        if(!isset($_SESSION['name']) || !isset($_SESSION['token']) || !isset($_SESSION['user']) || !isset($_SESSION['userId']) || !isset($_SESSION['size']) || (!isset($_SESSION['sexe']) || ($_SESSION['sexe'] !== "man" && $_SESSION['sexe'] !== "woman")) || !isset($_SESSION['auth']) || $_SESSION['auth'] !== true) {
             return header('Location: /suivi_poids/login');
         }
         
         $userModel = new UserModel();
-        $userModel->connection = new DatabaseConnection();
         $userData = $userModel->getStats($_SESSION['userId']);
         $userWeightList = $userModel->getAllWeight($_SESSION['userId']);   
         
@@ -177,12 +156,11 @@ class UserController {
 
         SESSION_START();
 
-        if(!isset($_SESSION['name']) || !isset($_SESSION['user']) || !isset($_SESSION['userId']) || !isset($_SESSION['size']) || (!isset($_SESSION['sexe']) || ($_SESSION['sexe'] !== "man" && $_SESSION['sexe'] !== "woman")) || !isset($_SESSION['auth']) || $_SESSION['auth'] !== true) {
+        if(!isset($_SESSION['name']) || !isset($_SESSION['token']) || !isset($_SESSION['user']) || !isset($_SESSION['userId']) || !isset($_SESSION['size']) || (!isset($_SESSION['sexe']) || ($_SESSION['sexe'] !== "man" && $_SESSION['sexe'] !== "woman")) || !isset($_SESSION['auth']) || $_SESSION['auth'] !== true) {
             return header('Location: /suivi_poids/login');
         }
 
         $userModel = new UserModel();
-        $userModel->connection = new DatabaseConnection();
         $userInfos = $userModel->getUserInfos($_SESSION['userId']);
 
         var_dump($userInfos);
@@ -197,18 +175,43 @@ class UserController {
 
         SESSION_START();
         
-        if(!isset($_SESSION['name']) || !isset($_SESSION['user']) || !isset($_SESSION['userId']) || !isset($_SESSION['size']) || (!isset($_SESSION['sexe']) || ($_SESSION['sexe'] !== "man" && $_SESSION['sexe'] !== "woman")) || !isset($_SESSION['auth']) || $_SESSION['auth'] !== true) {
+        if(!isset($_SESSION['name']) || !isset($_SESSION['token']) || !isset($_SESSION['user']) || !isset($_SESSION['userId']) || !isset($_SESSION['size']) || (!isset($_SESSION['sexe']) || ($_SESSION['sexe'] !== "man" && $_SESSION['sexe'] !== "woman")) || !isset($_SESSION['auth']) || $_SESSION['auth'] !== true) {
             return header('Location: /suivi_poids/login');
         }
         
-        $userModel = new UserModel();
-        $userModel->connection = new DatabaseConnection();
-        $success = $userModel->deleteUser($_SESSION['userId']);
+        $jwt = new Jwt();
+        $id = $_SESSION['userId'];
+        $token = $_POST['token'];
         
-        if($success) {
-            $this->logout();
+        if(!$jwt->isValid($token)) {
+            http_response_code(400);
+            return $this->logout("format");
+        }
+        if(!$jwt->check($token)) {
+            http_response_code(403);
+            return $this->logout("format");
+        }
+        if($jwt->isExpired($token)) {
+            http_response_code(403);
+            return $this->logout("exp");
+        }
+        
+        $payload = $jwt->getPayload($token);
+        
+        if($id === $payload['userId']) {
+            
+            $userModel = new UserModel();
+            $success = $userModel->deleteUser($_SESSION['userId']);
+            
+            if($success) {
+                $this->logout("delete");
+            } else {
+                $this->logout("format");
+            }
+            
         } else {
-            header('Location: /suivi_poids/');
+            http_response_code(400);
+            $this->logout("format");
         }
         
     }
@@ -220,26 +223,52 @@ class UserController {
         
         SESSION_START();
         
-        if(!isset($_SESSION['name']) || !isset($_SESSION['user']) || !isset($_SESSION['userId']) || !isset($_SESSION['size']) || (!isset($_SESSION['sexe']) || ($_SESSION['sexe'] !== "man" && $_SESSION['sexe'] !== "woman")) || !isset($_SESSION['auth']) || $_SESSION['auth'] !== true) {
+        if(!isset($_SESSION['name']) || !isset($_SESSION['token']) || !isset($_SESSION['user']) || !isset($_SESSION['userId']) || !isset($_SESSION['size']) || (!isset($_SESSION['sexe']) || ($_SESSION['sexe'] !== "man" && $_SESSION['sexe'] !== "woman")) || !isset($_SESSION['auth']) || $_SESSION['auth'] !== true) {
             return header('Location: /suivi_poids/login');
         }
 
-        if(
-            (isset($_POST['name']) && $_POST['name'] !== "" && preg_match('/^[a-zA-Zé èà]*$/', $_POST['name']) && (strlen($_POST['name']) > 2 || strlen($_POST['name']) < 25)) &&
-            (isset($_POST['size']) && preg_match('/^[0-9]*$/', $_POST['size']) && ($_POST['size'] > 90 && $_POST['size'] < 260)) && 
-            (isset($_POST['sexe']) && ($_POST['sexe'] === "man" || $_POST['sexe'] === "woman")) &&
-            (isset($_POST['birthday']) && preg_match('/^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)(?:19\d{2}|20[01][0-9]|2022)$/i', $_POST['birthday']))
-        ) {            
-            $userModel = new UserModel();
-            $userModel->connection = new DatabaseConnection();
-            $success = $userModel->modifyUser($_SESSION['userId'], $_POST['name'], $_POST['size'], $_POST['sexe'], $_POST['birthday']); 
-            
-            if($success){
-                header('Location: /suivi_poids/profil');
-            } else {
-                header('Location: /suivi_poids/');
-            }
+        $jwt = new Jwt();
+        $id = $_SESSION['userId'];
+        $token = $_POST['token'];
+        
+        if(!$jwt->isValid($token)) {
+            http_response_code(400);
+            return header('Location: /suivi_poids/profil?err=format');
         }
+        if(!$jwt->check($token)) {
+            http_response_code(403);
+            return header('Location: /suivi_poids/profil?err=format');
+        }
+        if($jwt->isExpired($token)) {
+            http_response_code(403);
+            return $this->logout("exp");
+        }
+        
+        $payload = $jwt->getPayload($token);
+        
+        if($id === $payload['userId']) {
+            
+            if(
+                (isset($_POST['name']) && $_POST['name'] !== "" && preg_match('/^[a-zA-Zé èà]*$/', $_POST['name']) && (strlen($_POST['name']) > 2 || strlen($_POST['name']) < 25)) &&
+                (isset($_POST['size']) && preg_match('/^[0-9]*$/', $_POST['size']) && ($_POST['size'] > 90 && $_POST['size'] < 260)) && 
+                (isset($_POST['sexe']) && ($_POST['sexe'] === "man" || $_POST['sexe'] === "woman")) &&
+                (isset($_POST['birthday']) && preg_match('/^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)(?:19\d{2}|20[01][0-9]|2022)$/i', $_POST['birthday']))
+            ) {            
+                $userModel = new UserModel();
+                $success = $userModel->modifyUser($_SESSION['userId'], $_POST['name'], $_POST['size'], $_POST['sexe'], $_POST['birthday']); 
+                
+                if($success){
+                    header('Location: /suivi_poids/profil?success=true');
+                } else {
+                    header('Location: /suivi_poids/profil?success=false');
+                }
+            }
+            
+        } else {
+            http_response_code(400);
+            $this->logout('format');
+        }
+
         
     }
 
@@ -250,24 +279,52 @@ class UserController {
         
         SESSION_START();
         
-        if(!isset($_SESSION['name']) || !isset($_SESSION['user']) || !isset($_SESSION['userId']) || !isset($_SESSION['size']) || (!isset($_SESSION['sexe']) || ($_SESSION['sexe'] !== "man" && $_SESSION['sexe'] !== "woman")) || !isset($_SESSION['auth']) || $_SESSION['auth'] !== true) {
+        if(!isset($_SESSION['name']) || !isset($_SESSION['token']) || !isset($_SESSION['user']) || !isset($_SESSION['userId']) || !isset($_SESSION['size']) || (!isset($_SESSION['sexe']) || ($_SESSION['sexe'] !== "man" && $_SESSION['sexe'] !== "woman")) || !isset($_SESSION['auth']) || $_SESSION['auth'] !== true) {
             return header('Location: /suivi_poids/login');
         }
 
-        if(
-            (isset($_POST['oldPassword']) && $_POST['oldPassword'] !== "" && preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/', $_POST['oldPassword'])) &&
-            (isset($_POST['newPassword']) && $_POST['newPassword'] !== "" && preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/', $_POST['newPassword']))
-        )
-
-        $userModel = new UserModel();
-        $userModel->connection = new DatabaseConnection();
-        $success = $userModel->modifyUserPassword($_SESSION['userId'], $_POST['oldPassword'], $_POST['newPassword']); 
+        $jwt = new Jwt();
+        $id = $_SESSION['userId'];
+        $token = $_POST['token'];
         
-        if($success){
-            header('Location: /suivi_poids/profil');
+        if(!$jwt->isValid($token)) {
+            http_response_code(400);
+            return header('Location: /suivi_poids/profil?err=format');
+        }
+        if(!$jwt->check($token)) {
+            http_response_code(403);
+            return header('Location: /suivi_poids/profil?err=format');
+        }
+        if($jwt->isExpired($token)) {
+            http_response_code(403);
+            return $this->logout("exp");
+        }
+        
+        $payload = $jwt->getPayload($token);
+        
+        if($id === $payload['userId']) {
+            
+            if(
+                (isset($_POST['oldPassword']) && $_POST['oldPassword'] !== "" && preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/', $_POST['oldPassword'])) &&
+                (isset($_POST['newPassword']) && $_POST['newPassword'] !== "" && preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/', $_POST['newPassword']))
+            ) {
+ 
+                $userModel = new UserModel();
+                $success = $userModel->modifyUserPassword($_SESSION['userId'], $_POST['oldPassword'], $_POST['newPassword']); 
+                
+                if($success){
+                    header('Location: /suivi_poids/profil?success=true');
+                } else {
+                    header('Location: /suivi_poids/profil?success=false');
+                }     
+            }
+            
+            header('Location: /suivi_poids/profil?success=false');
+            
         } else {
-            header('Location: /suivi_poids/');
-        }   
+            http_response_code(400);
+            $this->logout('format');
+        }
 
     }
 

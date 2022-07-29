@@ -89,6 +89,11 @@
     ?>
     <section class="dash__infos">
         <h2>Tableau de bord</h2>
+        <div class="dash__infos__errorCont">
+        <?php if(isset($_GET['err']) && $_GET['err'] === "addW"): ?>
+                <p>- Une erreur est survenu, impossible d'ajouter un nouveau poids.</p>
+            <?php endif; ?>
+        </div>
         <div class="dash__infos__cont">
             <div onClick="handleModal()" class="dash__infos__cont__infoBox">
                 <h4>Votre poids au <?= $userData->recordDate; ?></h4>
@@ -175,6 +180,7 @@
     <div class="dashAddWeight__modal">
         <p onClick="handleModal()" class="dashAddWeight__modal__close">X</p>
         <form class="dashAddWeight__modal__form" action="/suivi_poids/addWeight" method="post">
+            <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
             <label for="addWeightInput">Ajouter un nouveau poids</label>
             <p class="dashAddWeight__modal__form__error"></p>
             <input type="number" name="addWeight" id="addWeightInput">

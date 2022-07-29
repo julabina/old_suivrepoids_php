@@ -58,10 +58,16 @@
                 <h4>IMG</h4>
             </div>
         </div>
+        <div class="obj__change__errCont">
+            <?php if(isset($_GET['err']) && $_GET['err'] === "obj"): ?>
+                <p>- Une erreur est survenu.</p>
+            <?php endif; ?>
+        </div>
         <!-- weight tab -->
         <div class='obj__change__tabsCont'>
             <div class="obj__change__tabsCont__errorCont obj__change__tabsCont__errorCont__weight"></div>
             <form id="objFormWeight" action="/suivi_poids/objectif" method="post">
+                <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
                 <div class='obj__change__tabsCont__input'>
                     <label for="objChangeWeight">Entrer le poids que vous souhaitez atteindre</label>
                     <input type="number" name="objChangeWeight" id="changeWeight">
@@ -75,6 +81,7 @@
         <div class='obj__change__tabsCont obj__change__tabsCont--hidden'>
             <div class="obj__change__tabsCont__errorCont obj__change__tabsCont__errorCont__imc"></div>
             <form id="objFormImc" action="/suivi_poids/objectif" method="post">
+                <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
                 <div class='obj__change__tabsCont__input'>
                     <label for="objChangeImc">Entrer l'IMC que vous souhaitez atteindre</label>
                     <input type="number" name="objChangeImc" id="changeImc">
@@ -88,6 +95,7 @@
         <div class='obj__change__tabsCont obj__change__tabsCont--hidden'>
             <div class="obj__change__tabsCont__errorCont obj__change__tabsCont__errorCont__img"></div>
             <form id="objFormImg" action="/suivi_poids/objectif" method="post">
+                <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
                 <div class='obj__change__tabsCont__input'>
                     <label for="objChangeImg">Entrer l'IMG que vous souhaitez atteindre</label>
                     <input type="number" name="objChangeImg" id="changeImg">

@@ -23,6 +23,13 @@
     
     <nav class="profil__nav">
         <p class="profil__nav__subTitle">Que souhaitez vous faire ?</p>
+        <div class="profil__nav__errorCont">
+            <?php if(isset($_GET['success']) && $_GET['success'] === 'true'): ?>
+                <p id="successMsg">- Profil bien modifié.</p>
+            <?php elseif(isset($_GET['success']) && $_GET['success'] === 'false'): ?>
+                <p>- Une erreur est survenu.</p>
+            <?php endif; ?>
+        </div>
         <a href="/suivi_poids/dashboard"><button class="profil__nav__btn">Voir votre tableau de bord</button></a>
         <button onClick="openModify()" class="profil__nav__btn">Modifier votre profil</button>
         <button onClick="openModifyPassword()" class="profil__nav__btn">Changer de mot de passe</button>
@@ -33,6 +40,7 @@
         <h3>Modifier le profil</h3>
         <div class="profil__modify__errorCont"></div>
         <form class="profil__modify__form" action="/suivi_poids/modifyProfil" method='post'>
+            <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
             <div class="profil__modify__form__row">
                 <label for="modifyName">Prénom/Pseudo</label>
                 <input class="profil__modify__form__row__input" type="text" name="name" id="modifyName" value="<?= $userInfos->name; ?>">
@@ -58,13 +66,14 @@
             </div>
         </form>
     </section>
-
-   <section class="profil__modifyPassword profil__modifyPassword--hidden">
+    
+    <section class="profil__modifyPassword profil__modifyPassword--hidden">
         <h3>Modifier le mot de passe</h3>
         <div class="profil__modifyPassword__errorCont">
             <p id="passwordError"></p>
         </div>
         <form class="profil__modifyPassword__form" action="/suivi_poids/modifyPassword" method="post">
+            <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
             <div class="profil__modifyPassword__form__row">
                 <label for="passwordOld">Votre ancien mot de passe</label>
                 <input class="profil__modifyPassword__form__row__input" type="password" name="oldPassword" id="passwordOld">
@@ -89,6 +98,7 @@
             <h2>Supprimer votre compte</h2>
             <p>cette action est définitive !</p>
             <form class='profil__delete__modal__btnCont' method="post" action="/suivi_poids/delete">
+                <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
                 <button type="submit" class='profil__delete__modal__btnCont__btn profil__delete__modal__btnCont__btn--deleteBtn'>Supprimer</button>
                 <input type='button' onClick="toggleDeleteModal()" class='profil__delete__modal__btnCont__btn' value="Annuler" />
             </form>

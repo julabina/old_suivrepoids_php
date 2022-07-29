@@ -6,9 +6,7 @@ use App\Lib\DatabaseConnection;
 use \DateTime;
 use \Ramsey\Uuid\Uuid;
 
-class StatsModel {
-
-    public DatabaseConnection $connection;
+class StatsModel extends DatabaseConnection {
 
     /**
      * add new weight to one user
@@ -39,7 +37,7 @@ class StatsModel {
         $imc = $this->calculImc($weight, $size);
         $img = $this->calculImg($sexe, $imc, $age);
 
-        $statement = $this->connection->getConnection()->prepare(
+        $statement = $this->getConnection()->prepare(
             "INSERT INTO weight_infos(id, userId, user_weight, imc, img, record_date, created_at) VALUES (?, ?, ?, ?, ?, ?, NOW())"
         );
 
@@ -66,7 +64,7 @@ class StatsModel {
             $v4 = Uuid::uuid4();
             $newId = $v4->toString();
             
-            $statement = $this->connection->getConnection()->prepare(
+            $statement = $this->getConnection()->prepare(
                 "INSERT INTO goals(id, userId, weight_goal, imc_goal, img_goal, current, created_at) VALUES (?, ?, ?, ?, ?, ?, NOW())"
             );
             
@@ -87,7 +85,7 @@ class StatsModel {
      */
     private function removeCurrent(string $userId): bool {
         
-        $statement = $this->connection->getConnection()->prepare(
+        $statement = $this->getConnection()->prepare(
             "UPDATE goals SET current = ? WHERE userId = ?"
         );
         
@@ -104,7 +102,7 @@ class StatsModel {
      */
     public function getAllGoals(string $userId): array {
 
-        $statement = $this->connection->getConnection()->query(
+        $statement = $this->getConnection()->query(
             "SELECT * FROM goals WHERE userId = '$userId' ORDER BY created_at DESC"
         );
 
@@ -125,7 +123,7 @@ class StatsModel {
      */
     public function getImc(string $userId): array {
 
-        $statement = $this->connection->getConnection()->query(
+        $statement = $this->getConnection()->query(
             "SELECT size, user_weight FROM users RIGHT JOIN weight_infos ON users.userId = weight_infos.userId WHERE users.userId = '$userId' AND weight_infos.record_date = (SELECT MAX(record_date) FROM weight_infos WHERE weight_infos.userId = '$userId')"
         );
 
@@ -146,7 +144,7 @@ class StatsModel {
      */
     public function getImg(string $userId): array {
 
-        $statement = $this->connection->getConnection()->query(
+        $statement = $this->getConnection()->query(
             "SELECT size, is_man, birthday, user_weight FROM users RIGHT JOIN weight_infos ON users.userId = weight_infos.userId WHERE users.userId = '$userId' AND weight_infos.record_date = (SELECT MAX(record_date) FROM weight_infos WHERE weight_infos.userId = '$userId')"
         );
 

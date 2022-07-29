@@ -112,6 +112,10 @@
                 }
             }
         }
+        &__errCont {
+            color: map-get($map: $colors, $key: error);
+            width: 580px;
+        }
     }
     &__old {
         display: flex;

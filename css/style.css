@@ -266,6 +266,10 @@ footer {
 .dash__infos__cont__infoBox:hover {
   border: 1px solid rgba(165, 165, 165, 0.5);
 }
+.dash__infos__errorCont {
+  color: #d80404;
+  width: 810px;
+}
 .dash__obj {
   width: 810px;
   height: 150px;
@@ -1143,6 +1147,10 @@ footer {
   opacity: 0.7;
   transition: opacity 150ms ease-in-out;
 }
+.obj__change__errCont {
+  color: #d80404;
+  width: 580px;
+}
 .obj__old {
   display: flex;
   flex-direction: column;
@@ -1471,6 +1479,10 @@ footer {
 .profil__nav--hidden {
   display: none;
 }
+.profil__nav__errorCont {
+  width: 260px;
+  color: #d80404;
+}
 .profil__modify {
   display: flex;
   flex-direction: column;
@@ -1647,6 +1659,10 @@ footer {
 }
 .profil__delete--hidden {
   display: none;
+}
+
+#successMsg {
+  color: #5CB85C;
 }
 
 .notFound {

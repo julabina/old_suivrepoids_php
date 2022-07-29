@@ -40,6 +40,10 @@
         &--hidden {
             display: none
         }
+        &__errorCont {
+            width: 260px;
+            color: map-get($map: $colors, $key: error);
+        }
     }
     &__modify {
         @include profilForm;
@@ -94,4 +98,8 @@
             display: none;
         }
     }
+}
+
+#successMsg {
+    color: map-get($map: $colors, $key: successGreen);
 }

@@ -17,7 +17,14 @@
     <?php else: ?>
         <h1>S'enregistrer</h1>
         
-        <div class="sign__error"></div>
+        <div class="sign__error">
+            <?php if(isset($_GET['err']) && $_GET['err'] === 'email'): ?>
+                <p>- L'email existe déja.</p>
+            <?php elseif(isset($_GET['err']) && ($_GET['err'] === "sign" || $_GET['err'] === "format")): ?>
+                <p>- Une erreur est survenue, rééssayer plus tard.</p>
+                <p>- Si le probleme persiste contactez l'administrateur du site.</p>
+            <?php endif; ?>
+        </div>
         
         <form class="sign__form" id="sign__form" action="/suivi_poids/sign" method="post">
             <div class="sign__form__logs">

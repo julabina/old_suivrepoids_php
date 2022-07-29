@@ -50,6 +50,10 @@
                 }
             }
         }
+        &__errorCont {
+            color: map-get($map: $colors, $key: error);
+            width: 810px;
+        }
     }
     &__obj {
         width: 810px;

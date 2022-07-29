@@ -28,9 +28,7 @@ class WeightData {
     public string $recordDate;
 }
 
-class UserModel {
-
-    public DatabaseConnection $connection;
+class UserModel extends DatabaseConnection {
 
     /**
      * add new user to database
@@ -57,17 +55,32 @@ class UserModel {
         $birthDate = str_replace('/', '-', $birthday);
         $newBirthday = date('Y-m-d H:i:s' , strtotime($birthDate));
 
-        $statement = $this->connection->getConnection()->prepare(
-            "INSERT INTO users(userId, email, user_pwd, size, firstname, is_man, birthday, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())"
+        $connection = $this->getConnection();
+
+        $userStatement = $connection->query(
+            "SELECT * FROM users WHERE email = '$email'"
         );
 
-        $affectedLine = $statement->execute([$newId, $email, $newPassword, $size, $name, $newSexe, $newBirthday]);
+        $user = $userStatement->fetch();
+        
+        if($user === false) {
 
-        if($affectedLine > 0) {
-            return $newId;
+            $statement = $connection->prepare(
+                "INSERT INTO users(userId, email, user_pwd, size, firstname, is_man, birthday, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())"
+            );
+    
+            $affectedLine = $statement->execute([$newId, $email, $newPassword, $size, $name, $newSexe, $newBirthday]);
+    
+            if($affectedLine > 0) {
+                return $newId;
+            } else {
+                return "";
+            }
+
         } else {
-            return "";
+            return "errSign";
         }
+
     }
 
     /**
@@ -79,7 +92,7 @@ class UserModel {
      */
     public function logUser(string $email, string $password): array {
 
-        $statement = $this->connection->getConnection()->query(
+        $statement = $this->getConnection()->query(
             "SELECT * FROM users WHERE email = '$email'"
         );
 
@@ -107,7 +120,7 @@ class UserModel {
      */
     public function getStats(string $userId): User {
 
-        $statement = $this->connection->getConnection()->query(
+        $statement = $this->getConnection()->query(
             "SELECT size, firstname, is_man, weight_goal, imc_goal, img_goal, imc, img, user_weight, record_date FROM users RIGHT JOIN goals ON users.userId = goals.userId RIGHT JOIN weight_infos ON users.userId = weight_infos.userId WHERE users.userId = '$userId' AND goals.current = 1 AND weight_infos.record_date = (SELECT MAX(record_date) FROM weight_infos WHERE weight_infos.userId = '$userId')"
         );
         
@@ -144,7 +157,7 @@ class UserModel {
      */
     public function getUserInfos(string $userId): User {
 
-        $statement = $this->connection->getConnection()->query(
+        $statement = $this->getConnection()->query(
             "SELECT firstname, email, size, is_man, birthday FROM users WHERE userId = '$userId'"
         );
 
@@ -167,8 +180,7 @@ class UserModel {
         return $userInfos ;
 
     }
-
-    
+ 
     /**
      * delete user account
      * @param string $userId
@@ -176,7 +188,7 @@ class UserModel {
      */
     public function deleteUser(string $userId): bool {
 
-        $statement = $this->connection->getConnection()->prepare(
+        $statement = $this->getConnection()->prepare(
             "DELETE FROM users WHERE users.userId = ?"
         );
 
@@ -205,7 +217,7 @@ class UserModel {
         $birthDate = str_replace('/', '-', $birthday);
         $newBirthday = date('Y-m-d H:i:s' , strtotime($birthDate));
 
-        $statement = $this->connection->getConnection()->prepare(
+        $statement = $this->getConnection()->prepare(
             "UPDATE users SET size = ?, firstname = ?, is_man = ?, birthday = ? WHERE userId = ?"
         );
 
@@ -224,7 +236,7 @@ class UserModel {
      */
     public function modifyUserPassword($userId, $old, $new): bool {
 
-        $connect = $this->connection->getConnection();
+        $connect = $this->getConnection();
 
         $firstStatement = $connect->query(
             "SELECT user_pwd FROM users WHERE userId = '$userId'"
@@ -257,7 +269,7 @@ class UserModel {
      */
     public function getAllWeight(string $userId): array {
 
-        $statement = $this->connection->getConnection()->query(
+        $statement = $this->getConnection()->query(
             "SELECT user_weight, imc, img, record_date FROM weight_infos WHERE userId = '$userId'"
         );
 

@@ -17,7 +17,18 @@
     <?php else: ?>
         <h1>Se connecter</h1>
         
-        <div class="log__error"></div>
+        <div class="log__error">
+            <?php if(isset($_GET['err']) && $_GET['err'] === 'log'): ?>
+                <p>- L'email ou le mot de passe est incorrecte.</p>
+            <?php elseif(isset($_GET['err']) && $_GET['err'] === "format"): ?>
+                <p>- Une erreur est survenue, rééssayer plus tard.</p>
+                <p>- Si le probleme persiste contactez l'administrateur du site.</p>
+            <?php elseif(isset($_GET['err']) && $_GET['err'] === "exp"): ?>
+                <p>- Votre session a expiré.</p>
+            <?php elseif(isset($_GET['err']) && $_GET['err'] === "delete"): ?>
+                <p>- Votre compte a bien été supprimé.</p>
+            <?php endif; ?>
+        </div>
         
         <form class="log__form" id="log__form" action="/suivi_poids/login" method="post">
             <div class="log__form__email">

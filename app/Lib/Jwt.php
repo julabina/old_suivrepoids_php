@@ -4,8 +4,6 @@ namespace App\Lib;
 use \DateTime;
 
 class Jwt {
-
-    private $SECRET = 'Z75MelF!Ad4rpjYH4eT8?erBapja8er78T=Er:45e8yEKglk5t';
     
     /**
      * create token
@@ -23,7 +21,7 @@ class Jwt {
             'userId' => $userId
         ];
 
-        $token = $this->generate($header, $payload, $this->SECRET);
+        $token = $this->generate($header, $payload, $_ENV['SECRET_TOKEN_KEY']);
 
         return $token;
 
@@ -77,7 +75,7 @@ class Jwt {
     public function check(string $token): bool
     {
 
-        $secret = $this->SECRET;
+        $secret = $_ENV['SECRET_TOKEN_KEY'];
 
         $header = $this->getHeader($token);
         $payload = $this->getPayload($token);
