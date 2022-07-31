@@ -1,23 +1,49 @@
 <?php $title = 'dashboard'; ?>
 <?php ob_start(); ?>
 
-    <script src="https://www.gstatic.com/charts/loader.js"></script>
-    <script>
+<script src="https://www.gstatic.com/charts/loader.js"></script>
+<script>
+    let weightListArr = [], listArr = [];
+    let phpDate, dateSplit, dateMod, dateDecr, dayForFinalArr, daySplit, tempArr, overlayPara;
+
+    <?php foreach($userWeightList as $row): ?>
+        tempArr = [];
+        phpDate = "<?= $row->recordDate; ?>";
+        dateSplit = phpDate.split('-');
+        dateDecr = (dateSplit[1] /* - 1 */) + "";
+        if(dateDecr.length === 1) {
+            dateMod = '0' + dateDecr;
+        } else {
+            dateMod = dateDecr;
+        }
+        daySplit = dateSplit[2].split(' ');
+        dayForFinalArr = dateSplit[0] + ", " + dateMod + ", " + daySplit[0];
+        dayForOverlay = daySplit[0] + '/' + dateMod + '/' + dateSplit[0];
+    
+        overlayPara = <?= $row->weight; ?> + 'kg le ' + dayForOverlay;
+
+        tempArr.push(new Date(dayForFinalArr));
+        tempArr.push(<?= $row->weight; ?>);
+        tempArr.push(overlayPara);
+
+        listArr.push(tempArr);
+    <?php endforeach; ?>      
+    weightListArr = listArr;                
+</script>
+<script>
 
         google.charts.load('current', {
             packages: ['corechart']
         });
-    
+        
         const drawChart = () => {
             const dataChart = new google.visualization.DataTable();
             dataChart.addColumn('date', 'lastWeight');
             dataChart.addColumn('number', 'Poids');
             dataChart.addColumn({type: 'string', role: 'tooltip'});                      
-            dataChart.addRows([
-                <?php foreach($userWeightList as $row): ?>
-                    [ new Date(<?= date('Y, m, d', strtotime($row->recordDate)); ?>),  <?= $row->weight; ?>, '<?= $row->weight; ?>kg le <?= date('d/m/Y', strtotime($row->recordDate)); ?>'],
-                <?php endforeach; ?>                    
-            ]);
+            dataChart.addRows(
+                weightListArr
+            );
                 
             const chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
                 
@@ -77,20 +103,11 @@
 </header>
 
 <main class="dash">
-    <?php
-    echo "////////////////////////////////////////////////////////////////////////////////////////////////";echo "<br />";
-    echo "////////////////////////////////////////////////////////////////////////////////////////////////";echo "<br />";
-    echo "////////////////////// MOIS POUR CHART PAS LE BON ////////////////////////";echo "<br />";
-    echo "////////////////////////////////////////////////////////////////////////////////////////////////";echo "<br />";
-    echo "////////////////////////////////////////////////////////////////////////////////////////////////";echo "<br />";
-    echo "<pre>";
-    print_r($userWeightList);
-    echo "</pre>";
-    ?>
+    <!-- section infos begin -->
     <section class="dash__infos">
         <h2>Tableau de bord</h2>
         <div class="dash__infos__errorCont">
-        <?php if(isset($_GET['err']) && $_GET['err'] === "addW"): ?>
+            <?php if(isset($_GET['err']) && $_GET['err'] === "addW"): ?>
                 <p>- Une erreur est survenu, impossible d'ajouter un nouveau poids.</p>
             <?php endif; ?>
         </div>
@@ -148,6 +165,9 @@
             <p>Cliquer pour définir un nouvel objectif !</p>
         </div></a>
     </section>
+    <!-- section infos end -->
+
+    <!-- section graph begin -->
     <section class='dash__graph'>
         <div class="dash__graph__mainCont">
             <div class="dash__graph__mainCont__tabs">
@@ -155,43 +175,73 @@
                 <div onClick="handleGraph('list')" class="dash__graph__mainCont__tabs__tab"><p>Liste</p></div>
             </div>
             <div class="dash__graph__mainCont__graphNav">
-                <select name="" id="">
-                    <option value=""></option>
-                </select>
+                <div class="dash__graph__mainCont__graphNav__graphSelectType">
+                        <?php
+                            $weightYearArr = [];
+                            $years = [];
+                            foreach ($userWeightList as $userWeight) {
+                                $weightYear = explode('-', $userWeight->recordDate);
+                                $weightYearArr[] = $weightYear[0];
+                            }
+                            $uniqueWeightYear = array_reverse(array_unique($weightYearArr));
+                            foreach($uniqueWeightYear as $year) {
+                                $years[] = $year;
+                            }
+                        ?>
+                    <select name="graphSelectType" id="graphSelectType" onChange="changeType()">
+                        <option value="byTime1">1 mois</option>
+                        <option value="byTime2">2 mois</option>
+                        <option value="byTime3">3 mois</option>
+                        <option value="byTime6">6 mois</option>
+                        <option value="byTime">1 ans</option>
+                        <?php foreach($years as $year): ?>
+                            <option value="byYear<?= $year; ?>">Année <?= $year; ?></option>
+                        <?php endforeach; ?>
+                        <option value="byAll">Tout</option>
+                    </select>
+                </div>
             </div>
             <div class="dash__graph__mainCont__graph" id="chart_div">
             </div>
             <div class="dash__graph__mainCont__graph dash__graph__mainCont__graph--bot dash__graph__mainCont__graph--hidden">
                 <?php foreach($userWeightList as $weight): ?>
                     <div class="dash__graph__mainCont__graph__row">
-                        <div class=""><p><?= date('d/m/Y',strtotime($weight->recordDate)); ?></p></div>
-                        <div class=""><p><?= $weight->weight; ?></p></div>
-                        <div class=""><p><?= $weight->bmi; ?></p></div>
-                        <div class=""><p><?= $weight->bfp; ?></p></div>
+                        <div class="dash__graph__mainCont__graph__row_"><p><?= date('d/m/Y',strtotime($weight->recordDate)); ?></p></div>
+                        <div class="dash__graph__mainCont__graph__row_"><p><?= $weight->weight; ?></p></div>
+                        <div class="dash__graph__mainCont__graph__row_"><p><?= $weight->bmi; ?></p></div>
+                        <div class="dash__graph__mainCont__graph__row_"><p><?= $weight->bfp; ?></p></div>
                     </div>
                 <?php endforeach; ?>
             </div>
         </div>
     </section>
+    <!-- section graph end -->
+    <button onClick="tes7t()">ok</button>
 </main>
 
 <!-- modal add weight begin -->
 <section class="dashAddWeight dashAddWeight--hidden">
     <div class="dashAddWeight__modal">
         <p onClick="handleModal()" class="dashAddWeight__modal__close">X</p>
-        <form class="dashAddWeight__modal__form" action="/suivi_poids/addWeight" method="post">
-            <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
-            <label for="addWeightInput">Ajouter un nouveau poids</label>
-            <p class="dashAddWeight__modal__form__error"></p>
-            <input type="number" name="addWeight" id="addWeightInput">
-            <input onClick="verifyAddWeight()" class="dashAddWeight__modal__form__submitBtn" type="button" value="Ajouter">
-        </form>
+        <?php $currentDate = date('d-m-Y'); ?>
+        <?php if($userData->recordDate === $currentDate): ?>
+            <h2>Vous ne pouvez ajouter qu'une date par jour.</h2>
+            <?php else: ?>
+                <form class="dashAddWeight__modal__form" action="/suivi_poids/addWeight" method="post">
+                    <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
+                    <label for="addWeightInput">Ajouter un nouveau poids</label>
+                    <p class="dashAddWeight__modal__form__error"></p>
+                <input type="number" name="addWeight" id="addWeightInput">
+                <input onClick="verifyAddWeight()" class="dashAddWeight__modal__form__submitBtn" type="button" value="Ajouter">
+            </form>
+            <?php endif; ?>
     </div>
 </section>
 <!-- modal add weight end -->
 
 <script>  
     const modal = document.querySelector(".dashAddWeight");
+    currentDate = new Date();
 
     const verifyAddWeight = () => {   
         const addWeight = document.getElementById("addWeightInput");
@@ -229,19 +279,71 @@
     const handleGraph = (graph) => {
         const tabs = document.querySelectorAll('.dash__graph__mainCont__tabs__tab');
         const graphs = document.querySelectorAll('.dash__graph__mainCont__graph');
+        const graphNav = document.querySelector('.dash__graph__mainCont__graphNav');
 
         if(graph === "list") {
             tabs[1].classList.add('dash__graph__mainCont__tabs__tab--active');
             tabs[0].classList.remove('dash__graph__mainCont__tabs__tab--active');
             graphs[0].classList.add('dash__graph__mainCont__graph--hidden');
             graphs[1].classList.remove('dash__graph__mainCont__graph--hidden');
+            graphNav.classList.add('dash__graph__mainCont__graphNav--hidden');
         }else if(graph === "line") {
             tabs[0].classList.add('dash__graph__mainCont__tabs__tab--active');
             tabs[1].classList.remove('dash__graph__mainCont__tabs__tab--active');
             graphs[1].classList.add('dash__graph__mainCont__graph--hidden');
             graphs[0].classList.remove('dash__graph__mainCont__graph--hidden');
+            graphNav.classList.remove('dash__graph__mainCont__graphNav--hidden');
         } 
     };
+
+    const changeType = () => {
+
+        const selectType = document.getElementById('graphSelectType');
+
+        option = selectType.value;
+
+        if(option === "byTime1") {
+            calculForSelect(2592000000);
+        } else if(option === "byTime2") {
+            calculForSelect(5184000000);
+        } else if(option === "byTime3") {
+            calculForSelect(7776000000); 
+        } else if(option === "byTime6") {
+            calculForSelect(15552000000);  
+        } else if(option === "byTime") {
+            calculForSelect(31104000000);
+        } else if(option === "byAll") {
+            weightListArr = listArr;
+            google.charts.setOnLoadCallback(drawChart);
+        } else {
+            slicedOption = option.slice(6);
+           
+            filteredWeightListArr = listArr.filter(el => {
+                splitedDate = el[2].split('/');
+                if(splitedDate[2] === slicedOption) {
+                    return el;
+                }
+            });
+
+            weightListArr = filteredWeightListArr;
+            google.charts.setOnLoadCallback(drawChart);
+        }
+        
+    }
+
+    const calculForSelect = (time) => {
+        filteredListArr = listArr.filter(el => {
+            result = currentDate.getTime() - el[0].getTime();
+            if(result < time) {
+                return el;
+            }
+        });
+
+        weightListArr = filteredListArr;
+        google.charts.setOnLoadCallback(drawChart);
+    }
+
+    changeType();
 
 </script>
 

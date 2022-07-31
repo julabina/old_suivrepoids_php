@@ -306,7 +306,7 @@ footer {
   color: inherit;
 }
 .dash__graph {
-  margin: 30px 0 0;
+  margin: 30px 0 40px;
   padding-bottom: 30px;
 }
 .dash__graph__mainCont {
@@ -343,11 +343,12 @@ footer {
   display: flex;
   justify-content: center;
   width: 810px;
-  height: 420px;
+  min-height: 420px;
   border-radius: 0 3px 3px 3px;
   box-shadow: 0 3px 15px rgba(0, 0, 0, 0.199);
 }
 .dash__graph__mainCont__graph--hidden {
+  min-height: 0px;
   visibility: hidden;
   height: 0;
 }
@@ -357,17 +358,35 @@ footer {
   background: #fdfdfd;
   margin-top: -2px;
   height: auto;
+  padding: 40px 50px;
 }
 .dash__graph__mainCont__graph__row {
   display: flex;
   justify-content: space-around;
+  height: 35px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.158);
+  margin-top: 10px;
 }
 .dash__graph__mainCont__graphNav {
+  display: flex;
+  align-items: center;
   z-index: 5;
   width: 810px;
-  height: 50px;
+  padding-top: 5px;
   background: #fdfdfd;
   margin-bottom: -2px;
+}
+.dash__graph__mainCont__graphNav__graphSelectType {
+  margin-left: 15px;
+}
+.dash__graph__mainCont__graphNav__graphSelectType select {
+  height: 30px;
+  width: 120px;
+  border: 1px solid black;
+  padding-left: 15px;
+}
+.dash__graph__mainCont__graphNav--hidden {
+  display: none;
 }
 
 .dashAddWeight {
@@ -387,6 +406,11 @@ footer {
   background: #fdfdfd;
   padding: 50px 30px 30px;
   border-radius: 5px;
+}
+.dashAddWeight__modal h2 {
+  font-size: 1.5em;
+  font-weight: 600;
+  margin: 40px 0 60px;
 }
 .dashAddWeight__modal__form {
   display: flex;

@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Models\StatsModel;
 use App\Lib\Jwt;
-use App\controllers\UserController;
+use App\Controllers\UserController;
 
 
 class StatsController {
@@ -145,6 +145,7 @@ class StatsController {
             $jwt = new Jwt();
             $id = $_SESSION['userId'];
             $token = $_POST['token'];
+            $userController = new UserController();
             
             if(!$jwt->isValid($token)) {
                 http_response_code(400);

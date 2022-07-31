@@ -91,7 +91,7 @@
         color: inherit;
     }
     &__graph {
-        margin: 30px 0 0;
+        margin: 30px 0 40px;
         padding-bottom: 30px;
         &__mainCont {
             display: flex;
@@ -126,10 +126,11 @@
                 display: flex;
                 justify-content: center;
                 width: 810px;
-                height: 420px;
+                min-height: 420px;
                 border-radius: 0 3px 3px 3px;
                 box-shadow: 0 3px 15px rgba(0, 0, 0, 0.199);
                 &--hidden {
+                    min-height: 0px;
                     visibility: hidden;
                     height: 0;
                 }
@@ -139,18 +140,36 @@
                     background: map-get($map: $colors, $key: lightWhite);
                     margin-top: -2px;
                     height: auto;
+                    padding: 40px 50px;
                 }
                 &__row {
                     display: flex;
                     justify-content: space-around;
+                    height: 35px;
+                    border-bottom: 1px solid rgba(0, 0, 0, 0.158);
+                    margin-top: 10px;
                 }
             }
             &__graphNav {
+                display: flex;
+                align-items: center;
                 z-index: 5;
                 width: 810px;
-                height: 50px;
+                padding-top: 5px;
                 background: map-get($map: $colors, $key: lightWhite);
                 margin-bottom: -2px;
+                &__graphSelectType {
+                    margin-left: 15px;
+                    select {
+                        height: 30px;
+                        width: 120px;
+                        border: 1px solid black;
+                        padding-left: 15px;
+                    }
+                }
+                &--hidden {
+                    display: none;
+                }
             }
         }
     }
@@ -170,6 +189,11 @@
         background: map-get($colors, lightWhite);
         padding: 50px 30px 30px;
         border-radius: 5px;
+        h2 {
+            font-size: 1.5em;
+            font-weight: 600;
+            margin: 40px 0 60px;
+        }
         &__form {
             display: flex;
             flex-direction: column;
