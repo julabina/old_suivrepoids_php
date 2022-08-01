@@ -270,7 +270,7 @@ class UserModel extends DatabaseConnection {
     public function getAllWeight(string $userId): array {
 
         $statement = $this->getConnection()->query(
-            "SELECT user_weight, imc, img, record_date FROM weight_infos WHERE userId = '$userId'"
+            "SELECT user_weight, imc, img, record_date FROM weight_infos WHERE userId = '$userId' ORDER BY record_date DESC"
         );
 
         $weightData = [];

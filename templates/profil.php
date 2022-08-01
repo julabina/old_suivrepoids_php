@@ -19,7 +19,7 @@
 </header>
 
 <main class="profil">
-    <h2>Bonjour <?= $userInfos->name; ?></h2>
+    <h2>Bonjour <?= htmlspecialchars($userInfos->name); ?></h2>
     
     <nav class="profil__nav">
         <p class="profil__nav__subTitle">Que souhaitez vous faire ?</p>
@@ -40,18 +40,18 @@
         <h3>Modifier le profil</h3>
         <div class="profil__modify__errorCont"></div>
         <form class="profil__modify__form" action="/suivi_poids/modifyProfil" method='post'>
-            <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
+            <input type="hidden" name="token" value="<?= htmlspecialchars($_SESSION['token']); ?>">
             <div class="profil__modify__form__row">
                 <label for="modifyName">Prénom/Pseudo</label>
-                <input class="profil__modify__form__row__input" type="text" name="name" id="modifyName" value="<?= $userInfos->name; ?>">
+                <input class="profil__modify__form__row__input" type="text" name="name" id="modifyName" value="<?= htmlspecialchars($userInfos->name); ?>">
             </div>
             <div class="profil__modify__form__row">
                 <label for="modifySize">Taille</label>
-                <input class="profil__modify__form__row__input" type="number" name="size" id="modifySize" value="<?= $userInfos->size ?>">
+                <input class="profil__modify__form__row__input" type="number" name="size" id="modifySize" value="<?= htmlspecialchars($userInfos->size); ?>">
             </div>
             <div class="profil__modify__form__row">
                 <label for="modifyBirthday">Date de naissance</label>
-                <input class="profil__modify__form__row__input" type="text" name="birthday" id="modifyBirthday" value="<?= $userInfos->birthday; ?>">
+                <input class="profil__modify__form__row__input" type="text" name="birthday" id="modifyBirthday" value="<?= htmlspecialchars($userInfos->birthday); ?>">
             </div>
             <div class="profil__modify__form__row">
                 <label for="modifySexe">Sexe</label>
@@ -73,7 +73,7 @@
             <p id="passwordError"></p>
         </div>
         <form class="profil__modifyPassword__form" action="/suivi_poids/modifyPassword" method="post">
-            <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
+            <input type="hidden" name="token" value="<?= htmlspecialchars($_SESSION['token']); ?>">
             <div class="profil__modifyPassword__form__row">
                 <label for="passwordOld">Votre ancien mot de passe</label>
                 <input class="profil__modifyPassword__form__row__input" type="password" name="oldPassword" id="passwordOld">
@@ -98,7 +98,7 @@
             <h2>Supprimer votre compte</h2>
             <p>cette action est définitive !</p>
             <form class='profil__delete__modal__btnCont' method="post" action="/suivi_poids/delete">
-                <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
+                <input type="hidden" name="token" value="<?= htmlspecialchars($_SESSION['token']); ?>">
                 <button type="submit" class='profil__delete__modal__btnCont__btn profil__delete__modal__btnCont__btn--deleteBtn'>Supprimer</button>
                 <input type='button' onClick="toggleDeleteModal()" class='profil__delete__modal__btnCont__btn' value="Annuler" />
             </form>
@@ -191,7 +191,7 @@
             return errorCont.innerHTML = error;
         } 
         
-        if(inputs[0].value !== '<?= $userInfos->name; ?>' || inputs[1].value !== '<?= $userInfos->size; ?>' || inputs[2].value !== '<?= $userInfos->birthday; ?>' || select.value !== '<?= $userInfos->sexe; ?>') {
+        if(inputs[0].value !== "<?= htmlspecialchars($userInfos->name); ?>" || inputs[1].value !== "<?= htmlspecialchars($userInfos->size); ?>" || inputs[2].value !== "<?= htmlspecialchars($userInfos->birthday); ?>" || select.value !== "<?= htmlspecialchars($userInfos->sexe); ?>") {
             modifyForm.submit();
         } else {
             return errorCont.innerHTML = `<p>- Aucun champs n'a été modifier.</p>`;

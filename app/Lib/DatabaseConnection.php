@@ -6,10 +6,6 @@ class DatabaseConnection {
 
     private ?\PDO $database = null;
 
-    public function testDB() {
-        echo "BEURRE";
-    }
-
     /**
      * create a PDO connection to database
      * @return PDO

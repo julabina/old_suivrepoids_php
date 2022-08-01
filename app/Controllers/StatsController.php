@@ -20,7 +20,7 @@ class StatsController {
             return header('Location: /suivi_poids/login');
         }
         
-        $id = $_SESSION['userId'];
+        $id = htmlspecialchars($_SESSION['userId']);
         
         $statsModel = new StatsModel();
         $goals = $statsModel->getAllGoals($id);
@@ -40,10 +40,16 @@ class StatsController {
             return header('Location: /suivi_poids/login');
         }
 
+        foreach ($_POST as $element => $val) {
+
+            $_POST[$element] = htmlspecialchars($val);
+        
+        }
+
         $userController = new UserController();
 
         $jwt = new Jwt();
-        $id = $_SESSION['userId'];
+        $id = htmlspecialchars($_SESSION['userId']);
         $token = $_POST['token'];
         
         if(!$jwt->isValid($token)) {
@@ -80,11 +86,11 @@ class StatsController {
                     $img = $_POST['objChangeImg'];
                 }
             } else {
-                header('Location: /suivi_poids/');
+                return header('Location: /suivi_poids/');
             }
             
             $statsModel = new StatsModel();
-            $success = $statsModel->addGoal($_SESSION['userId'], $weight, $bmi, $img);
+            $success = $statsModel->addGoal(htmlspecialchars($_SESSION['userId']), $weight, $bmi, $img);
             
             if($success) {
                 header('Location: /suivi_poids/dashboard');
@@ -109,7 +115,7 @@ class StatsController {
         if(isset($_SESSION['name']) && isset($_SESSION['user']) && isset($_SESSION['userId']) && isset($_SESSION['size']) && (isset($_SESSION['sexe']) && isset($_SESSION['auth'])) && $_SESSION['auth'] === true) {
             
             $statsModel = new StatsModel();
-            $imcInfos = $statsModel->getImc($_SESSION['userId']);
+            $imcInfos = $statsModel->getImc(htmlspecialchars($_SESSION['userId']));
             
         }
         
@@ -126,7 +132,7 @@ class StatsController {
         if(isset($_SESSION['name']) && isset($_SESSION['user']) && isset($_SESSION['userId']) && isset($_SESSION['size']) && (isset($_SESSION['sexe']) && ($_SESSION['sexe'] === "man" || $_SESSION['sexe'] === "woman")) && isset($_SESSION['auth']) && $_SESSION['auth'] === true) {
             
             $statsModel = new StatsModel();
-            $imgInfos = $statsModel->getImg($_SESSION['userId']);
+            $imgInfos = $statsModel->getImg(htmlspecialchars($_SESSION['userId']));
             
         }
 
@@ -142,8 +148,12 @@ class StatsController {
         
         if(isset($_SESSION['name']) && isset($_SESSION['user']) && isset($_SESSION['userId']) && isset($_SESSION['size']) && (isset($_SESSION['sexe']) && ($_SESSION['sexe'] === "man" || $_SESSION['sexe'] === "woman")) && isset($_SESSION['auth']) && $_SESSION['auth'] === true && isset($_SESSION['birthday'])) {
             
+            foreach ($_POST as $element => $val) {
+                $_POST[$element] = htmlspecialchars($val);
+            }
+
             $jwt = new Jwt();
-            $id = $_SESSION['userId'];
+            $id = htmlspecialchars($_SESSION['userId']);
             $token = $_POST['token'];
             $userController = new UserController();
             
@@ -169,7 +179,7 @@ class StatsController {
                     $newWeight = $_POST['addWeight'];
     
                     $statsModel = new StatsModel();
-                    $success = $statsModel->addWeight($newWeight,$_SESSION['size'] , null, $_SESSION['sexe'], $_SESSION['birthday'] ,$_SESSION['userId']);
+                    $success = $statsModel->addWeight($newWeight,htmlspecialchars($_SESSION['size']) , null, htmlspecialchars($_SESSION['sexe']), htmlspecialchars($_SESSION['birthday']) ,htmlspecialchars($_SESSION['userId']));
     
                     if($success) {   
                         header('Location: /suivi_poids/dashboard');         

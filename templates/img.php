@@ -8,6 +8,7 @@
         <a class="header__titleLink" href="/suivi_poids/"><h1>TITRE DU SITE</h1></a>
         <?php if(isset($_SESSION['name']) && isset($_SESSION['user']) && isset($_SESSION['userId']) && isset($_SESSION['size']) && (isset($_SESSION['sexe']) && ($_SESSION['sexe'] === "man" || $_SESSION['sexe'] === "woman")) && isset($_SESSION['auth']) && $_SESSION['auth'] === true): ?>
             <div class="header__connected">
+                <a class='header__otherLink' href="/suivi_poids/imc">IMC</a>
                 <a class="header__connected__toDashboard" href="/suivi_poids/dashboard">Tableau de bord</a>
                 <a class="header__connected__logoutBtn" href="/suivi_poids/logout">Se deconnecter</a>
                 <a href="/suivi_poids/profil"><div class="header__connected__userProfil">
@@ -16,8 +17,9 @@
             </div>
         <?php else: ?>
             <div class="header__notConnectBtns">
+                <a class='header__otherLink' href="/suivi_poids/imc">IMC</a>
                 <a id="headerLogBtn" href="/suivi_poids/login">Se connecter</a>
-                <a href="/suivi_poids/sign">Creer un compte</a>
+                <a class="header__notConnectBtns__create" href="/suivi_poids/sign">Creer un compte</a>
             </div>
         <?php endif; ?> 
     </div>
@@ -30,7 +32,7 @@
     <?php if(isset($_SESSION['name']) && isset($_SESSION['user']) && isset($_SESSION['userId']) && isset($_SESSION['size']) && (isset($_SESSION['sexe']) && ($_SESSION['sexe'] === "man" || $_SESSION['sexe'] === "woman")) && isset($_SESSION['auth']) && $_SESSION['auth'] === true): ?>
         <section class="bfp__userSection">
             <p class="bfp__userSection__subTitle">Votre IMG est de</p>
-            <h3><?= $imgInfos['img']; ?>%</h3>
+            <h3><?= htmlspecialchars($imgInfos['img']); ?>%</h3>
 
             <p>Avec votre IMG, vous etes (selon Deurenberg)</p>
             <h4><?php 
@@ -151,36 +153,6 @@
                         }
                     }
                 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-                /* if($imgInfos['is_man'] === 0) {
-                    if($imgInfos['img'] < 25) {
-                        echo "Trop maigre";
-                    } elseif($imgInfos['img'] < 30 && $imgInfos['img'] > 24) {
-                        echo "Normal";
-                    } elseif($imgInfos['img'] > 29) {
-                        echo "Trop de graisse";
-                    }
-                } elseif($imgInfos['is_man'] === 1) {
-                    if($imgInfos['img'] < 15) {
-                        echo "Trop maigre";
-                    } elseif($imgInfos['img'] < 20 && $imgInfos['img'] > 14) {
-                        echo "Normal";
-                    } elseif($imgInfos['img'] > 19) {
-                        echo "Trop de graisse";
-                    }
-                } */
             ?></h4>
         </section>
     <?php endif; ?>
@@ -197,12 +169,12 @@
         <form class="bfp__tools__form">
             <div class="bfp__tools__form__cont">
                 <div class="bfp__tools__form__cont__field">
-                    <label for="bfpWeight">Poids en kg</label>
-                    <input type="number" name="weight" id="bfpWeight" placeholder="80">
-                </div>
-                <div class="bfp__tools__form__cont__field">
                     <label for="bfpSize">Taille en cm</label>
                     <input type="number" name="size" id="bfpSize" placeholder="175">
+                </div>
+                <div class="bfp__tools__form__cont__field">
+                    <label for="bfpWeight">Poids en kg</label>
+                    <input type="number" name="weight" id="bfpWeight" placeholder="80">
                 </div>
             </div>
             <div class="bfp__tools__form__cont">

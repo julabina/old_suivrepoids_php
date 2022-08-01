@@ -33,11 +33,11 @@
                     <?php if($goal['weight_goal'] === null && $goal['imc_goal'] === null && $goal['img_goal'] === null): ?>
                         <h3>Aucun objectif défini</h3>
                     <?php elseif($goal['weight_goal'] !== null): ?>
-                        <h3>Atteindre <?= $goal['weight_goal']; ?> kg</h3>
+                        <h3>Atteindre <?= htmlspecialchars($goal['weight_goal']); ?> kg</h3>
                     <?php elseif($goal['imc_goal'] !== null): ?>
-                        <h3>Atteindre un IMC de <?= $goal['imc_goal']; ?></h3>
+                        <h3>Atteindre un IMC de <?= htmlspecialchars($goal['imc_goal']); ?></h3>
                     <?php elseif($goal['img_goal'] !== null): ?>
-                        <h3>Atteindre un IMG de <?= $goal['img_goal']; ?>%</h3>
+                        <h3>Atteindre un IMG de <?= htmlspecialchars($goal['img_goal']); ?>%</h3>
                     <?php endif; ?>
                 <?php endif; ?>
             <?php endforeach; ?>
@@ -67,7 +67,7 @@
         <div class='obj__change__tabsCont'>
             <div class="obj__change__tabsCont__errorCont obj__change__tabsCont__errorCont__weight"></div>
             <form id="objFormWeight" action="/suivi_poids/objectif" method="post">
-                <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
+                <input type="hidden" name="token" value="<?= htmlspecialchars($_SESSION['token']); ?>">
                 <div class='obj__change__tabsCont__input'>
                     <label for="objChangeWeight">Entrer le poids que vous souhaitez atteindre</label>
                     <input type="number" name="objChangeWeight" id="changeWeight">
@@ -81,7 +81,7 @@
         <div class='obj__change__tabsCont obj__change__tabsCont--hidden'>
             <div class="obj__change__tabsCont__errorCont obj__change__tabsCont__errorCont__imc"></div>
             <form id="objFormImc" action="/suivi_poids/objectif" method="post">
-                <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
+                <input type="hidden" name="token" value="<?= htmlspecialchars($_SESSION['token']); ?>">
                 <div class='obj__change__tabsCont__input'>
                     <label for="objChangeImc">Entrer l'IMC que vous souhaitez atteindre</label>
                     <input type="number" name="objChangeImc" id="changeImc">
@@ -95,7 +95,7 @@
         <div class='obj__change__tabsCont obj__change__tabsCont--hidden'>
             <div class="obj__change__tabsCont__errorCont obj__change__tabsCont__errorCont__img"></div>
             <form id="objFormImg" action="/suivi_poids/objectif" method="post">
-                <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
+                <input type="hidden" name="token" value="<?= htmlspecialchars($_SESSION['token']); ?>">
                 <div class='obj__change__tabsCont__input'>
                     <label for="objChangeImg">Entrer l'IMG que vous souhaitez atteindre</label>
                     <input type="number" name="objChangeImg" id="changeImg">
@@ -117,18 +117,18 @@
                 ?>
                 <?php if($goal['weight_goal'] !== null): ?>
                     <article class="obj__old__card">
-                        <h3>Atteindre <?= $goal['weight_goal']; ?> kg</h3>
-                        <p>le <?= $newDate; ?>.</p>
+                        <h3>Atteindre <?= htmlspecialchars($goal['weight_goal']); ?> kg</h3>
+                        <p>le <?= htmlspecialchars($newDate); ?>.</p>
                     </article>
                 <?php elseif($goal['imc_goal'] !== null): ?>
                     <article class="obj__old__card">
-                        <h3>Atteindre un IMC de <?= $goal['imc_goal']; ?></h3>
-                        <p>le <?= $newDate; ?>.</p>
+                        <h3>Atteindre un IMC de <?= htmlspecialchars($goal['imc_goal']); ?></h3>
+                        <p>le <?= htmlspecialchars($newDate); ?>.</p>
                     </article>
                 <?php elseif($goal['img_goal'] !== null): ?>
                     <article class="obj__old__card">
-                        <h3>Atteindre un IMG de <?= $goal['img_goal']; ?>%</h3>
-                        <p>le <?= $newDate; ?>.</p>
+                        <h3>Atteindre un IMG de <?= htmlspecialchars($goal['img_goal']); ?>%</h3>
+                        <p>le <?= htmlspecialchars($newDate); ?>.</p>
                     </article>
                 <?php endif; ?>
             <?php endif; ?>

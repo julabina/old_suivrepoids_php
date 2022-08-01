@@ -1,5 +1,38 @@
-footer {
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: map-get($colors, primary);
-    height: 250px;
-    width: 100%;
+    height: 80px;
+    padding: 0 100px;
+    &__main {
+        display: flex;
+        justify-content: space-between;
+        width: 1080px;
+        color: map-get($map: $colors, $key: lightWhite);
+        h3 {
+            font-size: 0.9em;
+            font-weight: 300;
+        }
+        &__listCont {
+            display: flex;
+            ul {
+                display: flex;
+                margin-left: 40px;
+                li {
+                    margin-left: 15px;
+                }
+                a {
+                    text-decoration: none;
+                    color: inherit;
+                    &:hover {
+                        font-weight: 600;
+                    }
+                }
+            }
+            &__long {
+                width: 125px;
+            }
+        }
+    }
 }

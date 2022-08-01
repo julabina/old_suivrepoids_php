@@ -8,16 +8,18 @@
         <a class="header__titleLink" href="/suivi_poids/"><h1>TITRE DU SITE</h1></a>
         <?php if(isset($_SESSION['name']) && isset($_SESSION['user']) && isset($_SESSION['userId']) && isset($_SESSION['size']) && (isset($_SESSION['sexe']) && ($_SESSION['sexe'] === "man" || $_SESSION['sexe'] === "woman")) && isset($_SESSION['auth']) && $_SESSION['auth'] === true): ?>
             <div class="header__connected">
+                <a class='header__otherLink' href="/suivi_poids/img">IMG</a>
                 <a class="header__connected__toDashboard" href="/suivi_poids/dashboard">Tableau de bord</a>
                 <a class="header__connected__logoutBtn" href="/suivi_poids/logout">Se deconnecter</a>
                 <a href="/suivi_poids/profil"><div class="header__connected__userProfil">
                     <img src="../suivi_poids/assets/user.svg" alt="user icon">
                 </div></a>
             </div>
-        <?php else: ?>
-            <div class="header__notConnectBtns">
+            <?php else: ?>
+                <div class="header__notConnectBtns">
+                <a class='header__otherLink' href="/suivi_poids/img">IMG</a>
                 <a id="headerLogBtn" href="/suivi_poids/login">Se connecter</a>
-                <a href="/suivi_poids/sign">Creer un compte</a>
+                <a class="header__notConnectBtns__create" href="/suivi_poids/sign">Creer un compte</a>
             </div>
         <?php endif; ?>        
     </div>
@@ -30,7 +32,7 @@
     <?php if(isset($_SESSION['name']) && isset($_SESSION['user']) && isset($_SESSION['userId']) && isset($_SESSION['size']) && (isset($_SESSION['sexe']) && ($_SESSION['sexe'] === "man" || $_SESSION['sexe'] === "woman")) && isset($_SESSION['auth']) && $_SESSION['auth'] === true): ?>
         <section class="bmi__userSection"> 
             <p class="bmi__userSection__subTitle">Votre IMC est de</p>
-            <h3><?= floor($imcInfos['imc']); ?></h3>
+            <h3><?= htmlspecialchars(floor($imcInfos['imc'])); ?></h3>
 
             <p>Avec votre IMC, vous etes (selon l'OMS) en </p>
             <h4><?php 
@@ -53,9 +55,9 @@
 
             <p>Selon votre taille votre poids idéal se situe entre <?php 
                 $size = $imcInfos['size'] / 100;
-                echo ceil(($size * $size) * 18.5);
+                echo htmlspecialchars(ceil(($size * $size) * 18.5));
                 ?>kg et <?php
-                echo floor(($size * $size) * 25);  
+                echo htmlspecialchars(floor(($size * $size) * 25));  
             ?>kg.</p>
         </section>
     <?php endif; ?>
@@ -68,12 +70,12 @@
         <form class="bmi__tools__form">
             <div class="bmi__tools__form__cont">
                 <div class="bmi__tools__form__cont__field">
-                    <label for="bmiWeight">Poids en kg</label>
-                    <input type="number" name="weight" id="bmiWeight" placeholder="80">
-                </div>
-                <div class="bmi__tools__form__cont__field">
                     <label for="bmiSize">Taille en cm</label>
                     <input type="number" name="size" id="bmiSize" placeholder="175">
+                </div>
+                <div class="bmi__tools__form__cont__field">
+                    <label for="bmiWeight">Poids en kg</label>
+                    <input type="number" name="weight" id="bmiWeight" placeholder="80">
                 </div>
             </div>
             <div class="bmi__tools__form__btnCont">

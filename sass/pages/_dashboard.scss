@@ -91,13 +91,13 @@
         color: inherit;
     }
     &__graph {
-        margin: 30px 0 40px;
+        margin: 30px 0 0;
         padding-bottom: 30px;
         &__mainCont {
             display: flex;
             flex-direction: column;
             align-items: center;
-            height: 450px;
+            height: auto;
             &__tabs {
                 display: flex;
                 width: 810px;
@@ -129,25 +129,47 @@
                 min-height: 420px;
                 border-radius: 0 3px 3px 3px;
                 box-shadow: 0 3px 15px rgba(0, 0, 0, 0.199);
-                &--hidden {
-                    min-height: 0px;
-                    visibility: hidden;
-                    height: 0;
-                }
                 &--bot {
                     display: flex;
                     flex-direction: column;
                     background: map-get($map: $colors, $key: lightWhite);
                     margin-top: -2px;
-                    height: auto;
                     padding: 40px 50px;
                 }
-                &__row {
+                &--hidden {
+                    min-height: 0px;
+                    visibility: hidden;
+                    height: 0;
+                    padding: inherit;
+                }
+                &__rows {
                     display: flex;
-                    justify-content: space-around;
-                    height: 35px;
-                    border-bottom: 1px solid rgba(0, 0, 0, 0.158);
-                    margin-top: 10px;
+                    flex-direction: column;
+                    height: 330px;
+                    overflow: scroll;
+                    width: 100%;
+                    &__row {
+                        display: flex;
+                        justify-content: space-around;
+                        border-bottom: 1px solid rgba(0, 0, 0, 0.158);
+                        padding-top: 9px ;
+                        height: 35px;
+                        text-align: center;
+                        &:first-child {
+                            border-top: 1px solid rgba(0, 0, 0, 0.158);
+                            padding-top: 8px;
+                        }
+                        &__date {
+                            width: 95px;
+                        }
+                        &__stats {
+                            width: 45px;
+                        }
+                        &__nav {
+                            font-weight: 600;
+                            color: map-get($map: $colors, $key: lightBlack);
+                        }
+                    }
                 }
             }
             &__graphNav {

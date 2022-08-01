@@ -22,6 +22,12 @@ class UserController {
             (isset($_POST['sexe']) && ($_POST['sexe'] === "man" || $_POST['sexe'] === "woman")) &&
             (isset($_POST['birthday']) && preg_match('/^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)(?:19\d{2}|20[01][0-9]|2022)$/i', $_POST['birthday']))
         ) {
+
+            foreach ($_POST as $element => $val) {
+
+                $_POST[$element] = htmlspecialchars($val);
+            
+            }
             
             $email = $_POST['email'];
             $password = $_POST['password'];
@@ -63,6 +69,12 @@ class UserController {
                 (isset($_POST['email']) && $_POST['email'] !== "" && filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) && 
                 (isset($_POST['password']) && $_POST['password'] !== "" && preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/', $_POST['password']))
             ) {
+
+                foreach ($_POST as $element => $val) {
+
+                    $_POST[$element] = htmlspecialchars($val);
+                
+                }
 
                 $email = $_POST['email'];
                 $password = $_POST['password'];
@@ -135,10 +147,16 @@ class UserController {
         if(!isset($_SESSION['name']) || !isset($_SESSION['token']) || !isset($_SESSION['user']) || !isset($_SESSION['userId']) || !isset($_SESSION['size']) || (!isset($_SESSION['sexe']) || ($_SESSION['sexe'] !== "man" && $_SESSION['sexe'] !== "woman")) || !isset($_SESSION['auth']) || $_SESSION['auth'] !== true) {
             return header('Location: /suivi_poids/login');
         }
+
+        foreach ($_POST as $element => $val) {
+
+            $_POST[$element] = htmlspecialchars($val);
+        
+        }
         
         $userModel = new UserModel();
-        $userData = $userModel->getStats($_SESSION['userId']);
-        $userWeightList = $userModel->getAllWeight($_SESSION['userId']);   
+        $userData = $userModel->getStats(htmlspecialchars($_SESSION['userId']));
+        $userWeightList = $userModel->getAllWeight(htmlspecialchars($_SESSION['userId']));   
         
         
         if(!isset($userData->userId)) {
@@ -160,8 +178,14 @@ class UserController {
             return header('Location: /suivi_poids/login');
         }
 
+        foreach ($_POST as $element => $val) {
+
+            $_POST[$element] = htmlspecialchars($val);
+        
+        }
+
         $userModel = new UserModel();
-        $userInfos = $userModel->getUserInfos($_SESSION['userId']);
+        $userInfos = $userModel->getUserInfos(htmlspecialchars($_SESSION['userId']));
 
         var_dump($userInfos);
         require('templates/profil.php');
@@ -178,9 +202,15 @@ class UserController {
         if(!isset($_SESSION['name']) || !isset($_SESSION['token']) || !isset($_SESSION['user']) || !isset($_SESSION['userId']) || !isset($_SESSION['size']) || (!isset($_SESSION['sexe']) || ($_SESSION['sexe'] !== "man" && $_SESSION['sexe'] !== "woman")) || !isset($_SESSION['auth']) || $_SESSION['auth'] !== true) {
             return header('Location: /suivi_poids/login');
         }
+
+        foreach ($_POST as $element => $val) {
+
+            $_POST[$element] = htmlspecialchars($val);
+        
+        }
         
         $jwt = new Jwt();
-        $id = $_SESSION['userId'];
+        $id = htmlspecialchars($_SESSION['userId']);
         $token = $_POST['token'];
         
         if(!$jwt->isValid($token)) {
@@ -201,7 +231,7 @@ class UserController {
         if($id === $payload['userId']) {
             
             $userModel = new UserModel();
-            $success = $userModel->deleteUser($_SESSION['userId']);
+            $success = $userModel->deleteUser(htmlspecialchars($_SESSION['userId']));
             
             if($success) {
                 $this->logout("delete");
@@ -227,8 +257,14 @@ class UserController {
             return header('Location: /suivi_poids/login');
         }
 
+        foreach ($_POST as $element => $val) {
+
+            $_POST[$element] = htmlspecialchars($val);
+        
+        }
+
         $jwt = new Jwt();
-        $id = $_SESSION['userId'];
+        $id = htmlspecialchars($_SESSION['userId']);
         $token = $_POST['token'];
         
         if(!$jwt->isValid($token)) {
@@ -255,7 +291,7 @@ class UserController {
                 (isset($_POST['birthday']) && preg_match('/^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)(?:19\d{2}|20[01][0-9]|2022)$/i', $_POST['birthday']))
             ) {            
                 $userModel = new UserModel();
-                $success = $userModel->modifyUser($_SESSION['userId'], $_POST['name'], $_POST['size'], $_POST['sexe'], $_POST['birthday']); 
+                $success = $userModel->modifyUser(htmlspecialchars($_SESSION['userId']), $_POST['name'], $_POST['size'], $_POST['sexe'], $_POST['birthday']); 
                 
                 if($success){
                     header('Location: /suivi_poids/profil?success=true');
@@ -283,8 +319,14 @@ class UserController {
             return header('Location: /suivi_poids/login');
         }
 
+        foreach ($_POST as $element => $val) {
+
+            $_POST[$element] = htmlspecialchars($val);
+        
+        }
+
         $jwt = new Jwt();
-        $id = $_SESSION['userId'];
+        $id = htmlspecialchars($_SESSION['userId']);
         $token = $_POST['token'];
         
         if(!$jwt->isValid($token)) {
@@ -310,12 +352,12 @@ class UserController {
             ) {
  
                 $userModel = new UserModel();
-                $success = $userModel->modifyUserPassword($_SESSION['userId'], $_POST['oldPassword'], $_POST['newPassword']); 
+                $success = $userModel->modifyUserPassword(htmlspecialchars($_SESSION['userId']), $_POST['oldPassword'], $_POST['newPassword']); 
                 
                 if($success){
-                    header('Location: /suivi_poids/profil?success=true');
+                    return header('Location: /suivi_poids/profil?success=true');
                 } else {
-                    header('Location: /suivi_poids/profil?success=false');
+                    return header('Location: /suivi_poids/profil?success=false');
                 }     
             }
             

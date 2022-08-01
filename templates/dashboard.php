@@ -5,10 +5,9 @@
 <script>
     let weightListArr = [], listArr = [];
     let phpDate, dateSplit, dateMod, dateDecr, dayForFinalArr, daySplit, tempArr, overlayPara;
-
     <?php foreach($userWeightList as $row): ?>
         tempArr = [];
-        phpDate = "<?= $row->recordDate; ?>";
+        phpDate = "<?= htmlspecialchars($row->recordDate); ?>";
         dateSplit = phpDate.split('-');
         dateDecr = (dateSplit[1] /* - 1 */) + "";
         if(dateDecr.length === 1) {
@@ -20,10 +19,10 @@
         dayForFinalArr = dateSplit[0] + ", " + dateMod + ", " + daySplit[0];
         dayForOverlay = daySplit[0] + '/' + dateMod + '/' + dateSplit[0];
     
-        overlayPara = <?= $row->weight; ?> + 'kg le ' + dayForOverlay;
+        overlayPara = <?= htmlspecialchars($row->weight); ?> + 'kg le ' + dayForOverlay;
 
         tempArr.push(new Date(dayForFinalArr));
-        tempArr.push(<?= $row->weight; ?>);
+        tempArr.push(<?= htmlspecialchars($row->weight); ?>);
         tempArr.push(overlayPara);
 
         listArr.push(tempArr);
@@ -113,18 +112,18 @@
         </div>
         <div class="dash__infos__cont">
             <div onClick="handleModal()" class="dash__infos__cont__infoBox">
-                <h4>Votre poids au <?= $userData->recordDate; ?></h4>
-                <h3><?= $userData->weight; ?></h3>
+                <h4>Votre poids au <?= htmlspecialchars($userData->recordDate); ?></h4>
+                <h3><?= htmlspecialchars($userData->weight); ?></h3>
                 <p>cliquer pour ajouter un nouveau poids.</p>
             </div>
             <a href="/suivi_poids/imc"><div class="dash__infos__cont__infoBox">
                 <h4>Votre IMC</h4>
-                <h3><?= floor($userData->imc); ?></h3>
+                <h3><?= htmlspecialchars(floor($userData->imc)); ?></h3>
                 <p></p>
             </div></a>
             <a href="/suivi_poids/img"><div class="dash__infos__cont__infoBox">
                 <h4>Votre IMG</h4>
-                <h3><?= $userData->img; ?>%</h3>
+                <h3><?= htmlspecialchars($userData->img); ?>%</h3>
                 <p></p>
             </div></a>
         </div>
@@ -140,7 +139,7 @@
                     <?php else: ?>
                         <h4>Votre objectif actuel</h4>
                     <?php endif; ?>
-                    <h3>Atteindre le poids de <?= $userData->weight_goal; ?> kg</h3>
+                    <h3>Atteindre le poids de <?= htmlspecialchars($userData->weight_goal); ?> kg</h3>
                 <!-- if goal is imc -->
                 <?php elseif($userData->imc_goal !== null): ?>
                     <?php if($userData->imc <= $userData->imc_goal): ?>
@@ -149,7 +148,7 @@
                     <?php else: ?>
                         <h4>Votre objectif actuel</h4>
                     <?php endif; ?>
-                    <h3>Atteindre un IMC de <?= $userData->imc_goal; ?></h3>
+                    <h3>Atteindre un IMC de <?= htmlspecialchars($userData->imc_goal); ?></h3>
                 <!-- if goal is img -->
                 <?php elseif($userData->img_goal !== null): ?>
                     <?php if($userData->img <= $userData->img_goal): ?>
@@ -158,7 +157,7 @@
                     <?php else: ?>
                         <h4>Votre objectif actuel</h4>
                     <?php endif; ?>
-                    <h3>Atteindre un IMG de <?= $userData->img_goal; ?>%</h3>
+                    <h3>Atteindre un IMG de <?= htmlspecialchars($userData->img_goal); ?>%</h3>
                 <?php endif; ?>
                 <!-- <p>Phrase en rapport a la reussite ou non</p> -->
             </div>
@@ -195,7 +194,7 @@
                         <option value="byTime6">6 mois</option>
                         <option value="byTime">1 ans</option>
                         <?php foreach($years as $year): ?>
-                            <option value="byYear<?= $year; ?>">Année <?= $year; ?></option>
+                            <option value="byYear<?= htmlspecialchars($year); ?>">Année <?= htmlspecialchars($year); ?></option>
                         <?php endforeach; ?>
                         <option value="byAll">Tout</option>
                     </select>
@@ -204,19 +203,28 @@
             <div class="dash__graph__mainCont__graph" id="chart_div">
             </div>
             <div class="dash__graph__mainCont__graph dash__graph__mainCont__graph--bot dash__graph__mainCont__graph--hidden">
+                <ul class="dash__graph__mainCont__graph__rows">
+                    <li class="dash__graph__mainCont__graph__rows__row dash__graph__mainCont__graph__rows__row__nav">
+                        <p class="dash__graph__mainCont__graph__rows__row__date">Date</p>
+                        <p class="dash__graph__mainCont__graph__rows__row__stats">Poids</p>
+                        <p class="dash__graph__mainCont__graph__rows__row__stats">IMC</p>
+                        <p class="dash__graph__mainCont__graph__rows__row__stats">IMG</p>
+                    </li>
                 <?php foreach($userWeightList as $weight): ?>
-                    <div class="dash__graph__mainCont__graph__row">
-                        <div class="dash__graph__mainCont__graph__row_"><p><?= date('d/m/Y',strtotime($weight->recordDate)); ?></p></div>
-                        <div class="dash__graph__mainCont__graph__row_"><p><?= $weight->weight; ?></p></div>
-                        <div class="dash__graph__mainCont__graph__row_"><p><?= $weight->bmi; ?></p></div>
-                        <div class="dash__graph__mainCont__graph__row_"><p><?= $weight->bfp; ?></p></div>
-                    </div>
+                    
+                    <li class="dash__graph__mainCont__graph__rows__row">
+                        <div class="dash__graph__mainCont__graph__rows__row__date"><p><?= date('d/m/Y',strtotime($weight->recordDate)); ?></p></div>
+                        <div class="dash__graph__mainCont__graph__rows__row__stats"><p><?= htmlspecialchars($weight->weight); ?></p></div>
+                        <div class="dash__graph__mainCont__graph__rows__row__stats"><p><?= htmlspecialchars($weight->bmi); ?></p></div>
+                        <div class="dash__graph__mainCont__graph__rows__row__stats"><p><?= htmlspecialchars($weight->bfp); ?></p></div>
+                    </li>
+                    
                 <?php endforeach; ?>
+                </ul>
             </div>
         </div>
     </section>
     <!-- section graph end -->
-    <button onClick="tes7t()">ok</button>
 </main>
 
 <!-- modal add weight begin -->
@@ -225,10 +233,10 @@
         <p onClick="handleModal()" class="dashAddWeight__modal__close">X</p>
         <?php $currentDate = date('d-m-Y'); ?>
         <?php if($userData->recordDate === $currentDate): ?>
-            <h2>Vous ne pouvez ajouter qu'une date par jour.</h2>
+            <h2>Vous ne pouvez ajouter qu'un poids par jour.</h2>
             <?php else: ?>
                 <form class="dashAddWeight__modal__form" action="/suivi_poids/addWeight" method="post">
-                    <input type="hidden" name="token" value="<?= $_SESSION['token']; ?>">
+                    <input type="hidden" name="token" value="<?= htmlspecialchars($_SESSION['token']); ?>">
                     <label for="addWeightInput">Ajouter un nouveau poids</label>
                     <p class="dashAddWeight__modal__form__error"></p>
                 <input type="number" name="addWeight" id="addWeightInput">

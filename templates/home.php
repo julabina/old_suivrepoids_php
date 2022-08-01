@@ -20,7 +20,7 @@
         <?php else: ?>
             <div class="header__notConnectBtns">
                 <a id="headerLogBtn" href="/suivi_poids/login">Se connecter</a>
-                <a href="/suivi_poids/sign">Creer un compte</a>
+                <a class="header__notConnectBtns__create" href="/suivi_poids/sign">Creer un compte</a>
             </div>
         <?php endif; ?>
     </div>
@@ -29,7 +29,7 @@
 <main>
     <section class='home__basics'>
         <?php if(isset($_SESSION['name']) && isset($_SESSION['user']) && isset($_SESSION['userId']) && isset($_SESSION['size']) && (isset($_SESSION['sexe']) && ($_SESSION['sexe'] === "man" || $_SESSION['sexe'] === "woman")) && isset($_SESSION['auth']) && $_SESSION['auth'] === true): ?>
-            <h1>Bienvenue <?= $_SESSION['name']; ?></h1>
+            <h1>Bienvenue <?= htmlspecialchars($_SESSION['name']); ?></h1>
             <a class="home__basics__toDash" href="/suivi_poids/dashboard">Votre tableau de bord</a>
         <?php else: ?>
             <h2 class="home__basics__para">Une phrase d'accroche pertinante</h2>
