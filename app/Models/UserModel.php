@@ -191,11 +191,24 @@ class UserModel extends DatabaseConnection {
      */
     public function deleteUser(string $userId): bool {
 
-        $statement = $this->getConnection()->prepare(
-            "DELETE FROM users WHERE users.userId = ?"
+        $connect = $this->getConnection();
+
+        $statement = $connect->prepare(
+            "DELETE FROM users WHERE users.userId = ?"            
         );
 
         $affectedLine = $statement->execute([$userId]);
+        
+        if($affectedLine > 0) {
+            $statement2 = $connect->prepare(
+                "DELETE FROM goals WHERE goals.userId = ?"            
+            );
+            $statement3 = $connect->prepare(
+                "DELETE FROM weight_infos WHERE weight_infos.userId = ?"            
+            );
+            $affectedLine = $statement2->execute([$userId]);
+            $affectedLine = $statement3->execute([$userId]);
+        }
 
         return ($affectedLine > 0);
 
@@ -293,7 +306,15 @@ class UserModel extends DatabaseConnection {
 
     }
 
-    public function sendMail($email, $name, $subject, $msg) {
+    /**
+     * Send email to webmaster
+     * @param string $email
+     * @param string $name
+     * @param string $subject
+     * @param string $msg
+     * @return boolean
+     */
+    public function sendMail(string $email, string $name, string $subject, string $msg): bool {
 
         $mail = new PHPMailer();
         $mainSubject = "Suivi poids - " . $subject;
@@ -322,7 +343,7 @@ class UserModel extends DatabaseConnection {
                 return true;
             }
         } catch(Exception $e) {
-            return $mail->ErrorInfo;
+            return false /* $mail->ErrorInfo */;
         }
 
     }
