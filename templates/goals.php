@@ -2,8 +2,13 @@
 <?php $contentHead = "" ?>
 
 <?php
+    $now = new DateTime();
+    $currentTimestamp = $now->getTimestamp();
     if(!isset($_SESSION['name']) || !isset($_SESSION['user']) || !isset($_SESSION['userId']) || !isset($_SESSION['size']) || (!isset($_SESSION['sexe']) || ($_SESSION['sexe'] !== "man" && $_SESSION['sexe'] !== "woman")) || !isset($_SESSION['auth']) || $_SESSION['auth'] !== true) {
-        header('Location: /suivi_poids/login');
+        return header('Location: /suivi_poids/login');
+    }
+    if(!isset($_SESSION['exp']) || $_SESSION['exp'] < $currentTimestamp) {
+        return header('Location: /suivi_poids/logoutexp');
     }
 ?>
 

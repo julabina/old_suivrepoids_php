@@ -4,6 +4,9 @@ namespace App\Models;
 
 use App\Lib\DatabaseConnection;
 use \Ramsey\Uuid\Uuid;
+use \PHPMailer\PHPMailer\PHPMailer;
+use \PHPMailer\PHPMailer\SMTP;
+use \PHPMailer\PHPMailer\Exception;
 
 class User {
     public string $userId;
@@ -287,6 +290,40 @@ class UserModel extends DatabaseConnection {
         }
 
         return $weightData;
+
+    }
+
+    public function sendMail($email, $name, $subject, $msg) {
+
+        $mail = new PHPMailer();
+        $mainSubject = "Suivi poids - " . $subject;
+        $message = "From: " . $name . " , Email: " . $email . " , Message: " . $msg;
+
+        try {
+            $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+            $mail->isSMTP();
+            $mail->SMTPSecure = 'ssl';
+            $mail->Port = 465;
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = $_ENV['GMAIL_ACC'];
+            $mail->Password = $_ENV['GMAIL_PWD'];
+
+            $mail->setFrom($_ENV['GMAIL_ACC'], 'Suivi poids');
+            $mail->addAddress($_ENV['GMAIL_ACC']);
+            $mail->addReplyTo($email);
+            
+            $mail->Subject = $mainSubject;
+            $mail->Body = $message;
+
+            if(!$mail->send()) {
+                return false;
+            } else {
+                return true;
+            }
+        } catch(Exception $e) {
+            return $mail->ErrorInfo;
+        }
 
     }
 

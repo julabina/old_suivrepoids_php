@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Lib\Jwt;
 use App\Models\UserModel;
 use App\Models\StatsModel;
+use \DateTime;
 
 class UserController {
 
@@ -100,6 +101,8 @@ class UserController {
                     $jwt = new Jwt();
                     $token = $jwt->createToken($user[0]);
                     $_SESSION['token'] = $token;
+                    $now = new DateTime();
+                    $_SESSION['exp'] = $now->getTimestamp() + 86400;
 
                     header('Location: /suivi_poids');
                 } else {
@@ -136,6 +139,15 @@ class UserController {
 
 
     }
+
+    /**
+     * logout expirated php session
+     */
+    public function logoutExp() {
+
+        $this->logout("exp");
+
+    } 
 
     /**
      * open the user dashboard if user is logged
@@ -368,6 +380,31 @@ class UserController {
             $this->logout('format');
         }
 
+    }
+
+    public function sendMail() {
+
+        foreach ($_POST as $element => $val) {
+            $_POST[$element] = htmlspecialchars($val);
+        }
+
+        if(
+            (isset($_POST['email']) && $_POST['email'] !== "" && filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) && 
+            (isset($_POST['name']) && $_POST['name'] !== "" && preg_match('/^[a-zA-Zé èà]*$/', $_POST['name']) && (strlen($_POST['name']) > 2 || strlen($_POST['name']) < 25)) &&
+            (isset($_POST['subject']) && $_POST['subject'] !== "" && preg_match("/^[a-zA-Zé èà0-9 ?!:@,+'.-]+$/", $_POST['subject']) && (strlen($_POST['subject']) > 5 || strlen($_POST['subject'] < 50))) &&
+            (isset($_POST['message']) && $_POST['message'] !== "" && preg_match("/^[a-zA-Zé èà0-9 ?!:@,+'.-]+$/", $_POST['message']) && (strlen($_POST['message']) > 10 || strlen($_POST['message'] < 200)))
+        ) {
+
+            $userModel = new UserModel();
+            $success = $userModel->sendMail($_POST['email'], $_POST['name'], $_POST['subject'], $_POST['message']);
+            
+            if($success) {
+                header('Location: /suivi_poids/contact?send=true');
+            } else {
+                header('Location: /suivi_poids/contact?send=false');
+            }
+        }
+        
     }
 
 }

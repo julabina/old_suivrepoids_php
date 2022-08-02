@@ -7,6 +7,7 @@
     },
     "require": {
         "ramsey/uuid": "^4.2",
-        "vlucas/phpdotenv": "^5.4"
+        "vlucas/phpdotenv": "^5.4",
+        "phpmailer/phpmailer": "^6.6"
     }
 }

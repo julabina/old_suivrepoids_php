@@ -1,0 +1,69 @@
+.contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 70px;
+    background: map-get($colors,  primaryBackground);
+    min-height: 92vh;
+    h2 {
+        font-size: 2em;
+        font-weight: 600;
+        color: map-get($map: $colors, $key:lightBlack );
+        margin: 25px 0 60px;
+    }
+    &__section {
+        width: 810px;
+        background: map-get($map: $colors, $key:lightWhite );
+        padding: 25px 40px 50px;
+        border-radius: 3px;
+        margin-bottom: 10px;
+        &__errorCont {
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+            color: map-get($map: $colors, $key: error);
+            min-height: 60px;
+            padding-bottom: 40px;
+            line-height: 1.4;
+            letter-spacing: 0.3px;
+        }
+        &__form {
+            &__top {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 20px;
+                &__email, &__name {
+                    @include form;
+                    width: 100%;
+                }
+                &__email {
+                    margin-right: 30px;
+                }
+            }
+            &__subject {
+                @include form;
+                margin-bottom: 20px;
+            }
+            &__text {
+                display: flex;
+                flex-direction: column;
+                label {
+                    padding-bottom: 5px;
+                }
+                &__message {
+                    resize: vertical;
+                    min-height: 200px;
+                }
+            }
+            &__btnCont {
+                display: flex;
+                justify-content: center;
+                margin-top: 30px;
+                &__btn {
+                    @include submitBtn;
+                    padding: 10px;
+                }
+            }
+        }
+    }
+}
