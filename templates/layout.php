@@ -14,7 +14,6 @@
             <div class="footer__main__listCont">
                <ul>
                   <a href="/suivi_poids/about"><li>A propos</li></a>
-                  <a href="/suivi_poids/legal"><li class="footer__main__listCont__long">Mentions légales</li></a>
                   <a href="/suivi_poids/cgu"><li>CGU</li></a>
                   <a href="/suivi_poids/contact"><li>Contact</li></a>
                </ul>

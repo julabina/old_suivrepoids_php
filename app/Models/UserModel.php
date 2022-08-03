@@ -25,6 +25,7 @@ class User {
 }
 
 class WeightData {
+    public string $id;
     public string $weight;
     public string $bmi;
     public string $bfp;
@@ -124,7 +125,7 @@ class UserModel extends DatabaseConnection {
     public function getStats(string $userId): User {
 
         $statement = $this->getConnection()->query(
-            "SELECT size, firstname, is_man, weight_goal, imc_goal, img_goal, imc, img, user_weight, record_date FROM users RIGHT JOIN goals ON users.userId = goals.userId RIGHT JOIN weight_infos ON users.userId = weight_infos.userId WHERE users.userId = '$userId' AND goals.current = 1 AND weight_infos.record_date = (SELECT MAX(record_date) FROM weight_infos WHERE weight_infos.userId = '$userId')"
+            "SELECT size, firstname, is_man, weight_goal, imc_goal, img_goal, imc, img, user_weight, record_date FROM users RIGHT JOIN goals ON users.userId = goals.userId RIGHT JOIN weight_infos ON users.userId = weight_infos.userId WHERE users.userId = '$userId' AND goals.current_goal = 1 AND weight_infos.record_date = (SELECT MAX(record_date) FROM weight_infos WHERE weight_infos.userId = '$userId')"
         );
         
         $userStats = $statement->fetch();
@@ -286,7 +287,7 @@ class UserModel extends DatabaseConnection {
     public function getAllWeight(string $userId): array {
 
         $statement = $this->getConnection()->query(
-            "SELECT user_weight, imc, img, record_date FROM weight_infos WHERE userId = '$userId' ORDER BY record_date DESC"
+            "SELECT id, user_weight, imc, img, record_date FROM weight_infos WHERE userId = '$userId' ORDER BY record_date DESC"
         );
 
         $weightData = [];
@@ -294,6 +295,7 @@ class UserModel extends DatabaseConnection {
         while(($row = $statement->fetch())) {
 
             $data = new WeightData();
+            $data->id = $row['id'];
             $data->weight = $row['user_weight'];
             $data->bmi = $row['imc'];
             $data->bfp = $row['img'];
@@ -346,6 +348,97 @@ class UserModel extends DatabaseConnection {
             return false /* $mail->ErrorInfo */;
         }
 
+    }
+
+    /**
+     * check if user exist
+     * if ok change the password
+     * and send email with him
+     * 
+     * @param string $email
+     * @return string
+     */
+    public function resetPwd(string $email): string {
+
+        $connect = $this->getConnection();
+
+        $statement = $connect->query(
+            "SELECT * FROM users WHERE email = '$email'"
+        );
+
+        $user = $statement->fetch();
+
+        if($user > 0) {
+
+            $newPassword = ""; 
+            
+            do{
+                $newPassword = $this->randPwd();
+            }while(!preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/', $newPassword));
+            
+            $newPasswordHash = password_hash($newPassword, PASSWORD_DEFAULT);
+
+            $pwdStatement = $connect->prepare(
+                "UPDATE users SET user_pwd = ? WHERE users.email = ?"
+            );
+
+            $affectedLine = $pwdStatement->execute([$newPasswordHash, $email]);
+
+            if($affectedLine > 0) {
+                $mail = new PHPMailer();
+                $mainSubject = "Suivi poids - Reinitialisation du mot de passe";
+                $message = "Votre nouveau mot de passe est: $newPassword";
+        
+                try {
+                    $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+                    $mail->isSMTP();
+                    $mail->SMTPSecure = 'ssl';
+                    $mail->Port = 465;
+                    $mail->Host = 'smtp.gmail.com';
+                    $mail->SMTPAuth = true;
+                    $mail->Username = $_ENV['GMAIL_ACC'];
+                    $mail->Password = $_ENV['GMAIL_PWD'];
+        
+                    $mail->setFrom($_ENV['GMAIL_ACC'], 'Suivi poids');
+                    $mail->addAddress("julabina@hotmail.fr");
+                    
+                    $mail->Subject = $mainSubject;
+                    $mail->Body = $message;
+        
+                    if(!$mail->send()) {
+                        return "false";
+                    } else {
+                        return "true";
+                    }
+                } catch(Exception $e) {
+                    return "false"  /*$mail->ErrorInfo */;
+                } 
+            }  else {
+                return "false";
+            } 
+            
+        } else {
+            return "notExist";
+        }
+    }
+
+    /**
+     * generate random password
+     * @return string
+     */
+    private function randPwd(): string {
+
+        $pwdLength = rand(8, 15);
+        $char = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charLength = strlen($char);    
+        
+        $pwd = "";
+
+        for($i = 0; $i < $pwdLength; $i++) {
+            $pwd .= $char[rand(0, $charLength - 1)];
+        }
+
+        return $pwd;
     }
 
 }

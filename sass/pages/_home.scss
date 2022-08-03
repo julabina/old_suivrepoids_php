@@ -76,6 +76,7 @@
             justify-content: space-between;
             align-items: center;
             &__main {
+                position: relative;
                 background: map-get($map: $colors, $key: primary);
                 color: map-get($map: $colors, $key: lightWhite);
                 width: 380px;
@@ -89,12 +90,15 @@
                     margin-bottom: 35px;
                 }
                 p {
-                    line-height: 1.4;
-                    letter-spacing: 0.5px;
+                    line-height: 1.5;
+                    letter-spacing: 0.4px;
                 }
                 &__btnCont {
                     display: flex;
                     justify-content: center;
+                    position: absolute;
+                    left: 0;right: 0;
+                    bottom: 40px;
                     &__link {
                         display: flex;
                         align-items: center;
@@ -137,6 +141,9 @@
                         height: 40px;
                     }
                 }
+                h3 {
+                    font-weight: 600;
+                }
                 p {
                     text-align: center;
                     line-height: 1.4;
@@ -161,14 +168,10 @@
         }
         &__calculLink {
             display: flex;
+            justify-content: space-between;
             width: 1050px;
             margin-bottom: 40px;
             height: 150px;
-            p {
-                line-height: 1.4;
-                letter-spacing: 0.5px;
-                margin: 5px 0 ;
-            }
             a {
                 display: flex;
                 align-items: center;
@@ -176,6 +179,7 @@
                 background: map-get($colors, primaryBackground);
                 padding: 15px;
                 min-width: 150px;
+                width: 150px;
                 text-decoration: none;
                 color: inherit;
                 text-align: center;
@@ -187,6 +191,16 @@
                     background: white;
                     border: 1px solid black;
                     transition: all 150ms ease-out;
+                }
+            }
+            &__para {
+                display: flex;
+                flex-direction: column;
+                margin-top: 25px;
+                p {
+                    line-height: 1.4;
+                    letter-spacing: 0.5px;
+                    margin: 5px 0 ;
                 }
             }
         }

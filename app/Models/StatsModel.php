@@ -34,8 +34,8 @@ class StatsModel extends DatabaseConnection {
         $birthToNow = $currentDate - $birthdayTimestamp;
         $age = floor($birthToNow / 31536000);
 
-        $imc = $this->calculImc($weight, $size);
-        $img = $this->calculImg($sexe, $imc, $age);
+        $imc = $this->calculBmi($weight, $size);
+        $img = $this->calculBfp($sexe, $imc, $age);
 
         $statement = $this->getConnection()->prepare(
             "INSERT INTO weight_infos(id, userId, user_weight, imc, img, record_date, created_at) VALUES (?, ?, ?, ?, ?, ?, NOW())"
@@ -65,7 +65,7 @@ class StatsModel extends DatabaseConnection {
             $newId = $v4->toString();
             
             $statement = $this->getConnection()->prepare(
-                "INSERT INTO goals(id, userId, weight_goal, imc_goal, img_goal, current, created_at) VALUES (?, ?, ?, ?, ?, ?, NOW())"
+                "INSERT INTO goals(id, userId, weight_goal, imc_goal, img_goal, current_goal, created_at) VALUES (?, ?, ?, ?, ?, ?, NOW())"
             );
             
             $affectedLine = $statement->execute([$newId, $userId, $weight, $imc, $img, 1]);
@@ -86,7 +86,7 @@ class StatsModel extends DatabaseConnection {
     private function removeCurrent(string $userId): bool {
         
         $statement = $this->getConnection()->prepare(
-            "UPDATE goals SET current = ? WHERE userId = ?"
+            "UPDATE goals SET current_goal = ? WHERE userId = ?"
         );
         
         $affectedLine = $statement->execute([0, $userId]);
@@ -103,7 +103,8 @@ class StatsModel extends DatabaseConnection {
     public function getAllGoals(string $userId): array {
 
         $statement = $this->getConnection()->query(
-            "SELECT * FROM goals WHERE userId = '$userId' ORDER BY created_at DESC"
+            /* "SELECT * FROM goals WHERE userId = '$userId' ORDER BY created_at DESC" */
+            "SELECT goals.id, weight_goal, imc_goal, img_goal, current_goal, success, goals.created_at, user_weight, imc, img, record_date FROM goals LEFT JOIN weight_infos ON goals.userId = weight_infos.userId WHERE goals.userId = '$userId' AND weight_infos.record_date = (SELECT MAX(record_date) FROM weight_infos WHERE weight_infos.userId = '$userId') ORDER BY goals.created_at DESC; "
         );
 
         $goals = [];
@@ -129,7 +130,7 @@ class StatsModel extends DatabaseConnection {
 
         $userInfos = $statement->fetch();
 
-        $imc = $this->calculImc($userInfos['user_weight'], $userInfos['size']);
+        $imc = $this->calculBmi($userInfos['user_weight'], $userInfos['size']);
         
         $imcArr = ["imc" => $imc];
 
@@ -150,7 +151,7 @@ class StatsModel extends DatabaseConnection {
 
         $userInfos = $statement->fetch();
 
-        $imc = $this->calculImc($userInfos['user_weight'], $userInfos['size']);
+        $imc = $this->calculBmi($userInfos['user_weight'], $userInfos['size']);
 
         if($userInfos['is_man'] === 1) {
             $sexe = "man";
@@ -163,7 +164,7 @@ class StatsModel extends DatabaseConnection {
         $birthToNow = $currentDate - $birthdayTimestamp;
         $age = floor($birthToNow / 31536000);
         
-        $img = $this->calculImg($sexe, $imc, $age);
+        $img = $this->calculBfp($sexe, $imc, $age);
 
         $imgArr = ["img" => $img];
         $ageArr = ["age" => $age];
@@ -178,7 +179,7 @@ class StatsModel extends DatabaseConnection {
      * @param string $size
      * @return int
      */
-    private function calculImc(string $weight, string $size): int {
+    private function calculBmi(string $weight, string $size): int {
         
         $newSize = $size / 100;
         
@@ -192,7 +193,7 @@ class StatsModel extends DatabaseConnection {
      * @param string $age
      * @return int
      */
-    private function calculImg(string $sexe, string $imc, string $age): int {
+    private function calculBfp(string $sexe, string $imc, string $age): int {
 
         $newImc = number_format($imc, 0);
 
@@ -201,6 +202,42 @@ class StatsModel extends DatabaseConnection {
         } else  if ($sexe === "woman") {
             return (1.2*$newImc)+(0.23*$age)-(10.8*0)-5.4;
         }
+    }
+
+    /**
+     * if weight is not the current, 
+     * delete weight
+     * @param string $id
+     * @param string $userId
+     * @return string
+     */
+    public function deleteWeight(string $id, string $userId): string {
+
+        $connect = $this->getConnection();
+
+        $checkStatement = $connect->query(
+            "SELECT id FROM weight_infos WHERE record_date = (SELECT MAX(record_date) FROM weight_infos WHERE weight_infos.userId = '$userId')"
+        );
+
+        $currentId = $checkStatement->fetch();
+        
+        if($id !== $currentId['id']) {
+            $statement = $connect->prepare(
+                "DELETE FROM weight_infos WHERE weight_infos.id = ?"
+            );
+
+            $affectedLine = $statement->execute([$id]);
+
+            if($affectedLine > 0) {
+                return "ok";
+            } else {
+                return "notOk";
+            }
+
+        } else {
+            return "first";
+        }
+
     }
 
 }

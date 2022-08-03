@@ -14,6 +14,20 @@ class UserController {
      */
     public function sign() {
 
+        if(isset($_POST['g-recaptcha-response']) && $_POST['g-recaptcha-response'] !== ""){
+
+            $captcha = $_POST['g-recaptcha-response'];
+            $apiCallAddress = "https://www.google.com/recaptcha/api/siteverify?secret=".$_ENV['G_CAPTCHA_SERVER_KEY']."&response=".$captcha;
+            $response=file_get_contents($apiCallAddress);
+            $google_response = json_decode($response);
+
+            if($google_response->success !== true) {
+                return header('Location: /suivi_poids/login?err=captcha');
+            } 
+        } else {
+            return header('Location: /suivi_poids/login?err=captcha');
+        }
+
         if(
             (isset($_POST['email']) && $_POST['email'] !== "" && filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) && 
             (isset($_POST['password']) && $_POST['password'] !== "" && preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/', $_POST['password'])) &&
@@ -25,9 +39,7 @@ class UserController {
         ) {
 
             foreach ($_POST as $element => $val) {
-
                 $_POST[$element] = htmlspecialchars($val);
-            
             }
             
             $email = $_POST['email'];
@@ -50,7 +62,7 @@ class UserController {
 
                 $addingWeight = $statModel->addWeight($weight, $size, null, $sexe, $age, $id);
                 $addingGoal = $statModel->addGoal($id, NULL, NULL, NULL);
-                $this->log();
+                $this->log(true);
             } else {
                 header('Location: /suivi_poids/sign?err=sign');
             }
@@ -64,7 +76,23 @@ class UserController {
      * log one user,
      * create php session if ok
      */
-    public function log() {
+    public function log($notRobot = false) {
+
+            if(!$notRobot) {
+                if(isset($_POST['g-recaptcha-response']) && $_POST['g-recaptcha-response'] !== ""){
+                    
+                    $captcha = $_POST['g-recaptcha-response'];
+                    $apiCallAddress = "https://www.google.com/recaptcha/api/siteverify?secret=".$_ENV['G_CAPTCHA_SERVER_KEY']."&response=".$captcha;
+                    $response=file_get_contents($apiCallAddress);
+                    $google_response = json_decode($response);
+                    
+                    if($google_response->success !== true) {
+                        return header('Location: /suivi_poids/login?err=captcha');
+                    } 
+                } else {
+                    return header('Location: /suivi_poids/login?err=captcha');
+                }
+            }
 
             if(
                 (isset($_POST['email']) && $_POST['email'] !== "" && filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) && 
@@ -72,9 +100,7 @@ class UserController {
             ) {
 
                 foreach ($_POST as $element => $val) {
-
                     $_POST[$element] = htmlspecialchars($val);
-                
                 }
 
                 $email = $_POST['email'];
@@ -105,6 +131,7 @@ class UserController {
                     $_SESSION['exp'] = $now->getTimestamp() + 86400;
 
                     header('Location: /suivi_poids');
+                    
                 } else {
 
                     header('Location: /suivi_poids/login?err=log');
@@ -112,9 +139,7 @@ class UserController {
                 }
 
             } else {
-
                 header('Location: /suivi_poids/login?err=format');
-            
             }
             
 
@@ -161,19 +186,12 @@ class UserController {
         }
 
         foreach ($_POST as $element => $val) {
-
-            $_POST[$element] = htmlspecialchars($val);
-        
+            $_POST[$element] = htmlspecialchars($val);       
         }
         
         $userModel = new UserModel();
         $userData = $userModel->getStats(htmlspecialchars($_SESSION['userId']));
         $userWeightList = $userModel->getAllWeight(htmlspecialchars($_SESSION['userId']));   
-        
-        
-        if(!isset($userData->userId)) {
-           
-        }
         
         require('templates/dashboard.php');
 
@@ -191,15 +209,12 @@ class UserController {
         }
 
         foreach ($_POST as $element => $val) {
-
             $_POST[$element] = htmlspecialchars($val);
-        
         }
 
         $userModel = new UserModel();
         $userInfos = $userModel->getUserInfos(htmlspecialchars($_SESSION['userId']));
 
-        var_dump($userInfos);
         require('templates/profil.php');
     }
 
@@ -216,9 +231,7 @@ class UserController {
         }
 
         foreach ($_POST as $element => $val) {
-
-            $_POST[$element] = htmlspecialchars($val);
-        
+            $_POST[$element] = htmlspecialchars($val);      
         }
         
         $jwt = new Jwt();
@@ -270,9 +283,7 @@ class UserController {
         }
 
         foreach ($_POST as $element => $val) {
-
             $_POST[$element] = htmlspecialchars($val);
-        
         }
 
         $jwt = new Jwt();
@@ -332,9 +343,7 @@ class UserController {
         }
 
         foreach ($_POST as $element => $val) {
-
-            $_POST[$element] = htmlspecialchars($val);
-        
+            $_POST[$element] = htmlspecialchars($val);   
         }
 
         $jwt = new Jwt();
@@ -399,12 +408,37 @@ class UserController {
             $success = $userModel->sendMail($_POST['email'], $_POST['name'], $_POST['subject'], $_POST['message']);
             
             if($success) {
-                header('Location: /suivi_poids/contact?send=true');
-            } else {
-                header('Location: /suivi_poids/contact?send=false');
+                return header('Location: /suivi_poids/contact?send=true');
+            } 
+        }
+
+        header('Location: /suivi_poids/contact?send=false');
+    }
+
+    /**
+     * try to reset password
+     */
+    public function resetPwd() {
+
+        foreach ($_POST as $element => $val) {
+            $_POST[$element] = htmlspecialchars($val);
+        }
+
+        if((isset($_POST['email']) && $_POST['email'] !== "" && filter_var($_POST['email'], FILTER_VALIDATE_EMAIL))) {
+
+            $userModel = new UserModel();
+            $res = $userModel->resetPwd($_POST['email']);
+
+            if($res === 'true') {
+                return header('Location: /suivi_poids/login?err=send');
+            } elseif($res === 'notExist') {
+                return header('Location: /suivi_poids/forgotten?err=notExist');
+            } elseif($res === 'false') {
+                return header('Location: /suivi_poids/forgotten?err=notSend');
             }
         }
-        
+        header('Location: /suivi_poids/forgotten?err=notSend');
+
     }
 
 }

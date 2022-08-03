@@ -1,0 +1,37 @@
+.cgu {
+    display: flex;
+    justify-content: center;
+    padding-top: 70px;
+    min-height: 100vh;
+    &__section {
+        width: 1080px;
+        color: map-get($map: $colors, $key: lightBlack);
+        margin-bottom: 70px;
+        h2 {
+            font-size: 2em;
+            font-weight: 600;
+            text-align: center;
+            margin-top: 25px;
+        }
+        h3 {
+            font-size: 1.5em;
+            font-weight: 600;
+            letter-spacing: 0.1px;
+            margin: 40px 0;
+        }
+        p {
+            font-size: 1.1em;
+            line-height: 1.4;
+            letter-spacing: 0.3px;
+        }
+        &__started {
+            text-align: center;
+            font-weight: 300;
+            font-size: 1em;
+            margin: 50px 0 40px;
+        }
+        &__space {
+            margin-bottom: 35px;
+        }
+    }
+}

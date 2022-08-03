@@ -41,9 +41,7 @@ class StatsController {
         }
 
         foreach ($_POST as $element => $val) {
-
             $_POST[$element] = htmlspecialchars($val);
-        
         }
 
         $userController = new UserController();
@@ -182,21 +180,52 @@ class StatsController {
                     $success = $statsModel->addWeight($newWeight,htmlspecialchars($_SESSION['size']) , null, htmlspecialchars($_SESSION['sexe']), htmlspecialchars($_SESSION['birthday']) ,htmlspecialchars($_SESSION['userId']));
     
                     if($success) {   
-                        header('Location: /suivi_poids/dashboard');         
+                       return header('Location: /suivi_poids/dashboard');         
                     } else {
-                        header('Location: /suivi_poids/dashboard?err=addW');
+                       return header('Location: /suivi_poids/dashboard?err=addW');
                     }
                     
                 }                
                 
             } else {
                 http_response_code(400);
-                $userController->logout("format");
+                return $userController->logout("format");
             }
 
 
         } 
 
+        header('Location: /suivi_poids/dashboard?err=addW');
+    }
+
+    /**
+     * try to delete one user weight
+     */
+    public function deleteWeight() {
+
+        SESSION_START();
+        
+        if(!isset($_SESSION['name']) || !isset($_SESSION['token']) || !isset($_SESSION['user']) || !isset($_SESSION['userId']) || !isset($_SESSION['size']) || (!isset($_SESSION['sexe']) || ($_SESSION['sexe'] !== "man" && $_SESSION['sexe'] !== "woman")) || !isset($_SESSION['auth']) || $_SESSION['auth'] !== true) {
+            return header('Location: /suivi_poids/login');
+        }
+
+        foreach ($_POST as $element => $val) {
+            $_POST[$element] = htmlspecialchars($val);
+        }
+
+        if($_POST['weight'] !== "") {
+            $statsModel = new StatsModel();
+            $res = $statsModel->deleteWeight($_POST['weight'], $_SESSION['userId']);
+            if($res === "ok") {
+                return header('Location: /suivi_poids/dashboard');
+            } elseif($res === "first") {
+                return header('Location: /suivi_poids/dashboard?err=first');
+            } elseif ($res === "notOk") {
+                return header('Location: /suivi_poids/dashboard?err=not');
+            }
+        }
+        header('Location: /suivi_poids/dashboard?err=not');
+        
     }
 
 }

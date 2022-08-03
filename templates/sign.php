@@ -1,5 +1,9 @@
-<?php $title = 'signup'; ?>
-<?php $contentHead = "" ?>
+<?php $title = 'sign'; 
+    ob_start(); ?>
+
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+<?php $contentHead = ob_get_clean() ?>
 
 <?php SESSION_START(); ?>
 
@@ -68,6 +72,9 @@
                 <input type="checkbox" name="checkCgu" id="signCheckCgu">
                 <label for="signCheckCgu">J'ai lu et j'accepte les <a href="/suivi_poids/cgu/">Conditions Générales d'Utilisation</a>.</label>
             </div>
+            <div class="sign__form__captcha">
+                <div class="g-recaptcha" data-sitekey="<?= $_ENV['G_CAPTCHA_CLIENT_KEY']; ?>" data-size="normal"></div>
+            </div>
             <div class="sign__form__btnCont">
                 <input class="sign__form__btnCont__submitBtn" type="button" value="Créer un compte" onClick="checkInputs()">
             </div>
@@ -86,6 +93,7 @@
     const cgu = document.getElementById('signCheckCgu');
     const form = document.getElementById('sign__form');
     const errorCont = document.querySelector('.sign__error');
+    const captcha = document.querySelector(".g-recaptcha");
 
     const checkInputs = () => {
         let error = "";
@@ -135,6 +143,12 @@
         if(!cgu.checked) {
             error += `<p>- Vous devez accepter les conditions générales d'utilisation.</p>`
         } 
+
+        const response = grecaptcha.getResponse();
+        if(response.length == 0) 
+        { 
+            error += `<p>- Veuillez cocher la case "Je ne suis pas un robot".</p>`;
+        }
 
         if(error !== '') {
             errorCont.innerHTML = error;

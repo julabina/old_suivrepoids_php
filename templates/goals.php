@@ -34,7 +34,7 @@
 
         <div class="obj__current__cont">
             <?php foreach($goals as $goal): ?>
-                <?php if($goal['current']): ?>
+                <?php if($goal['current_goal']): ?>
                     <?php if($goal['weight_goal'] === null && $goal['imc_goal'] === null && $goal['img_goal'] === null): ?>
                         <h3>Aucun objectif défini</h3>
                     <?php elseif($goal['weight_goal'] !== null): ?>
@@ -75,7 +75,7 @@
                 <input type="hidden" name="token" value="<?= htmlspecialchars($_SESSION['token']); ?>">
                 <div class='obj__change__tabsCont__input'>
                     <label for="objChangeWeight">Entrer le poids que vous souhaitez atteindre</label>
-                    <input type="number" name="objChangeWeight" id="changeWeight">
+                    <input type="number" name="objChangeWeight" id="changeWeight" placeholder="Votre poids actuel: <?= $goal['user_weight']; ?> kg">
                 </div>
                 <div class="obj__change__tabsCont__submitBtnCont">
                     <input class="obj__change__tabsCont__submitBtnCont__btn" onClick="verifyChangingWeight()" type="button" value="Valider">
@@ -89,7 +89,7 @@
                 <input type="hidden" name="token" value="<?= htmlspecialchars($_SESSION['token']); ?>">
                 <div class='obj__change__tabsCont__input'>
                     <label for="objChangeImc">Entrer l'IMC que vous souhaitez atteindre</label>
-                    <input type="number" name="objChangeImc" id="changeImc">
+                    <input type="number" name="objChangeImc" id="changeImc" placeholder="Votre IMC actuel: <?= $goal['imc']; ?>">
                 </div>
                 <div class="obj__change__tabsCont__submitBtnCont">
                     <input class="obj__change__tabsCont__submitBtnCont__btn" onClick="verifyChangingImc()" type="button" value="Valider">
@@ -103,7 +103,7 @@
                 <input type="hidden" name="token" value="<?= htmlspecialchars($_SESSION['token']); ?>">
                 <div class='obj__change__tabsCont__input'>
                     <label for="objChangeImg">Entrer l'IMG que vous souhaitez atteindre</label>
-                    <input type="number" name="objChangeImg" id="changeImg">
+                    <input type="number" name="objChangeImg" id="changeImg" placeholder="Votre IMG actuel: <?= $goal['img']; ?>%">
                 </div>
                 <div class="obj__change__tabsCont__submitBtnCont">
                     <input class="obj__change__tabsCont__submitBtnCont__btn" onClick="verifyChangingImg()" type="button" value="Valider">
@@ -115,7 +115,7 @@
     <section class="obj__old">   
         <h2>Mes anciens objectifs</h2>    
         <?php foreach($goals as $goal): ?>
-            <?php if($goal['current'] === 0): ?>
+            <?php if($goal['current_goal'] === 0): ?>
                 <?php
                     $goalDate = strtotime($goal['created_at']);
                     $newDate = date('d-m-Y', $goalDate);

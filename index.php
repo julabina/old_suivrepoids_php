@@ -13,6 +13,7 @@ $router->post('/objectif', 'Stats#addGoal');
 $router->get('/imc', 'Stats#showImc');
 $router->get('/img', 'Stats#showImg');
 $router->post('/addWeight', 'Stats#addWeight');
+$router->post('/deleteWeight', 'Stats#deleteWeight');
 $router->get('/profil', 'User#showProfil');
 $router->get('/login', function(){ require('templates/log.php'); });
 $router->post('/login', 'User#log');
@@ -28,6 +29,8 @@ $router->get('/legal', function(){ require('templates/legal.php'); });
 $router->get('/cgu', function(){ require('templates/cgu.php'); });
 $router->get('/contact', function(){ require('templates/contact.php'); });
 $router->post('/contact', 'User#sendMail');
+$router->get('/forgotten', function(){ require('templates/forgotten.php'); });
+$router->post('/resetpwd', 'User#resetPwd');
 $router->get('/404', function(){ require('templates/404.php'); });
 
 $router->run();

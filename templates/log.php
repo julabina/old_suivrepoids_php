@@ -1,5 +1,9 @@
-<?php $title = 'login'; ?>
-<?php $contentHead = "" ?>
+<?php $title = 'login'; 
+    ob_start(); ?>
+
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+<?php $contentHead = ob_get_clean() ?>
 
 <?php SESSION_START(); ?>
 
@@ -27,6 +31,10 @@
                 <p>- Votre session a expiré.</p>
             <?php elseif(isset($_GET['err']) && $_GET['err'] === "delete"): ?>
                 <p>- Votre compte a bien été supprimé.</p>
+            <?php elseif(isset($_GET['err']) && $_GET['err'] === "send"): ?>
+                <p>- L'email de récupération a bien été envoyé.</p>
+            <?php elseif(isset($_GET['err']) && $_GET['err'] === "captcha"): ?>
+                <p>- Veuillez cochez le Captcha.</p>
             <?php endif; ?>
         </div>
         
@@ -38,6 +46,10 @@
             <div class="log__form__password">
                 <label for="logPassword">Mot de passe</label>
                 <input type="password" name="password" id="logPassword">
+                <a href="/suivi_poids/forgotten"><p>Mot de passe oublié ?</p></a>
+            </div>
+            <div class="log__form__captcha">
+                <div class="g-recaptcha" data-sitekey="<?= $_ENV['G_CAPTCHA_CLIENT_KEY']; ?>" data-size="compact"></div>
             </div>
             <div class="log__form__btnCont">
                 <input class="log__form__btnCont__submitBtn" type="button" value="Se connecter" onClick="checkLogInputs()">
@@ -51,8 +63,10 @@
     const password = document.getElementById('logPassword');
     const form = document.getElementById('log__form');
     const errorCont = document.querySelector('.log__error');
+    const captcha = document.querySelector(".g-recaptcha");
     
     const checkLogInputs = () => {
+        
         let error = "";
 
         if(email.value === "") {
@@ -65,6 +79,12 @@
             error += `<p>- Le mot de passe ne doit pas etre vide.</p>`
         } else if(!password.value.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/)) {
             error += `<p>- Le mot de passe doit etre d'une longueur de 8 caracteres et contenir au moins une majuscule un chiffre et une lettre.</p>`
+        }
+
+        const response = grecaptcha.getResponse();
+        if(response.length == 0) 
+        { 
+            error += `<p>- Veuillez cocher la case "Je ne suis pas un robot".</p>`;
         }
 
         if(error !== '') {

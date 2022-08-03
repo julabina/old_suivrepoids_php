@@ -97,7 +97,7 @@
 
 <header class="dashHeader">
     <div class="header">
-        <a href="/suivi_poids/"><h1>TITRE DU SITE</h1></a>
+        <a class="header__titleLink" href="/suivi_poids/"><h1>TITRE DU SITE</h1></a>
         <div class="header__connected">
             <a class="header__connected__logoutBtn" href="/suivi_poids/logout">Se deconnecter</a>
             <a href="/suivi_poids/profil"><div class="header__connected__userProfil">
@@ -114,6 +114,10 @@
         <div class="dash__infos__errorCont">
             <?php if(isset($_GET['err']) && $_GET['err'] === "addW"): ?>
                 <p>- Une erreur est survenu, impossible d'ajouter un nouveau poids.</p>
+            <?php elseif(isset($_GET['err']) && $_GET['err'] === "first"): ?>
+                <p>- Vous ne pouvez pas supprimer le dernier poids.</p>
+            <?php elseif(isset($_GET['err']) && $_GET['err'] === "not"): ?>
+                <p>- Une erreur est survenu, impossible de supprimer un poids.</p>
             <?php endif; ?>
         </div>
         <div class="dash__infos__cont">
@@ -215,6 +219,7 @@
                         <p class="dash__graph__mainCont__graph__rows__row__stats">Poids</p>
                         <p class="dash__graph__mainCont__graph__rows__row__stats">IMC</p>
                         <p class="dash__graph__mainCont__graph__rows__row__stats">IMG</p>
+                        <div class="dash__graph__mainCont__graph__rows__row__btnCont"></div>
                     </li>
                 <?php foreach($userWeightList as $weight): ?>
                     
@@ -223,6 +228,10 @@
                         <div class="dash__graph__mainCont__graph__rows__row__stats"><p><?= htmlspecialchars($weight->weight); ?></p></div>
                         <div class="dash__graph__mainCont__graph__rows__row__stats"><p><?= htmlspecialchars($weight->bmi); ?></p></div>
                         <div class="dash__graph__mainCont__graph__rows__row__stats"><p><?= htmlspecialchars($weight->bfp); ?></p></div>
+                        <form method="post" action="/suivi_poids/deleteWeight" class="dash__graph__mainCont__graph__rows__row__btnCont">
+                            <input type="hidden" name="weight" value="<?= htmlspecialchars($weight->id); ?>">  
+                            <button class="dash__graph__mainCont__graph__rows__row__btnCont__btn"><img src="../suivi_poids/assets/close.svg" alt="close icon"></button>
+                        </form>
                     </li>
                     
                 <?php endforeach; ?>
@@ -356,7 +365,7 @@
         weightListArr = filteredListArr;
         google.charts.setOnLoadCallback(drawChart);
     }
-
+    
     changeType();
 
 </script>
