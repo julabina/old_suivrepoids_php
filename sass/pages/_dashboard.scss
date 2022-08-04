@@ -153,7 +153,6 @@
                         display: flex;
                         justify-content: space-around;
                         border-bottom: 1px solid rgba(0, 0, 0, 0.158);
-                        padding-top: 9px ;
                         height: 35px;
                         text-align: center;
                         &:first-child {
@@ -162,15 +161,19 @@
                         }
                         &__date {
                             width: 95px;
+                            padding-top: 9px ;
                         }
                         &__stats {
                             width: 45px;
+                            padding-top: 9px ;
                         }
                         &__nav {
                             font-weight: 600;
                             color: map-get($map: $colors, $key: lightBlack);
+                            padding-top: 9px ;
                         }
                         &__btnCont {
+                            padding-top: 9px ;
                             width: 20px;
                             &__btn {
                                 display: flex;
@@ -213,6 +216,87 @@
                 }
                 &--hidden {
                     display: none;
+                }
+            }
+        }
+    }
+    @include forTablet {
+        min-height: 96vh;
+        &__infos {
+            margin-top: 50px;
+            width: 100%;
+            &__cont {
+                width: 90%;
+                &__infoBox {
+                    margin: initial;
+                    &:hover {
+                        border: none;
+                    }
+                }
+            }
+        }
+        &__obj {
+            width: 90%;
+            &__link {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+
+            }
+            &:hover {
+                border: none;
+            }
+        }
+        &__graph {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            &__mainCont  {
+                width: 90%;
+                &__tabs {
+                    width: 100%;
+                    &__tab {
+                        height: 80px;
+                        width: 180px;
+                        font-size: 1.1em;
+                        font-weight: 600;
+                    }
+                }
+                &__graph {
+                    width: 100%;
+                    &--bot {
+                        height: auto;
+                    }
+                    &__rows {
+                        height: auto;
+                        overflow: initial;
+                        &__row {
+                            height: 45px;
+                            &__btnCont {
+                                display: flex;
+                                align-items: center;
+                                width: 40px;height: 45px;
+                                padding-top: 0;
+                                &__btn {
+                                    height: 30px;width: 30px;
+                                    transition: none;
+                                    &:hover {
+                                        transition: none;
+                                        background: map-get($map: $colors, $key:primary );
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                &__graphNav {
+                    width: 100%;
+                    &__graphSelectType {
+                        select {
+                            height: 50px;
+                            width: 150px;
+                        }
+                    }
                 }
             }
         }

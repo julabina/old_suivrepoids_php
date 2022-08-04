@@ -137,7 +137,7 @@
                 <p></p>
             </div></a>
         </div>
-        <a href="/suivi_poids/objectifs"><div class="dash__obj">
+        <a class="dash__obj__link" href="/suivi_poids/objectifs"><div class="dash__obj">
             <div class="dash__obj__content">
                 <?php if($userData->weight_goal === NULL && $userData->imc_goal === NULL && $userData->img_goal === NULL): ?>
                     <h3>Vous pouvez définir un objectif ici !!</h3>

@@ -514,7 +514,6 @@ header h1 {
   display: flex;
   justify-content: space-around;
   border-bottom: 1px solid rgba(0, 0, 0, 0.158);
-  padding-top: 9px;
   height: 35px;
   text-align: center;
 }
@@ -524,15 +523,19 @@ header h1 {
 }
 .dash__graph__mainCont__graph__rows__row__date {
   width: 95px;
+  padding-top: 9px;
 }
 .dash__graph__mainCont__graph__rows__row__stats {
   width: 45px;
+  padding-top: 9px;
 }
 .dash__graph__mainCont__graph__rows__row__nav {
   font-weight: 600;
   color: #1b1b1b;
+  padding-top: 9px;
 }
 .dash__graph__mainCont__graph__rows__row__btnCont {
+  padding-top: 9px;
   width: 20px;
 }
 .dash__graph__mainCont__graph__rows__row__btnCont__btn {
@@ -574,6 +577,88 @@ header h1 {
 }
 .dash__graph__mainCont__graphNav--hidden {
   display: none;
+}
+@media screen and (max-width: 1270px) {
+  .dash {
+    min-height: 96vh;
+  }
+  .dash__infos {
+    margin-top: 50px;
+    width: 100%;
+  }
+  .dash__infos__cont {
+    width: 90%;
+  }
+  .dash__infos__cont__infoBox {
+    margin: initial;
+  }
+  .dash__infos__cont__infoBox:hover {
+    border: none;
+  }
+  .dash__obj {
+    width: 90%;
+  }
+  .dash__obj__link {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  .dash__obj:hover {
+    border: none;
+  }
+  .dash__graph {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  .dash__graph__mainCont {
+    width: 90%;
+  }
+  .dash__graph__mainCont__tabs {
+    width: 100%;
+  }
+  .dash__graph__mainCont__tabs__tab {
+    height: 80px;
+    width: 180px;
+    font-size: 1.1em;
+    font-weight: 600;
+  }
+  .dash__graph__mainCont__graph {
+    width: 100%;
+  }
+  .dash__graph__mainCont__graph--bot {
+    height: auto;
+  }
+  .dash__graph__mainCont__graph__rows {
+    height: auto;
+    overflow: initial;
+  }
+  .dash__graph__mainCont__graph__rows__row {
+    height: 45px;
+  }
+  .dash__graph__mainCont__graph__rows__row__btnCont {
+    display: flex;
+    align-items: center;
+    width: 40px;
+    height: 45px;
+    padding-top: 0;
+  }
+  .dash__graph__mainCont__graph__rows__row__btnCont__btn {
+    height: 30px;
+    width: 30px;
+    transition: none;
+  }
+  .dash__graph__mainCont__graph__rows__row__btnCont__btn:hover {
+    transition: none;
+    background: #0C2E8A;
+  }
+  .dash__graph__mainCont__graphNav {
+    width: 100%;
+  }
+  .dash__graph__mainCont__graphNav__graphSelectType select {
+    height: 50px;
+    width: 150px;
+  }
 }
 
 .dashAddWeight {
