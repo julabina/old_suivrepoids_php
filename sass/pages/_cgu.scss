@@ -34,4 +34,9 @@
             margin-bottom: 35px;
         }
     }
+    @include forTablet {
+        &__section {
+            width: 90%;
+        }
+    }
 }

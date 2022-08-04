@@ -255,7 +255,7 @@
                     <label for="addWeightInput">Ajouter un nouveau poids</label>
                     <p class="dashAddWeight__modal__form__error"></p>
                 <input type="number" name="addWeight" id="addWeightInput">
-                <input onClick="verifyAddWeight()" class="dashAddWeight__modal__form__submitBtn" type="button" value="Ajouter">
+                <input id="addWeightModalBtn" onClick="verifyAddWeight()" class="dashAddWeight__modal__form__submitBtn" type="button" value="Ajouter">
             </form>
             <?php endif; ?>
     </div>

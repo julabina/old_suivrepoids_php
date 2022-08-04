@@ -353,6 +353,11 @@ header h1 {
 .backToHome--withHeader {
   top: 75px;
 }
+@media screen and (max-width: 1270px) {
+  .backToHome {
+    font-size: 1.2em;
+  }
+}
 
 .dash {
   padding-top: 60px;
@@ -634,6 +639,7 @@ header h1 {
     overflow: initial;
   }
   .dash__graph__mainCont__graph__rows__row {
+    margin: 2px;
     height: 45px;
   }
   .dash__graph__mainCont__graph__rows__row__btnCont {
@@ -700,6 +706,12 @@ header h1 {
   border: 1px solid rgba(165, 165, 165, 0.5);
   padding-left: 15px;
 }
+@media screen and (max-width: 1270px) {
+  .dashAddWeight__modal__form input {
+    height: 50px;
+    margin: -2px;
+  }
+}
 .dashAddWeight__modal__form label {
   font-weight: 600;
   font-size: 1.15em;
@@ -733,6 +745,15 @@ header h1 {
   opacity: 0.7;
   transition: opacity 150ms ease-in-out;
 }
+@media screen and (max-width: 1270px) {
+  .dashAddWeight__modal__form__submitBtn {
+    transition: none;
+  }
+  .dashAddWeight__modal__form__submitBtn:hover {
+    transition: none;
+    opacity: 1;
+  }
+}
 .dashAddWeight__modal__close {
   position: absolute;
   top: 10px;
@@ -748,6 +769,17 @@ header h1 {
 }
 .dashAddWeight--hidden {
   display: none;
+}
+
+#addWeightInput {
+  margin-bottom: 30px;
+  margin: 1px 1px 30px;
+}
+
+@media screen and (max-width: 1270px) {
+  #addWeightModalBtn {
+    margin: 0;
+  }
 }
 
 .home {
@@ -1084,6 +1116,7 @@ header h1 {
     width: 250px;
     padding: 25px 0;
     transition: none;
+    margin: 2px;
   }
   .home__bmiBfp__calculLink a:hover {
     background: #EEEEEE;
@@ -1123,6 +1156,11 @@ header h1 {
   box-shadow: 0 7px 15px rgba(0, 0, 0, 0.151);
   margin-bottom: 50px;
 }
+@media screen and (max-width: 1270px) {
+  .bmi__userSection {
+    width: 90%;
+  }
+}
 .bmi__userSection__subTitle {
   font-size: 1.1em;
 }
@@ -1147,6 +1185,11 @@ header h1 {
   border-radius: 3px;
   box-shadow: 0 7px 15px rgba(0, 0, 0, 0.151);
   margin-bottom: 50px;
+}
+@media screen and (max-width: 1270px) {
+  .bmi__tools {
+    width: 90%;
+  }
 }
 .bmi__tools p {
   line-height: 1.4;
@@ -1198,6 +1241,15 @@ header h1 {
 .bmi__tools__form__btnCont input:hover {
   opacity: 0.7;
   transition: opacity 150ms ease-in-out;
+}
+@media screen and (max-width: 1270px) {
+  .bmi__tools__form__btnCont input {
+    transition: none;
+  }
+  .bmi__tools__form__btnCont input:hover {
+    transition: none;
+    opacity: 1;
+  }
 }
 .bmi__tools__error {
   color: #d80404;
@@ -1255,6 +1307,32 @@ header h1 {
   font-size: 1.1em;
   font-weight: 600;
 }
+@media screen and (max-width: 1270px) {
+  .bmi__userSection p {
+    width: 100%;
+    text-align: center;
+  }
+  .bmi__tools__form__cont {
+    padding: 2px;
+  }
+  .bmi__tools__form__cont__field label {
+    padding-bottom: 2px;
+    margin-top: 1px;
+  }
+  .bmi__tools__form__cont__field input {
+    width: 250px;
+    height: 45px;
+    margin: -1px 0 -2px;
+  }
+  .bmi__tools__interpretation__array__row {
+    display: flex;
+    justify-content: center;
+  }
+  .bmi__tools__interpretation__array__row p {
+    text-align: center;
+    width: 100%;
+  }
+}
 
 .bfp {
   display: flex;
@@ -1281,6 +1359,11 @@ header h1 {
   box-shadow: 0 7px 15px rgba(0, 0, 0, 0.151);
   margin-bottom: 50px;
 }
+@media screen and (max-width: 1270px) {
+  .bfp__userSection {
+    width: 90%;
+  }
+}
 .bfp__userSection__subTitle {
   font-size: 1.1em;
 }
@@ -1305,6 +1388,11 @@ header h1 {
   border-radius: 3px;
   box-shadow: 0 7px 15px rgba(0, 0, 0, 0.151);
   margin-bottom: 50px;
+}
+@media screen and (max-width: 1270px) {
+  .bfp__tools {
+    width: 90%;
+  }
 }
 .bfp__tools p {
   line-height: 1.4;
@@ -1356,6 +1444,15 @@ header h1 {
 .bfp__tools__form__btnCont input:hover {
   opacity: 0.7;
   transition: opacity 150ms ease-in-out;
+}
+@media screen and (max-width: 1270px) {
+  .bfp__tools__form__btnCont input {
+    transition: none;
+  }
+  .bfp__tools__form__btnCont input:hover {
+    transition: none;
+    opacity: 1;
+  }
 }
 .bfp__tools__error {
   color: #d80404;
@@ -1413,6 +1510,32 @@ header h1 {
   font-size: 1.1em;
   font-weight: 600;
 }
+@media screen and (max-width: 1270px) {
+  .bfp__userSection p {
+    width: 100%;
+    text-align: center;
+  }
+  .bfp__tools__form__cont {
+    padding: 2px;
+  }
+  .bfp__tools__form__cont__field label {
+    padding-bottom: 2px;
+    margin-top: 1px;
+  }
+  .bfp__tools__form__cont__field input {
+    width: 250px;
+    height: 45px;
+    margin: -1px 0 -2px;
+  }
+  .bfp__tools__interpretation__array__row {
+    display: flex;
+    justify-content: center;
+  }
+  .bfp__tools__interpretation__array__row p {
+    text-align: center;
+    width: 100%;
+  }
+}
 .bfp__tools span {
   letter-spacing: initial;
   font-weight: 300;
@@ -1437,6 +1560,13 @@ header h1 {
   margin-top: 30px;
   font-size: 0.8em;
   font-weight: 300;
+}
+@media screen and (max-width: 1270px) {
+  .bfp__tools__form select {
+    width: 250px;
+    height: 44px;
+    margin: -1px 0 0;
+  }
 }
 
 .obj {
@@ -1569,6 +1699,15 @@ header h1 {
   opacity: 0.7;
   transition: opacity 150ms ease-in-out;
 }
+@media screen and (max-width: 1270px) {
+  .obj__change__tabsCont__submitBtnCont__btn {
+    transition: none;
+  }
+  .obj__change__tabsCont__submitBtnCont__btn:hover {
+    transition: none;
+    opacity: 1;
+  }
+}
 .obj__change__errCont {
   color: #d80404;
   width: 580px;
@@ -1589,6 +1728,37 @@ header h1 {
   text-align: center;
   padding: 10px 0;
   line-height: 1.4;
+}
+@media screen and (max-width: 1270px) {
+  .obj__current {
+    width: 90%;
+  }
+  .obj__change {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    padding: 40px 0;
+  }
+  .obj__change__tabs {
+    width: 90%;
+    margin: -1px;
+  }
+  .obj__change__tabs__tab {
+    width: 100%;
+    margin: -1px 0px;
+  }
+  .obj__change__tabsCont {
+    max-width: initial;
+    width: 90%;
+    margin: -1px;
+  }
+  .obj__change__tabsCont__input input {
+    height: 50px;
+  }
+  .obj__old {
+    width: 90%;
+  }
 }
 
 .log {
@@ -1636,6 +1806,12 @@ header h1 {
   border: 1px solid rgba(165, 165, 165, 0.5);
   padding-left: 15px;
 }
+@media screen and (max-width: 1270px) {
+  .log__form__email input, .log__form__password input {
+    height: 50px;
+    margin: -2px;
+  }
+}
 .log__form__email p, .log__form__password p {
   font-weight: 300;
   font-size: 0.85em;
@@ -1663,6 +1839,15 @@ header h1 {
 .log__form__btnCont__submitBtn:hover {
   opacity: 0.7;
   transition: opacity 150ms ease-in-out;
+}
+@media screen and (max-width: 1270px) {
+  .log__form__btnCont__submitBtn {
+    transition: none;
+  }
+  .log__form__btnCont__submitBtn:hover {
+    transition: none;
+    opacity: 1;
+  }
 }
 .log__form__captcha {
   display: flex;
@@ -1756,6 +1941,12 @@ header h1 {
   border: 1px solid rgba(165, 165, 165, 0.5);
   padding-left: 15px;
 }
+@media screen and (max-width: 1270px) {
+  .sign__form__logs__email input, .sign__form__logs__password input {
+    height: 50px;
+    margin: -2px;
+  }
+}
 .sign__form__name {
   display: flex;
   width: 100%;
@@ -1776,6 +1967,12 @@ header h1 {
   border: 1px solid rgba(165, 165, 165, 0.5);
   padding-left: 15px;
 }
+@media screen and (max-width: 1270px) {
+  .sign__form__name__firstname input, .sign__form__name__birthday input {
+    height: 50px;
+    margin: -2px;
+  }
+}
 .sign__form__stats {
   display: flex;
   width: 100%;
@@ -1795,6 +1992,12 @@ header h1 {
   height: 40px;
   border: 1px solid rgba(165, 165, 165, 0.5);
   padding-left: 15px;
+}
+@media screen and (max-width: 1270px) {
+  .sign__form__stats__size input, .sign__form__stats__weight input {
+    height: 50px;
+    margin: -2px;
+  }
 }
 .sign__form__stats__sexe {
   display: flex;
@@ -1839,6 +2042,15 @@ header h1 {
   opacity: 0.7;
   transition: opacity 150ms ease-in-out;
 }
+@media screen and (max-width: 1270px) {
+  .sign__form__btnCont__submitBtn {
+    transition: none;
+  }
+  .sign__form__btnCont__submitBtn:hover {
+    transition: none;
+    opacity: 1;
+  }
+}
 .sign__form__captcha {
   display: flex;
   justify-content: center;
@@ -1879,6 +2091,30 @@ header h1 {
   .sign__notConnected__linkCont a:hover {
     opacity: 1;
     transition: none;
+  }
+}
+@media screen and (max-width: 1270px) {
+  .sign__form__logs__email, .sign__form__logs__password {
+    margin: -1px 15px;
+  }
+  .sign__form__stats__size, .sign__form__stats__weight {
+    margin: 0px 14px;
+  }
+  .sign__form__stats__sexe {
+    flex-direction: column;
+    margin: 0 15px;
+    width: 110px;
+  }
+  .sign__form__stats__sexe label {
+    margin-bottom: 5px;
+    font-size: 0.9em;
+  }
+  .sign__form__stats__sexe select {
+    height: 50px;
+  }
+  .sign__form__checkCont input {
+    width: 20px;
+    height: 20px;
   }
 }
 
@@ -1929,6 +2165,15 @@ header h1 {
   opacity: 0.7;
   transition: opacity 150ms ease-in-out;
 }
+@media screen and (max-width: 1270px) {
+  .profil__nav__btn {
+    transition: none;
+  }
+  .profil__nav__btn:hover {
+    transition: none;
+    opacity: 1;
+  }
+}
 .profil__nav__deleteBtn {
   transition: all 170ms ease-in-out;
 }
@@ -1974,6 +2219,12 @@ header h1 {
   border: 1px solid rgba(165, 165, 165, 0.5);
   padding-left: 15px;
 }
+@media screen and (max-width: 1270px) {
+  .profil__modify__form__row input {
+    height: 50px;
+    margin: -2px;
+  }
+}
 .profil__modify__form__btnCont {
   display: flex;
   justify-content: center;
@@ -1998,8 +2249,29 @@ header h1 {
   opacity: 0.7;
   transition: opacity 150ms ease-in-out;
 }
+@media screen and (max-width: 1270px) {
+  .profil__modify__form__btnCont__btn {
+    transition: none;
+  }
+  .profil__modify__form__btnCont__btn:hover {
+    transition: none;
+    opacity: 1;
+  }
+}
 .profil__modify--hidden {
   display: none;
+}
+@media screen and (max-width: 1270px) {
+  .profil__modify__form {
+    margin: 5px;
+  }
+  .profil__modify__form__row {
+    width: 400px;
+    margin: 2px;
+  }
+  .profil__modify__form__row label {
+    margin-top: 25px;
+  }
 }
 .profil__modify select {
   height: 40px;
@@ -2035,6 +2307,12 @@ header h1 {
   border: 1px solid rgba(165, 165, 165, 0.5);
   padding-left: 15px;
 }
+@media screen and (max-width: 1270px) {
+  .profil__modifyPassword__form__row input {
+    height: 50px;
+    margin: -2px;
+  }
+}
 .profil__modifyPassword__form__btnCont {
   display: flex;
   justify-content: center;
@@ -2059,8 +2337,29 @@ header h1 {
   opacity: 0.7;
   transition: opacity 150ms ease-in-out;
 }
+@media screen and (max-width: 1270px) {
+  .profil__modifyPassword__form__btnCont__btn {
+    transition: none;
+  }
+  .profil__modifyPassword__form__btnCont__btn:hover {
+    transition: none;
+    opacity: 1;
+  }
+}
 .profil__modifyPassword--hidden {
   display: none;
+}
+@media screen and (max-width: 1270px) {
+  .profil__modifyPassword__form {
+    margin: 5px;
+  }
+  .profil__modifyPassword__form__row {
+    width: 400px;
+    margin: 2px;
+  }
+  .profil__modifyPassword__form__row label {
+    margin-top: 25px;
+  }
 }
 .profil__delete {
   position: fixed;
@@ -2115,11 +2414,30 @@ header h1 {
   opacity: 0.7;
   transition: opacity 150ms ease-in-out;
 }
+@media screen and (max-width: 1270px) {
+  .profil__delete__modal__btnCont__btn {
+    transition: none;
+  }
+  .profil__delete__modal__btnCont__btn:hover {
+    transition: none;
+    opacity: 1;
+  }
+}
 .profil__delete__modal__btnCont__btn--deleteBtn {
   background: #d80404;
 }
 .profil__delete--hidden {
   display: none;
+}
+@media screen and (max-width: 1270px) {
+  .profil {
+    min-height: 93vh;
+  }
+  .profil__nav__btn {
+    margin: 30px 0;
+    width: 300px;
+    padding: 30px 0;
+  }
 }
 
 #successMsg {
@@ -2176,6 +2494,12 @@ header h1 {
   border: 1px solid rgba(165, 165, 165, 0.5);
   padding-left: 15px;
 }
+@media screen and (max-width: 1270px) {
+  .contact__section__form__top__email input, .contact__section__form__top__name input {
+    height: 50px;
+    margin: -2px;
+  }
+}
 .contact__section__form__top__email {
   margin-right: 30px;
 }
@@ -2192,6 +2516,12 @@ header h1 {
   height: 40px;
   border: 1px solid rgba(165, 165, 165, 0.5);
   padding-left: 15px;
+}
+@media screen and (max-width: 1270px) {
+  .contact__section__form__subject input {
+    height: 50px;
+    margin: -2px;
+  }
 }
 .contact__section__form__text {
   display: flex;
@@ -2226,6 +2556,36 @@ header h1 {
 .contact__section__form__btnCont__btn:hover {
   opacity: 0.7;
   transition: opacity 150ms ease-in-out;
+}
+@media screen and (max-width: 1270px) {
+  .contact__section__form__btnCont__btn {
+    transition: none;
+  }
+  .contact__section__form__btnCont__btn:hover {
+    transition: none;
+    opacity: 1;
+  }
+}
+@media screen and (max-width: 1270px) {
+  .contact {
+    min-height: 93vh;
+  }
+  .contact__section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 90%;
+    margin-top: 80px;
+  }
+  .contact__section__form__text__message {
+    margin: 1px;
+  }
+  .contact__section__form__btnCont {
+    margin-top: 40px;
+  }
+  .contact__section__form__btnCont__btn {
+    padding: 20px;
+  }
 }
 
 .cgu {
@@ -2264,6 +2624,11 @@ header h1 {
 }
 .cgu__section__space {
   margin-bottom: 35px;
+}
+@media screen and (max-width: 1270px) {
+  .cgu__section {
+    width: 90%;
+  }
 }
 
 .forgotten {
@@ -2311,6 +2676,12 @@ header h1 {
   border: 1px solid rgba(165, 165, 165, 0.5);
   padding-left: 15px;
 }
+@media screen and (max-width: 1270px) {
+  .forgotten__form__row input {
+    height: 50px;
+    margin: -2px;
+  }
+}
 .forgotten__form__row p {
   font-weight: 300;
   font-size: 0.85em;
@@ -2338,6 +2709,15 @@ header h1 {
 .forgotten__form__btnCont__submitBtn:hover {
   opacity: 0.7;
   transition: opacity 150ms ease-in-out;
+}
+@media screen and (max-width: 1270px) {
+  .forgotten__form__btnCont__submitBtn {
+    transition: none;
+  }
+  .forgotten__form__btnCont__submitBtn:hover {
+    transition: none;
+    opacity: 1;
+  }
 }
 .forgotten__notConnected {
   margin-top: 200px;
@@ -2406,6 +2786,15 @@ header h1 {
 .notFound__btn button:hover {
   opacity: 0.7;
   transition: opacity 150ms ease-in-out;
+}
+@media screen and (max-width: 1270px) {
+  .notFound__btn button {
+    transition: none;
+  }
+  .notFound__btn button:hover {
+    transition: none;
+    opacity: 1;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

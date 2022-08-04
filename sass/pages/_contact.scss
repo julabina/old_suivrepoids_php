@@ -66,4 +66,27 @@
             }
         }
     }
+    @include forTablet {
+        min-height: 93vh;
+        &__section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 90%;
+            margin-top: 80px;
+            &__form {
+                &__text {
+                    &__message {
+                        margin: 1px;
+                    }
+                }
+                &__btnCont {
+                    margin-top: 40px;
+                    &__btn {
+                        padding: 20px;
+                    }
+                }
+            }
+        }
+    }
 }

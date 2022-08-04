@@ -11,4 +11,7 @@
     &--withHeader {
         top: 75px;
     }
+    @include forTablet {
+        font-size: 1.2em;
+    }
 }

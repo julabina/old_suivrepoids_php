@@ -271,6 +271,7 @@
                         height: auto;
                         overflow: initial;
                         &__row {
+                            margin: 2px;
                             height: 45px;
                             &__btnCont {
                                 display: flex;
@@ -363,5 +364,16 @@
     }
     &--hidden {
         display: none;
+    }
+}
+
+#addWeightInput {
+    margin-bottom: 30px;
+    margin: 1px 1px 30px;
+}
+
+#addWeightModalBtn {
+    @include forTablet {
+        margin: 0;
     }
 }

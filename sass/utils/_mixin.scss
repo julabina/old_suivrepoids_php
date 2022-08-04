@@ -41,6 +41,13 @@
         opacity: 0.7;
         transition: opacity 150ms ease-in-out;
     }
+    @include forTablet {
+        transition: none;
+        &:hover {
+            transition: none;
+            opacity: 1;
+        }
+    }
 }
 
 @mixin form {
@@ -55,6 +62,12 @@
         border: 1px solid map-get($map: $colors, $key: transLightGray);
         padding-left: 15px;
     }
+    @include forTablet {
+        input {
+            height: 50px;
+            margin: -2px;
+        }
+    }
 }
 
 @mixin bmiSection {
@@ -66,6 +79,9 @@
     padding: 30px;
     border-radius: 3px;
     box-shadow: 0 7px 15px rgba(0, 0, 0, 0.151);
+    @include forTablet {
+        width: 90%;
+    }
 }
 
 @mixin userStatsBmiBfp {
@@ -196,6 +212,44 @@
             }
         }
     }
+    @include forTablet {
+        &__userSection {
+            p {
+                width: 100%;
+                text-align: center;
+            }
+        }
+        &__tools {
+            &__form {
+                &__cont {
+                    padding: 2px;
+                    &__field {
+                        label {
+                            padding-bottom: 2px;
+                            margin-top: 1px;
+                        }
+                        input {
+                            width: 250px;
+                            height: 45px;
+                            margin: -1px 0 -2px;
+                        }
+                    }
+                }
+            }
+            &__interpretation {
+                &__array {
+                    &__row {
+                        display: flex;
+                        justify-content: center;
+                        p {
+                            text-align: center;
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 @mixin notConnected {
@@ -242,6 +296,18 @@
     }
     &--hidden {
         display: none;
+    }
+    @include forTablet {
+        &__form {
+            margin:  5px;
+            &__row {
+                width: 400px;
+                margin: 2px;
+                label {
+                    margin-top: 25px;
+                }
+            }
+        }
     }
 }
 

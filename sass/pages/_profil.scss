@@ -98,6 +98,16 @@
             display: none;
         }
     }
+    @include forTablet {
+        min-height: 93vh;
+        &__nav {
+            &__btn {
+                margin: 30px 0;
+                width: 300px;
+                padding: 30px 0;
+            }
+        }
+    }
 }
 
 #successMsg {

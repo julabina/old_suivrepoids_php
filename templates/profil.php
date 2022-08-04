@@ -16,7 +16,7 @@
 
 <header>
     <div class="header">
-        <a href="/suivi_poids/"><h1>TITRE DU SITE</h1></a>
+        <a class="header__titleLink" href="/suivi_poids/"><h1>TITRE DU SITE</h1></a>
         <div class="header__connected">
             <a class="header__connected__logoutBtn" href="/suivi_poids/logout">Se deconnecter</a>
         </div>

@@ -285,6 +285,7 @@
                     width: 250px;
                     padding: 25px 0;
                     transition: none;
+                    margin: 2px;
                     &:hover {
                         background: map-get($colors, primaryBackground);
                         transition: none;

@@ -93,4 +93,35 @@
     &__notConnected {
         @include notConnected;
     }
+    @include forTablet {
+        &__form {
+            &__logs {
+                &__email, &__password {
+                    margin: -1px 15px;
+                }
+            }
+            &__stats {
+                &__size, &__weight {
+                    margin: 0px 14px;
+                }
+                &__sexe {
+                    flex-direction: column;
+                    margin: 0 15px;
+                    width: 110px;
+                    label {
+                        margin-bottom: 5px;
+                        font-size: 0.9em;
+                    }
+                    select {
+                        height: 50px;
+                    }
+                }
+            }
+            &__checkCont {
+                input {
+                   width: 20px;height: 20px; 
+                }
+            }
+        }
+    }
 }
