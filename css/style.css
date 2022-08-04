@@ -106,6 +106,14 @@ header h1 {
   font-weight: 600;
   color: #1b1b1b;
 }
+@media screen and (max-width: 1270px) {
+  header {
+    height: 80px;
+  }
+  header h1 {
+    font-size: 1.6em;
+  }
+}
 
 .header {
   display: flex;
@@ -149,6 +157,18 @@ header h1 {
   opacity: 0.7;
   transition: opacity 150ms ease-in-out;
 }
+@media screen and (max-width: 1270px) {
+  .header__notConnectBtns__create {
+    font-weight: 600;
+    padding: 0;
+    font-size: 1.1em;
+    transition: none;
+  }
+  .header__notConnectBtns__create:hover {
+    opacity: 1;
+    transition: none;
+  }
+}
 .header__connected {
   display: flex;
   align-items: center;
@@ -172,6 +192,18 @@ header h1 {
 .header__connected__logoutBtn:hover, .header__connected__toDashboard:hover {
   opacity: 0.7;
   transition: opacity 150ms ease-in-out;
+}
+@media screen and (max-width: 1270px) {
+  .header__connected__logoutBtn, .header__connected__toDashboard {
+    font-weight: 600;
+    padding: 0;
+    font-size: 1.1em;
+    transition: none;
+  }
+  .header__connected__logoutBtn:hover, .header__connected__toDashboard:hover {
+    opacity: 1;
+    transition: none;
+  }
 }
 .header__connected__userProfil {
   display: flex;
@@ -205,6 +237,46 @@ header h1 {
 .header__otherLink:hover {
   opacity: 0.7;
   transition: opacity 150ms ease-in-out;
+}
+@media screen and (max-width: 1270px) {
+  .header {
+    width: 750px;
+  }
+  .header__notConnectBtns a {
+    font-size: 1em;
+    padding: 20px 0px;
+    transition: none;
+  }
+  .header__notConnectBtns a:hover {
+    opacity: 1;
+    transition: none;
+  }
+  .header__notConnectBtns__create {
+    width: 200px;
+  }
+  .header__connected__logoutBtn, .header__connected__toDashboard {
+    padding: 20px 5px;
+    font-size: 1em;
+  }
+  .header__connected__userProfil {
+    height: 57px;
+    width: 57px;
+    transition: none;
+  }
+  .header__connected__userProfil img {
+    height: 27px;
+  }
+  .header__connected__userProfil:hover {
+    opacity: 1;
+    transition: none;
+  }
+  .header__otherLink {
+    transition: none;
+  }
+  .header__otherLink:hover {
+    opacity: 1;
+    transition: none;
+  }
 }
 
 #headerLogBtn {
@@ -251,6 +323,20 @@ header h1 {
 }
 .footer__main__listCont__long {
   width: 240px;
+}
+@media screen and (max-width: 1270px) {
+  .footer {
+    height: 100px;
+  }
+  .footer__main {
+    width: 750px;
+  }
+  .footer__listCont ul li {
+    font-size: 1.1em;
+  }
+  .footer__listCont ul a:hover {
+    font-weight: initial;
+  }
 }
 
 .backToHome {
@@ -623,6 +709,18 @@ header h1 {
   opacity: 0.7;
   transition: opacity 150ms ease-in-out;
 }
+@media screen and (max-width: 1270px) {
+  .home__basics__toDash {
+    font-weight: 600;
+    padding: 0;
+    font-size: 1.1em;
+    transition: none;
+  }
+  .home__basics__toDash:hover {
+    opacity: 1;
+    transition: none;
+  }
+}
 .home__basics__notConnectBtns {
   display: flex;
   justify-content: space-between;
@@ -644,6 +742,18 @@ header h1 {
 .home__basics__notConnectBtns a:hover {
   opacity: 0.7;
   transition: opacity 150ms ease-in-out;
+}
+@media screen and (max-width: 1270px) {
+  .home__basics__notConnectBtns a {
+    font-weight: 600;
+    padding: 0;
+    font-size: 1.1em;
+    transition: none;
+  }
+  .home__basics__notConnectBtns a:hover {
+    opacity: 1;
+    transition: none;
+  }
 }
 .home__basics__para {
   text-transform: uppercase;
@@ -730,7 +840,10 @@ header h1 {
   background: #fdfdfd;
   color: #0C2E8A;
 }
-.home__faq__cont__step {
+.home__faq__cont__steps {
+  display: flex;
+}
+.home__faq__cont__steps__step {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -743,7 +856,7 @@ header h1 {
   padding: 25px 25px 30px;
   transition: transform 300ms ease-in-out;
 }
-.home__faq__cont__step__img {
+.home__faq__cont__steps__step__img {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -751,18 +864,18 @@ header h1 {
   width: 50px;
   border-radius: 50%;
 }
-.home__faq__cont__step__img img {
+.home__faq__cont__steps__step__img img {
   height: 40px;
 }
-.home__faq__cont__step h3 {
+.home__faq__cont__steps__step h3 {
   font-weight: 600;
 }
-.home__faq__cont__step p {
+.home__faq__cont__steps__step p {
   text-align: center;
   line-height: 1.4;
   letter-spacing: 0.4px;
 }
-.home__faq__cont__step:hover {
+.home__faq__cont__steps__step:hover {
   transform: scale(110%);
   transition: transform 300ms ease-in-out;
 }
@@ -814,6 +927,90 @@ header h1 {
   line-height: 1.4;
   letter-spacing: 0.5px;
   margin: 5px 0;
+}
+@media screen and (max-width: 1270px) {
+  .home__basics h1 {
+    font-size: 2.3em;
+  }
+  .home__basics__toDash {
+    padding: 30px 0;
+  }
+  .home__basics__notConnectBtns a {
+    padding: 30px 0;
+  }
+  .home__basics__scrollLink {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  .home__basics__scrollBtn {
+    transition: none;
+    height: 80px;
+    width: 80px;
+    bottom: 30px;
+  }
+  .home__basics__scrollBtn img {
+    width: 40px;
+  }
+  .home__basics__scrollBtn:hover {
+    transition: none;
+    opacity: 1;
+  }
+  .home__faq {
+    height: auto;
+  }
+  .home__faq__cont {
+    flex-direction: column;
+  }
+  .home__faq__cont__main {
+    width: 500px;
+    margin-top: 100px;
+  }
+  .home__faq__cont__main__btnCont__link {
+    height: 50px;
+    transition: none;
+  }
+  .home__faq__cont__main__btnCont__link:hover {
+    background: rgba(253, 253, 253, 0.3);
+    color: #fdfdfd;
+    transition: none;
+  }
+  .home__faq__cont__steps {
+    width: 100%;
+    margin: 30px 0;
+  }
+  .home__faq__cont__steps__step {
+    width: 30%;
+    transition: none;
+  }
+  .home__faq__cont__steps__step:hover {
+    transform: scale(100%);
+    transition: none;
+  }
+  .home__bmiBfp__calculLink {
+    flex-direction: column;
+    align-items: center;
+    width: auto;
+    height: auto;
+  }
+  .home__bmiBfp__calculLink a {
+    border: 1px solid black;
+    min-width: 250px;
+    width: 250px;
+    padding: 25px 0;
+    transition: none;
+  }
+  .home__bmiBfp__calculLink a:hover {
+    background: #EEEEEE;
+    transition: none;
+  }
+  .home__bmiBfp__calculLink__para {
+    width: 700px;
+    margin-bottom: 30px;
+  }
+  .home__bmiBfp__calculLink__para p {
+    font-size: 1.1em;
+  }
 }
 
 .bmi {
@@ -1412,6 +1609,18 @@ header h1 {
   opacity: 0.7;
   transition: opacity 150ms ease-in-out;
 }
+@media screen and (max-width: 1270px) {
+  .log__notConnected__linkCont a {
+    font-weight: 600;
+    padding: 0;
+    font-size: 1.1em;
+    transition: none;
+  }
+  .log__notConnected__linkCont a:hover {
+    opacity: 1;
+    transition: none;
+  }
+}
 
 .sign {
   display: flex;
@@ -1574,6 +1783,18 @@ header h1 {
 .sign__notConnected__linkCont a:hover {
   opacity: 0.7;
   transition: opacity 150ms ease-in-out;
+}
+@media screen and (max-width: 1270px) {
+  .sign__notConnected__linkCont a {
+    font-weight: 600;
+    padding: 0;
+    font-size: 1.1em;
+    transition: none;
+  }
+  .sign__notConnected__linkCont a:hover {
+    opacity: 1;
+    transition: none;
+  }
 }
 
 .profil {
@@ -2057,6 +2278,18 @@ header h1 {
 .forgotten__notConnected__linkCont a:hover {
   opacity: 0.7;
   transition: opacity 150ms ease-in-out;
+}
+@media screen and (max-width: 1270px) {
+  .forgotten__notConnected__linkCont a {
+    font-weight: 600;
+    padding: 0;
+    font-size: 1.1em;
+    transition: none;
+  }
+  .forgotten__notConnected__linkCont a:hover {
+    opacity: 1;
+    transition: none;
+  }
 }
 
 .notFound {

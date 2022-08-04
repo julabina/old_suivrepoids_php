@@ -33,7 +33,7 @@
             <p>Les présentes conditions générales d'utilisation (dites « CGU ») ont pour objet l'encadrement juridique des modalités de mise à disposition du site et des services par _______________ et de définir les conditions d’accès et d’utilisation des services par « l'Utilisateur ».</p>
             <p class="cgu__section__space">Les présentes CGU sont accessibles sur le site à la rubrique «CGU».</p>
 
-            <p>Toute inscription ou utilisation du site implique l'acceptation sans aucune réserve ni restriction des présentes CGU par l’utilisateur. Lors de l'inscription sur le site via le Formulaire d’inscription, chaque utilisateur accepte expressément les présentes CGU en cochant la case précédant le texte suivant : « Je reconnais avoir lu et compris les CGU et je les accepte ».</p>     
+            <p>Toute inscription ou utilisation du site implique l'acceptation sans aucune réserve ni restriction des présentes CGU par l’utilisateur. Lors de l'inscription sur le site via le Formulaire d’inscription, chaque utilisateur accepte expressément les présentes CGU en cochant la case précédant le texte suivant : « J'ai lu et j'accepte les Conditions Générales d'Utilisation ».</p>     
             <p>En cas de non-acceptation des CGU stipulées dans le présent contrat, l'Utilisateur se doit de renoncer à l'accès des services proposés par le site.</p>     
             <p>TITRE_SITE.com se réserve le droit de modifier unilatéralement et à tout moment le contenu des présentes CGU.</p>   
         
@@ -54,7 +54,7 @@
             <p>Pour accéder aux services, l’Utilisateur doit ensuite s'identifier à l'aide de son identifiant et de son mot de passe qui lui seront communiqués après son inscription.</p>
             <p>Tout Utilisateur membre régulièrement inscrit pourra également solliciter sa désinscription en se rendant à la page dédiée sur son espace personnel. Celle-ci sera effective dans un délai raisonnable.</p>
             <p>Tout événement dû à un cas de force majeure ayant pour conséquence un dysfonctionnement du site ou serveur et sous réserve de toute interruption ou modification en cas de maintenance, n'engage pas la responsabilité de TITRE_SITE.com. Dans ces cas, l’Utilisateur accepte ainsi ne pas tenir rigueur à l’éditeur de toute interruption ou suspension de service, même sans préavis.</p>
-            <p>L'Utilisateur a la possibilité de contacter le site par messagerie électronique à l’adresse email de l’éditeur communiqué à l’ARTICLE 1.</p>
+            <p>L'Utilisateur a la possibilité de contacter le site via le formulaire de <a href="/suivi_poids/contact">contact</a>.</p>
 
         <h3>Article 3 : Collecte des données</h3>
 

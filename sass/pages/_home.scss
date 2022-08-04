@@ -119,39 +119,42 @@
                     }
                 }
             }
-            &__step {
+            &__steps {
                 display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: space-around;
-                background: white;
-                width: 250px;
-                margin: 0 15px;
-                height: 300px;
-                border-radius: 2px;
-                padding: 25px 25px 30px;
-                transition: transform 300ms ease-in-out;
-                &__img {
+                &__step {
                     display: flex;
+                    flex-direction: column;
                     align-items: center;
-                    justify-content: center;
-                    height: 50px;width: 50px;
-                    border-radius: 50%;
-                    img {
-                        height: 40px;
-                    }
-                }
-                h3 {
-                    font-weight: 600;
-                }
-                p {
-                    text-align: center;
-                    line-height: 1.4;
-                    letter-spacing: 0.4px;
-                }
-                &:hover {
-                    transform: scale(110%);
+                    justify-content: space-around;
+                    background: white;
+                    width: 250px;
+                    margin: 0 15px;
+                    height: 300px;
+                    border-radius: 2px;
+                    padding: 25px 25px 30px;
                     transition: transform 300ms ease-in-out;
+                    &__img {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        height: 50px;width: 50px;
+                        border-radius: 50%;
+                        img {
+                            height: 40px;
+                        }
+                    }
+                    h3 {
+                        font-weight: 600;
+                    }
+                    p {
+                        text-align: center;
+                        line-height: 1.4;
+                        letter-spacing: 0.4px;
+                    }
+                    &:hover {
+                        transform: scale(110%);
+                        transition: transform 300ms ease-in-out;
+                    }
                 }
             }
         }
@@ -201,6 +204,98 @@
                     line-height: 1.4;
                     letter-spacing: 0.5px;
                     margin: 5px 0 ;
+                }
+            }
+        }
+    }
+    @include forTablet {
+        &__basics {
+            h1 {
+                font-size: 2.3em;
+            }
+            &__toDash {
+                padding: 30px 0;
+            }
+            &__notConnectBtns {
+                a {
+                    padding: 30px 0;
+                }
+            }
+            &__scrollLink {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+            }
+            &__scrollBtn {
+                transition: none;
+                height: 80px;
+                width: 80px;
+                bottom: 30px;
+                img {
+                    width: 40px;
+                }
+                &:hover {
+                    transition: none;
+                    opacity: 1;
+                }
+            }
+        }
+        &__faq {
+            height: auto;
+            &__cont {
+                flex-direction: column;
+                &__main {
+                    width: 500px;
+                    margin-top: 100px;
+                    &__btnCont {
+                        &__link {
+                            height: 50px;
+                            transition: none;
+                            &:hover {
+                                background: transparentize(map-get($map: $colors, $key: lightWhite), 0.7);
+                                color: map-get($map: $colors, $key: lightWhite);
+                                transition: none;
+                            }
+                        }
+                    }
+                }
+                &__steps {
+                    width: 100%;
+                    margin: 30px 0;
+                    &__step {
+                        width: 30%;
+                        transition: none;
+                        &:hover {
+                            transform: scale(100%);
+                            transition: none;
+                        }
+                    }
+                }
+            }
+        }
+        &__bmiBfp {
+            &__calculLink {
+                flex-direction: column;
+                align-items: center;
+                width: auto;
+                height: auto;
+                a {
+                    border: 1px solid black;
+                    min-width: 250px;
+                    width: 250px;
+                    padding: 25px 0;
+                    transition: none;
+                    &:hover {
+                        background: map-get($colors, primaryBackground);
+                        transition: none;
+                    }
+                }
+                &__para {
+                    width: 700px;
+                    margin-bottom: 30px;
+                    p {
+                        font-size: 1.1em;
+                    }
                 }
             }
         }

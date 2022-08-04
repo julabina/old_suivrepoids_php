@@ -35,4 +35,22 @@
             }
         }
     }
+    @include forTablet {
+        height: 100px;
+        &__main {
+            width: 750px;
+        }
+        &__listCont {
+            ul {
+                li {
+                    font-size: 1.1em;
+                }
+                a {
+                    &:hover {
+                        font-weight: initial;
+                    }
+                }
+            }
+        }
+    }
 }

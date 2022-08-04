@@ -16,6 +16,12 @@ header {
         font-weight: 600;
         color: map-get($map: $colors, $key:lightBlack );
     }
+    @include forTablet {
+        height: 80px;
+        h1 {
+            font-size: 1.6em;
+        }
+    }
 }
 
 .header {
@@ -88,6 +94,47 @@ header {
         &:hover {
             opacity: 0.7;
             transition: opacity 150ms ease-in-out;
+        }
+    }
+    @include forTablet {
+        width: 750px;
+        &__notConnectBtns {
+            a {
+                font-size: 1em;
+                padding: 20px 0px;
+                transition: none;
+                &:hover {
+                    opacity: 1;
+                    transition: none;
+                }
+            }
+            &__create {
+                width: 200px;
+            }
+        }
+        &__connected {
+            &__logoutBtn, &__toDashboard {
+                padding: 20px 5px;
+                font-size: 1em;
+            }
+            &__userProfil {
+                height: 57px;width: 57px;
+                transition: none;
+                img {
+                    height: 27px;
+                }
+                &:hover {
+                    opacity: 1;
+                    transition: none;
+                }
+            }
+        }
+        &__otherLink {
+            transition: none;
+            &:hover {
+                opacity: 1;
+                transition: none;
+            }
         }
     }
 }

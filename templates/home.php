@@ -64,26 +64,28 @@
                     <?php endif; ?>
                 </div>
             </div>
-            <div class="home__faq__cont__step">
-                <div class="home__faq__cont__step__img">    
-                    <img src="../suivi_poids/assets/weight.svg" alt="weight icon">
+            <div class="home__faq__cont__steps">
+                <div class="home__faq__cont__steps__step">
+                    <div class="home__faq__cont__steps__step__img">    
+                        <img src="../suivi_poids/assets/weight.svg" alt="weight icon">
+                    </div>
+                    <h3>Atteindre votre objectif</h3>
+                    <p>Choisissez un objectif, puis observer votre évolution.</p>
                 </div>
-                <h3>Atteindre votre objectif</h3>
-                <p>Choisissez un objectif, puis observer votre évolution.</p>
-            </div>
-            <div class="home__faq__cont__step">
-                <div class="home__faq__cont__step__img">    
-                    <img src="../suivi_poids/assets/graph.svg" alt="graph icon">
+                <div class="home__faq__cont__steps__step">
+                    <div class="home__faq__cont__steps__step__img">    
+                        <img src="../suivi_poids/assets/graph.svg" alt="graph icon">
+                    </div>
+                    <h3>Suivre votre poids</h3>
+                    <p>Entrer votre poids et suivez la progression de celui-ci.</p>
                 </div>
-                <h3>Suivre votre poids</h3>
-                <p>Entrer votre poids et suivez la progression de celui-ci.</p>
-            </div>
-            <div class="home__faq__cont__step">
-                <div class="home__faq__cont__step__img">    
-                    <img src="../suivi_poids/assets/money.svg" alt="money icon">
+                <div class="home__faq__cont__steps__step">
+                    <div class="home__faq__cont__steps__step__img">    
+                        <img src="../suivi_poids/assets/money.svg" alt="money icon">
+                    </div>
+                    <h3>100% Gratuit</h3>
+                    <p>TITRE DU SITE est entiérement gratuit et le restera.</p>
                 </div>
-                <h3>100% Gratuit</h3>
-                <p>TITRE DU SITE est entiérement gratuit et le restera.</p>
             </div>
         </div>
     </section>

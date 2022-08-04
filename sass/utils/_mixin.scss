@@ -13,6 +13,16 @@
         opacity: 0.7;
         transition: opacity 150ms ease-in-out;
     }
+    @include forTablet {
+        font-weight: 600;
+        padding:  0;
+        font-size: 1.1em;
+        transition: none;
+        &:hover {
+            opacity: 1;
+            transition: none;
+        }
+    }
 }
 
 @mixin submitBtn {
@@ -232,5 +242,11 @@
     }
     &--hidden {
         display: none;
+    }
+}
+
+@mixin forTablet {
+    @media screen and (max-width: map-get($screens, toTablet)) {
+        @content;
     }
 }
