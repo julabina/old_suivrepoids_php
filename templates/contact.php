@@ -82,6 +82,10 @@
 </main>
 
 <script>
+
+    /**
+     * check form before post
+     */
     const verifyForm = () => {
 
         const contactForm = document.querySelector(".contact__section__form");
@@ -130,6 +134,9 @@
 
     };
 
+    /**
+     * toggle the mobile hamburger menu
+     */
     const toggleMobileMenu = () => {
         const hambBtn = document.querySelector(".hambMenu__hambBtn");
         const closeBtn = document.querySelector(".hambMenu__closeBtn");

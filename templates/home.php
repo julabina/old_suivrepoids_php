@@ -63,7 +63,7 @@
         <div class="home__faq__cont">
             <div class="home__faq__cont__main">
                 <h2>Comment ca marche ?</h2>
-                <p>TITRE DU SITE vous permet d'enregistrer régulièrement votre poids et de génèrer l'IMC et l'IMG automatiquement, vous pouvez suivre votre progression et réaliser vos objectifs.</p>
+                <p>TITRE DU SITE vous permet d'enregistrer régulièrement votre poids et de générer l'IMC et l'IMG automatiquement, vous pouvez suivre votre progression et réaliser vos objectifs.</p>
                 <div class="home__faq__cont__main__btnCont">
                     <?php if(isset($_SESSION['name']) && isset($_SESSION['user']) && isset($_SESSION['userId']) && isset($_SESSION['size']) && (isset($_SESSION['sexe']) && ($_SESSION['sexe'] === "man" || $_SESSION['sexe'] === "woman")) && isset($_SESSION['auth']) && $_SESSION['auth'] === true): ?> 
                         <a class='home__faq__cont__main__btnCont__link' href="/suivi_poids/dashboard"><p>Commencer</p></a>
@@ -85,14 +85,14 @@
                         <img src="../suivi_poids/assets/graph.svg" alt="graph icon">
                     </div>
                     <h3>Suivre votre poids</h3>
-                    <p>Entrer votre poids et suivez la progression de celui-ci.</p>
+                    <p>Entrez votre poids et suivez la progression de celui-ci.</p>
                 </div>
                 <div class="home__faq__cont__steps__step">
                     <div class="home__faq__cont__steps__step__img">    
                         <img src="../suivi_poids/assets/money.svg" alt="money icon">
                     </div>
                     <h3>100% Gratuit</h3>
-                    <p>TITRE DU SITE est entiérement gratuit et le restera.</p>
+                    <p>TITRE DU SITE est entièrement gratuit et le restera.</p>
                 </div>
             </div>
         </div>
@@ -120,6 +120,9 @@
 
 <script>
 
+    /**
+     * toggle the mobile hamburger menu
+     */
     const toggleMobileMenu = () => {
         const hambBtn = document.querySelector(".hambMenu__hambBtn");
         const closeBtn = document.querySelector(".hambMenu__closeBtn");

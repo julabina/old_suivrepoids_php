@@ -37,6 +37,9 @@
 
 <script>
 
+    /**
+     * check form befor post
+     */
     const checkForgotForm = () => {
         const forgotForm = document.querySelector('.forgotten__form');
         const forgotError = document.querySelector('.forgotten__errorCont');

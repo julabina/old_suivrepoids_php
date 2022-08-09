@@ -274,6 +274,9 @@
     const modal = document.querySelector(".dashAddWeight");
     currentDate = new Date();
 
+    /**
+     * verify add weight form before post
+     */
     const verifyAddWeight = () => {   
         const addWeight = document.getElementById("addWeightInput");
         const modalErrorCont = document.querySelector(".dashAddWeight__modal__form__error");
@@ -299,6 +302,9 @@
         handleModal();
     };
 
+    /**
+     * toggle add weight modal
+     */
     const handleModal = () => {
         if(modal.classList.contains('dashAddWeight--hidden')) {
             modal.classList.remove("dashAddWeight--hidden");
@@ -307,6 +313,10 @@
         }
     };
 
+    /**
+     * handle graph tabs
+     * @param graph
+     */
     const handleGraph = (graph) => {
         const tabs = document.querySelectorAll('.dash__graph__mainCont__tabs__tab');
         const graphs = document.querySelectorAll('.dash__graph__mainCont__graph');
@@ -327,6 +337,9 @@
         } 
     };
 
+    /**
+     * change time duration for the graph
+     */
     const changeType = () => {
 
         const selectType = document.getElementById('graphSelectType');
@@ -362,6 +375,10 @@
         
     }
 
+    /**
+     * sort weight list order by time
+     * @param time
+     */
     const calculForSelect = (time) => {
         filteredListArr = listArr.filter(el => {
             result = currentDate.getTime() - el[0].getTime();
@@ -374,6 +391,9 @@
         google.charts.setOnLoadCallback(drawChart);
     }
 
+    /**
+     * toggle the mobile hamburger menu
+     */
     const toggleMobileMenu = () => {
         const hambBtn = document.querySelector(".hambMenu__hambBtn");
         const closeBtn = document.querySelector(".hambMenu__closeBtn");

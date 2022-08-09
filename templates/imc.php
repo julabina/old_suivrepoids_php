@@ -123,6 +123,9 @@
     const weight = document.getElementById('bmiWeight');
     const size = document.getElementById('bmiSize');
 
+    /**
+     * check form before post
+     */
     const verifyForm = () => {
         const errorCont = document.querySelector(".bmi__tools__error");
         const error = document.createElement('p');
@@ -158,6 +161,9 @@
         }
     };
 
+    /**
+     * calcul the bmi with bmi form 
+     */
     const calculBmi = () => {
         const resultDiv = document.querySelector(".bmi__tools__results");
         const resultCont = document.querySelector(".bmi__tools__results__score");
@@ -169,6 +175,9 @@
         resultCont.textContent = Math.floor(result);
     };
 
+    /**
+     * toggle the mobile hamburger menu
+     */
     const toggleMobileMenu = () => {
         const hambBtn = document.querySelector(".hambMenu__hambBtn");
         const closeBtn = document.querySelector(".hambMenu__closeBtn");

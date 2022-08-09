@@ -170,6 +170,9 @@
     const formImc = document.getElementById('objFormImc');
     const formImg = document.getElementById('objFormImg');
     
+    /**
+     * reset obj class
+     */
     const resetClass = () => {
         for(let i = 0; i < tabs.length; i++) {
             if(tabs[i].classList.contains('obj__change__tabs__tab--active')) {
@@ -181,6 +184,9 @@
         }
     };
 
+    /**
+     * change tab from tabs
+     */
     const changeTab = (tab) => {
         resetClass();
         tabs[tab].classList.add('obj__change__tabs__tab--active');
@@ -191,6 +197,9 @@
         }
     };
 
+    /**
+     * check input before post
+     */
     const verifyChangingWeight = () => {
         let error = "";
 
@@ -208,6 +217,9 @@
 
     };
     
+    /**
+     * check input before post
+     */
     const verifyChangingImc = () => {
         let error = "";
         
@@ -225,6 +237,9 @@
 
     };
     
+    /**
+     * check input before post
+     */
     const verifyChangingImg = () => {
         let error = "";
         
@@ -242,6 +257,9 @@
 
     };
 
+    /**
+     * toggle the mobile hamburger menu
+     */
     const toggleMobileMenu = () => {
         const hambBtn = document.querySelector(".hambMenu__hambBtn");
         const closeBtn = document.querySelector(".hambMenu__closeBtn");

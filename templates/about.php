@@ -35,12 +35,16 @@
 </header>
 
 <main class="about">
-                <h2>A Propos</h2>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit, et numquam placeat quia architecto excepturi assumenda. Doloremque expedita delectus officia harum iusto dolores animi et unde voluptatum hic, alias quas. Nisi dolor adipisci fugiat eum alias magni. Fuga saepe, dignissimos quod, distinctio veritatis qui nulla unde quos animi nemo veniam.</p>
+    <h2>A Propos</h2>
+    <p>TITRE DU SITE est développé par <a href="julienlenfume.com">Lenfumé julien</a>.</p>
+    <p>Le code est disponible sur GitHub via ce <a href="https://github.com/julabina/suivi_poids">repository</a></p>
 </main>
 
 <script>
 
+    /**
+     * toggle the mobile hamburger menu
+     */
     const toggleMobileMenu = () => {
         const hambBtn = document.querySelector(".hambMenu__hambBtn");
         const closeBtn = document.querySelector(".hambMenu__closeBtn");

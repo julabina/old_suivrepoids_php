@@ -252,6 +252,9 @@
     const age = document.getElementById('bfpAge');
     const sexe = document.getElementById('bfpSexe');
 
+    /**
+     * check form before post
+     */
     const verifyForm = () => {
         const errorCont = document.querySelector(".bfp__tools__error");
         const error = document.createElement('p');
@@ -294,6 +297,9 @@
         }
     };
         
+    /**
+     * calcul body fat percent with bfp form
+     */
     const calculBfp = () => {
         const resultDiv = document.querySelector(".bfp__tools__results");
         const resultCont = document.querySelector(".bfp__tools__results__score");
@@ -310,6 +316,9 @@
         resultCont.textContent = Math.floor(result) + "%";
     };
 
+    /**
+     * toggle the mobile hamburger menu
+     */
     const toggleMobileMenu = () => {
         const hambBtn = document.querySelector(".hambMenu__hambBtn");
         const closeBtn = document.querySelector(".hambMenu__closeBtn");

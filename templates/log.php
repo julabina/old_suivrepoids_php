@@ -65,6 +65,9 @@
     const errorCont = document.querySelector('.log__error');
     const captcha = document.querySelector(".g-recaptcha");
     
+    /**
+     * check form before post
+     */
     const checkLogInputs = () => {
         
         let error = "";

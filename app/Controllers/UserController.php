@@ -391,6 +391,9 @@ class UserController {
 
     }
 
+    /**
+     * seending mail from contact page
+     */
     public function sendMail() {
 
         foreach ($_POST as $element => $val) {

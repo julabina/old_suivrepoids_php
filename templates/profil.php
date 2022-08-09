@@ -124,16 +124,25 @@
     const sectionModify = document.querySelector('.profil__modify');
     const sectionModifyPassword = document.querySelector('.profil__modifyPassword');
 
+    /**
+     * open modify tab
+     */
     const openModify = () => {
         nav.classList.add('profil__nav--hidden');
         sectionModify.classList.remove('profil__modify--hidden');
     };
     
+    /**
+     * open change password tab
+     */
     const openModifyPassword = () => {
         nav.classList.add('profil__nav--hidden');
         sectionModifyPassword.classList.remove('profil__modifyPassword--hidden');
     };
     
+    /**
+     * toggle delete confirmation modal
+     */
     const toggleDeleteModal = () => {
         const modal = document.querySelector('.profil__delete');
         
@@ -144,12 +153,18 @@
         }
     };
     
+    /**
+     * toggle back to menu 
+     */
     const backToNav = () => {
         sectionModify.classList.add('profil__modify--hidden');
         sectionModifyPassword.classList.add('profil__modifyPassword--hidden');
         nav.classList.remove('profil__nav--hidden');
     };
 
+    /**
+     * verify form befor change password
+     */
     const verifyPassword = () => {
         const passwordForm = document.querySelector(".profil__modifyPassword__form");
         const passwordInputs = document.querySelectorAll('.profil__modifyPassword__form__row__input');
@@ -170,6 +185,9 @@
         }
     };
     
+    /**
+     * verify modify form before post
+     */
     const verifyModify = () => {
         const modifyForm = document.querySelector('.profil__modify__form');
         const inputs = document.querySelectorAll('.profil__modify__form__row__input');
@@ -211,6 +229,9 @@
         }
     };
 
+    /**
+     * toggle the mobile hamburger menu
+     */
     const toggleMobileMenu = () => {
         const hambBtn = document.querySelector(".hambMenu__hambBtn");
         const closeBtn = document.querySelector(".hambMenu__closeBtn");
