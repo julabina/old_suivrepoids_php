@@ -250,6 +250,39 @@
             }
         }
     }
+    @include forMobile {
+        h2 {
+            margin-top: 30px;
+            text-align: center;
+            width: 90%;
+            font-size: 1.7em;
+        }
+        &__tools {
+            &__form {
+                &__cont {
+                    flex-direction: column;
+                    &__field {
+                        margin-top: 25px;
+                    }
+                }
+            }
+            &__interpretation {
+                width: 100%;
+                h3 {
+                    text-align: center;
+                }
+                &__array {
+                    &__row {
+                        padding: 0;
+                        height: 60px;
+                    }
+                }
+            }
+            &__disclaimer {
+                text-align: center;
+            }
+        }
+    }
 }
 
 @mixin notConnected {
@@ -261,6 +294,16 @@
         a {
             @include homeBtn;
             width: 160px;
+        }
+    }
+    @include forTablet {
+        &__linkCont {
+            a {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 40px;
+            }
         }
     }
 }
@@ -309,10 +352,23 @@
             }
         }
     }
+    @include forMobile {
+        &__form {
+            &__row {
+                width: 100%;
+            }
+        }
+    }
 }
 
 @mixin forTablet {
     @media screen and (max-width: map-get($screens, toTablet)) {
+        @content;
+    }
+}
+
+@mixin forMobile {
+    @media screen and (max-width: map-get($screens, toMobile)) {
         @content;
     }
 }

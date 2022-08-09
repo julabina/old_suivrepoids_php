@@ -167,4 +167,18 @@
             width: 90%;
         }
     }
+    @include forMobile {
+        &__current__cont {
+            width: 90%;
+        }
+        &__change {
+            &__tabsCont {
+                &__input {
+                    label {
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    }
 }

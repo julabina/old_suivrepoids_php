@@ -15,4 +15,9 @@
             padding: 10px ;
         }
     }
+    @include forTablet {
+        h1 {
+            text-align: center;
+        }
+    }
 }

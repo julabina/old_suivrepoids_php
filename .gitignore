@@ -1,3 +1,5 @@
 /vendor/
+/PRODUCTION/
 
+create_table.txt
 .env

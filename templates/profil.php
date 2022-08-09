@@ -15,7 +15,15 @@
 <?php ob_start(); ?>
 
 <header>
-    <div class="header">
+    <div class="hambMenu">
+        <div onClick="toggleMobileMenu()" class="hambMenu__hambBtn">
+            <img src="../suivi_poids/assets/hamburger.svg" alt="hamburger menu icon">
+        </div>
+        <div onClick="toggleMobileMenu()" class="hambMenu__closeBtn hambMenu__closeBtn--hidden">
+            <img src="../suivi_poids/assets/closeHamb.svg" alt="close icon">
+        </div>
+    </div>
+    <div class="header header--mobile">
         <a class="header__titleLink" href="/suivi_poids/"><h1>TITRE DU SITE</h1></a>
         <div class="header__connected">
             <a class="header__connected__logoutBtn" href="/suivi_poids/logout">Se deconnecter</a>
@@ -202,6 +210,22 @@
             return errorCont.innerHTML = `<p>- Aucun champs n'a été modifier.</p>`;
         }
     };
+
+    const toggleMobileMenu = () => {
+        const hambBtn = document.querySelector(".hambMenu__hambBtn");
+        const closeBtn = document.querySelector(".hambMenu__closeBtn");
+        const header = document.querySelector('.header');
+
+        if(hambBtn.classList.contains('hambMenu__hambBtn--hidden')) {
+            hambBtn.classList.remove('hambMenu__hambBtn--hidden');
+            closeBtn.classList.add('hambMenu__closeBtn--hidden');
+            header.classList.add('header--mobile');
+        } else {
+            hambBtn.classList.add('hambMenu__hambBtn--hidden');
+            closeBtn.classList.remove('hambMenu__closeBtn--hidden');
+            header.classList.remove('header--mobile');
+        }
+    }
 </script>
 
 <?php $content = ob_get_clean(); ?>

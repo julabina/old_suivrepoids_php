@@ -89,4 +89,17 @@
             }
         }
     }
+    @include forMobile {
+        &__section {
+            width: 90%;
+            &__form {
+                &__top {
+                    flex-direction: column;
+                    &__email {
+                        margin-bottom: 20px;
+                    }
+                }
+            }
+        }
+    }
 }

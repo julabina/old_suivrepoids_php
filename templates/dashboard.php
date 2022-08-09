@@ -96,7 +96,15 @@
 </script>
 
 <header class="dashHeader">
-    <div class="header">
+    <div class="hambMenu">
+        <div onClick="toggleMobileMenu()" class="hambMenu__hambBtn">
+            <img src="../suivi_poids/assets/hamburger.svg" alt="hamburger menu icon">
+        </div>
+        <div onClick="toggleMobileMenu()" class="hambMenu__closeBtn hambMenu__closeBtn--hidden">
+            <img src="../suivi_poids/assets/closeHamb.svg" alt="close icon">
+        </div>
+    </div>
+    <div class="header header--mobile">
         <a class="header__titleLink" href="/suivi_poids/"><h1>TITRE DU SITE</h1></a>
         <div class="header__connected">
             <a class="header__connected__logoutBtn" href="/suivi_poids/logout">Se deconnecter</a>
@@ -126,12 +134,12 @@
                 <h3><?= htmlspecialchars($userData->weight); ?></h3>
                 <p>cliquer pour ajouter un nouveau poids.</p>
             </div>
-            <a href="/suivi_poids/imc"><div class="dash__infos__cont__infoBox">
+            <a href="/suivi_poids/imc"><div class="dash__infos__cont__infoBox dash__infos__cont__infoBox__afterLink">
                 <h4>Votre IMC</h4>
                 <h3><?= htmlspecialchars(floor($userData->imc)); ?></h3>
                 <p></p>
             </div></a>
-            <a href="/suivi_poids/img"><div class="dash__infos__cont__infoBox">
+            <a href="/suivi_poids/img"><div class="dash__infos__cont__infoBox dash__infos__cont__infoBox__afterLink">
                 <h4>Votre IMG</h4>
                 <h3><?= htmlspecialchars($userData->img); ?>%</h3>
                 <p></p>
@@ -364,6 +372,22 @@
 
         weightListArr = filteredListArr;
         google.charts.setOnLoadCallback(drawChart);
+    }
+
+    const toggleMobileMenu = () => {
+        const hambBtn = document.querySelector(".hambMenu__hambBtn");
+        const closeBtn = document.querySelector(".hambMenu__closeBtn");
+        const header = document.querySelector('.header');
+
+        if(hambBtn.classList.contains('hambMenu__hambBtn--hidden')) {
+            hambBtn.classList.remove('hambMenu__hambBtn--hidden');
+            closeBtn.classList.add('hambMenu__closeBtn--hidden');
+            header.classList.add('header--mobile');
+        } else {
+            hambBtn.classList.add('hambMenu__hambBtn--hidden');
+            closeBtn.classList.remove('hambMenu__closeBtn--hidden');
+            header.classList.remove('header--mobile');
+        }
     }
     
     changeType();

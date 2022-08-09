@@ -42,4 +42,13 @@
             }
         }
     }
+    @include forMobile {
+        &__tools {
+            &__form {
+                &__cont {
+                    margin-top: 0;
+                }
+            }
+        }
+    }
 }

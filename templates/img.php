@@ -14,7 +14,15 @@
 <?php ob_start(); ?>
 
 <header>
-    <div class="header">
+    <div class="hambMenu">
+        <div onClick="toggleMobileMenu()" class="hambMenu__hambBtn">
+            <img src="../suivi_poids/assets/hamburger.svg" alt="hamburger menu icon">
+        </div>
+        <div onClick="toggleMobileMenu()" class="hambMenu__closeBtn hambMenu__closeBtn--hidden">
+            <img src="../suivi_poids/assets/closeHamb.svg" alt="close icon">
+        </div>
+    </div>
+    <div class="header header--mobile">
         <a class="header__titleLink" href="/suivi_poids/"><h1>TITRE DU SITE</h1></a>
         <?php if(isset($_SESSION['name']) && isset($_SESSION['user']) && isset($_SESSION['userId']) && isset($_SESSION['size']) && (isset($_SESSION['sexe']) && ($_SESSION['sexe'] === "man" || $_SESSION['sexe'] === "woman")) && isset($_SESSION['auth']) && $_SESSION['auth'] === true): ?>
             <div class="header__connected">
@@ -301,6 +309,22 @@
         }
         resultCont.textContent = Math.floor(result) + "%";
     };
+
+    const toggleMobileMenu = () => {
+        const hambBtn = document.querySelector(".hambMenu__hambBtn");
+        const closeBtn = document.querySelector(".hambMenu__closeBtn");
+        const header = document.querySelector('.header');
+
+        if(hambBtn.classList.contains('hambMenu__hambBtn--hidden')) {
+            hambBtn.classList.remove('hambMenu__hambBtn--hidden');
+            closeBtn.classList.add('hambMenu__closeBtn--hidden');
+            header.classList.add('header--mobile');
+        } else {
+            hambBtn.classList.add('hambMenu__hambBtn--hidden');
+            closeBtn.classList.remove('hambMenu__closeBtn--hidden');
+            header.classList.remove('header--mobile');
+        }
+    }
 </script>
 
 <?php $content = ob_get_clean(); ?>

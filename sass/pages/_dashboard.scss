@@ -221,16 +221,24 @@
         }
     }
     @include forTablet {
-        min-height: 96vh;
+        min-height: initial;
         &__infos {
             margin-top: 50px;
             width: 100%;
             &__cont {
                 width: 90%;
+                a {
+                    width: 30%;
+                }
                 &__infoBox {
                     margin: initial;
+                    width: 30%;
                     &:hover {
                         border: none;
+                    }
+                    &__afterLink {
+                        width: 100%;
+
                     }
                 }
             }
@@ -300,6 +308,26 @@
                     }
                 }
             }
+        }
+    }
+    @include forMobile {
+        &__infos {
+            &__cont {
+                flex-direction: column;
+                a, &__infoBox {
+                    width: 100%;
+                    margin: 10px 0;
+                }
+            }
+            &__errorCont {
+                width: 90%;
+            }
+        }
+        &__obj {
+            margin-top: 20px;
+        }
+        &__graph {
+            margin-top: 40px;
         }
     }
 }

@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     background: map-get($map: $colors, $key: primaryBackground);
-    height: 100vh;
+    min-height: 100vh;
     h1 {
         font-size: 1.8em;
         font-weight: 600;
@@ -25,6 +25,7 @@
         padding: 40px 20px;
         border-radius: 3px;
         box-shadow: 0 3px 20px rgba(0, 0, 0, 0.247);
+        margin-bottom: 25px;
         &__logs {
             display: flex;
             width: 100%;
@@ -97,12 +98,12 @@
         &__form {
             &__logs {
                 &__email, &__password {
-                    margin: -1px 15px;
+                    margin: 0x 15px;
                 }
             }
             &__stats {
                 &__size, &__weight {
-                    margin: 0px 14px;
+                    margin: 0px 15px;
                 }
                 &__sexe {
                     flex-direction: column;
@@ -121,6 +122,47 @@
                 input {
                    width: 20px;height: 20px; 
                 }
+            }
+        }
+    }
+    @include forMobile {
+        h1 {
+            margin-top: 50px;
+        }
+        &__error {
+            width: 90%;
+            min-height: 40px;
+            height: auto;
+        }
+        &__form {
+            width: 90%;
+            padding: 40px 0;
+            &__logs {
+                flex-direction: column;
+                margin-bottom: 0;
+                &__email, &__password {
+                    width: 90%;
+                    margin-bottom: 18px;
+                }
+            }
+            &__name {
+                flex-direction: column;
+                margin-bottom: 0;
+                &__firstname, &__birthday {
+                    width: 90%;
+                    margin-bottom: 18px;
+                }
+            }
+            &__stats {
+                flex-direction: column;
+                margin-bottom: 0;
+                &__size, &__weight, &__sexe {
+                    width: 90%;
+                    margin-bottom: 18px;
+                }
+            }
+            &__checkCont {
+                line-height: 1.7;
             }
         }
     }

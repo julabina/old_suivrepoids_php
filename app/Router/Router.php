@@ -82,6 +82,10 @@ class Router {
         
         foreach($this->routes[$_SERVER['REQUEST_METHOD']] as $route) {
             
+            if(!isset($this->url)) {
+                $this->url = '/';
+            }
+
             if($route->match($this->url)) {
                 return $route->call();
             } 
