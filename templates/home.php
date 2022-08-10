@@ -25,7 +25,10 @@
         </div>
     </div>
     <div class="header header--mobile">
-        <h1>TITRE DU SITE</h1>
+        <div class="header__titleCont">
+            <img src="../suivi_poids/assets/weight-icon.jpg" alt="weight balance icon">
+            <h1>TITRE DU SITE</h1>
+        </div>
         <?php if(isset($_SESSION['name']) && isset($_SESSION['user']) && isset($_SESSION['userId']) && isset($_SESSION['size']) && (isset($_SESSION['sexe']) && ($_SESSION['sexe'] === "man" || $_SESSION['sexe'] === "woman")) && isset($_SESSION['auth']) && $_SESSION['auth'] === true): ?>
             <div class="header__connected">
                 <a class="header__connected__logoutBtn" href="/suivi_poids/logout">Se deconnecter</a>

@@ -105,6 +105,7 @@ header h1 {
   font-size: 1.4em;
   font-weight: 600;
   color: #1b1b1b;
+  text-transform: uppercase;
 }
 @media screen and (max-width: 1270px) {
   header {
@@ -128,6 +129,15 @@ header h1 {
   display: flex;
   justify-content: space-between;
   width: 1180px;
+}
+.header__titleCont {
+  display: flex;
+  align-items: center;
+}
+.header__titleCont img {
+  margin-right: 5px;
+  height: 20px;
+  object-fit: cover;
 }
 .header__titleLink {
   display: flex;

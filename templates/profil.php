@@ -24,7 +24,10 @@
         </div>
     </div>
     <div class="header header--mobile">
-        <a class="header__titleLink" href="/suivi_poids/"><h1>TITRE DU SITE</h1></a>
+        <a class="header__titleLink" href="/suivi_poids/"><div class="header__titleCont">
+            <img src="../suivi_poids/assets/weight-icon.jpg" alt="weight balance icon">
+            <h1>TITRE DU SITE</h1>
+        </div></a>
         <div class="header__connected">
             <a class="header__connected__logoutBtn" href="/suivi_poids/logout">Se deconnecter</a>
         </div>

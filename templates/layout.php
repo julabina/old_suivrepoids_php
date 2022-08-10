@@ -4,6 +4,7 @@
       <meta charset="utf-8" />
       <title><?= $title; ?></title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="shortcut icon" href="../suivi_poids/assets/weight-icon.jpg" type="image/x-icon">
       <link href="/suivi_poids/css/style.css" rel="stylesheet" type="text/css" /> 
       <?= $contentHead; ?>
    </head>
